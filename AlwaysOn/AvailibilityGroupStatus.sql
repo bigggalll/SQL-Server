@@ -1,3 +1,4 @@
+-- Ajoute d'un commentaire
 SELECT ag.name AS ag_name,
        ar.replica_server_name AS ag_replica_server,
        dr_state.database_id AS database_id,
