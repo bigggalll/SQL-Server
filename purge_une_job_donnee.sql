@@ -1,0 +1,2 @@
+DECLARE @Date DATETIME = ‘LA_DATE_VOULUE’
+EXEC MSDB.DBO.SP_PURGE_JOBHISTORY @job_name = ‘NOM_DE_LA_JOB', @Oldest_date = @Date 

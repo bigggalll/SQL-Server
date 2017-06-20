@@ -1,0 +1,3 @@
+select *
+from msdb.dbo.sysjobs
+where CONVERT(VARCHAR(34), CONVERT(VARBINARY(32), job_id), 1)  = '0xC1E441B41B7AE749973F4FC129D1052D'

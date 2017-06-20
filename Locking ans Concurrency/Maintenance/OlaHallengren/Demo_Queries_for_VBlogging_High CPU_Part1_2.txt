@@ -1,0 +1,305 @@
+Slide: Detecting high CPU by SQL Process
+You can also determine a high CPU pressure condition using the Dynamic Management Views (DMVs) listed below:
+sys.dm_os_schedulers  - runnable_tasks_count > 0 
+sys.dm_exec_requests – wait_time > 0 with ‘SOS_SCHEDULER_YIELD’ wait_type 
+Having confirmed that there is a High CPU problem by SQL Server process we would then proceed with identifying what inside SQL is driving the processor utilization.
+If you are troubleshooting the issue LIVE, there is a high possibility where you may not be able to open a new connection or may take several attempts to open one since the CPU may be too busy to honor the request. Starting SQL 2005, you are advised to use the DAC (Dedicated ADMIN Connection) in such situations.
+Below is a query you could use to get a TOP 20 High CPU driving Queries once the connection is established:
+use [Master]
+--IDENTIFY EXPENSIVE QUERIES (Below gets the top queries by cumulative CPU cost)
+--Remember "sys.dm_exec_query_stats" gives us runtime CPU usage not compile time.
+--Also the statistics are rolled to Batch level. So once the Batch identified you will need to drill down further to the high CPU Stmt.
+SELECT TOP 20
+LEFT(P.CACHEOBJTYPE + '(' +P.OBJTYPE + ')', 35) AS cacheobjtype,
+p.usecounts,
+p.size_in_bytes / 1024 AS SIZE_IN_KB,
+stat.total_worker_time/1000 AS TOT_CPU_MS,
+stat.total_elapsed_time/1000 AS TOT_DURATION_MS,
+stat.total_physical_reads,
+stat.total_logical_writes,
+stat.total_logical_reads,
+LEFT (CASE
+                WHEN PA.VALUE=32767 THEN 'ResourceDb'
+                ELSE ISNULL (DB_NAME (CONVERT (sysname, pa.value)), CONVERT (sysname, pa.value))
+                END, 40) AS dbname,
+sql.objectid,
+CONVERT (NVARCHAR(50), CASE
+                WHEN sql.objectid IS NULL THEN NULL
+                ELSE REPLACE (REPLACE (sql.[text], CHAR(13), ' '), CHAR(10), '')
+                END) as PROCNAME,
+                REPLACE(REPLACE(SUBSTRING (sql.[text], stat.statement_start_offset/2 + 1,
+CASE WHEN stat.statement_end_offset = -1 THEN LEN (CONVERT (nvarchar(max), sql.[text]))
+ELSE stat.statement_end_offset / 2 - stat.statement_start_offset / 2 + 1 END),
+                CHAR(13), ' '), CHAR(10), ' ') AS STMT_TEXT,
+                QPLAN.Query_Plan
+FROM sys.dm_exec_cached_plans p
+OUTER APPLY sys.dm_exec_plan_attributes (p.plan_handle) pa
+INNER JOIN sys.dm_exec_query_stats stat ON p.plan_handle = stat.plan_handle
+OUTER APPLY sys.dm_exec_sql_text (p.plan_handle) AS sql
+OUTER APPLY sys.dm_exec_query_plan(p.plan_handle) as QPLAN
+WHERE pa.attribute = 'dbid'
+ORDER BY tot_cpu_ms DESC
+OR
+SELECT * FROM sys.dm_exec_requests ORDER BY CPU_TIME desc
+
+
+
+Slide: Excessive Query Compilation and Optimization
+Detection:
+Starting SQL Server 2008, SQL stores a query_hash value which represents queries that are “similar”.
+Let’s take an example of “similar” queries which are not being parameterized:
+DBCC FREEPROCCACHE
+use [AdventureWorks]
+/*
+Example of in-line literals in the query text which can lead to queries NOT being parameterized
+and thus you would see "similar" query text in the proc cache each with its separate compiled plans
+*/
+DECLARE @SQLString nvarchar(500)
+DECLARE @cnt INT
+SET @cnt = 1
+/* Build the SQL string several times by appending the @SQLString*/
+While @cnt <= 100
+begin
+      SET @SQLString =
+            N'SELECT EmployeeID, NationalIDNumber, Title, ManagerID
+               FROM AdventureWorks.HumanResources.Employee WHERE ManagerID = ' + CAST(@cnt AS nvarchar(500))
+      EXECUTE sp_executesql @SQLString
+      SET @cnt = @cnt + 1
+end
+You could run the below query which helps in identifying queries with same query_hash value:
+select q.query_hash,
+      q.number_of_entries,
+      t.text as sample_query,
+      p.query_plan as sample_plan
+from (select top 20 query_hash,
+                  count(*) as number_of_entries,
+                  min(sql_handle) as sample_sql_handle,
+                  min(plan_handle) as sample_plan_handle
+            from sys.dm_exec_query_stats
+            group by query_hash
+            having count(*) > 1
+            order by count(*) desc) as q
+      cross apply sys.dm_exec_sql_text(q.sample_sql_handle) as t
+      cross apply sys.dm_exec_query_plan(q.sample_plan_handle) as p
+go
+Queries that have a number_of_entries value in the hundreds or thousands are excellent candidates for parameterization. If you look at the CompileTime and CompileCPU attributes under the <QueryPlan> tag of the sample XML query plan and multiply those values times the number_of_entries value for that query, you can get an estimate of how much compile time and CPU you can eliminate by parameterizing the query (which means that the query is compiled once, and then it is cached and reused for subsequent executions).
+You can use the query_hash and query_plan_hash values together to determine whether a set of ad hoc queries with the same query_hash value resulted in query plans with the same or different query_plan_hash values, or access path. This is done via a small modification to the earlier query.
+select q.query_hash,
+      q.number_of_entries,
+      q.distinct_plans,
+      t.text as sample_query,
+      p.query_plan as sample_plan
+from (select top 20 query_hash,
+                  count(*) as number_of_entries,
+                  count(distinct query_plan_hash) as distinct_plans,
+                  min(sql_handle) as sample_sql_handle,
+                  min(plan_handle) as sample_plan_handle
+            from sys.dm_exec_query_stats
+            group by query_hash
+            having count(*) > 1
+            order by count(*) desc) as q
+      cross apply sys.dm_exec_sql_text(q.sample_sql_handle) as t
+      cross apply sys.dm_exec_query_plan(q.sample_plan_handle) as p
+go
+Note that this new query returns a count of the number of distinct query plans (query_plan_hash values) for a given query_hash value. Rows that return a large number for number_of_entries and a distinct_plans count of 1 are good candidates for parameterization. Even if the number of distinct plans is more than one, you can use sys.dm_exec_query_plan to retrieve the different query plans and examine them to see whether the difference is important and necessary for achieving optimal performance.
+Having identified the scope for parameterizing queries change should ideally be done on the application. For our example we could rewrite the batch using sp_executesql which will allow parameterizing our query:
+use [AdventureWorks]
+--DBCC FREEPROCCACHE
+/* Example which makes use of the parameters (as placeholders) in the query which leads to parameterization and
+plan reuse*/
+DECLARE @SQLString nvarchar(500)
+DECLARE @ParmDefinition nvarchar(500);
+DECLARE @cnt INT
+SET @cnt = 1
+SET @SQLString =
+     N'SELECT EmployeeID, NationalIDNumber, Title, ManagerID
+       FROM AdventureWorks.HumanResources.Employee WHERE ManagerID = @ManagerID '
+-------------------------------------------
+SET @ParmDefinition = N'@ManagerID tinyint';
+-------------------------------------------
+/* Execute the same string with the different parameter value */
+While @cnt <= 100
+begin
+      EXECUTE sp_executesql @SQLString, @ParmDefinition, @ManagerID = @cnt
+      SET @cnt = @cnt + 1
+end
+Run the same query above to get the number_of_entries value for the query_hash and you will now see the difference.
+Detection:
+You can look out for high ratio of SQL Statistics: SQL Compilations/sec to SQL Statistics: Batch Requests/sec as one indication of high compilations as an area to focus on.
+You can also check queries waiting for compile memory will show a wait type of "RESOURCE_SEMAPHORE_QUERY_COMPILE“
+SQL Server 2005 throttles the number of concurrent compiles that can happen at any one time.  Unlike 2000, which throttled solely based on the number of compiles, SQL 2005 throttles based on memory usage during the compile.  There are three gateways (semaphores) called the small, medium, and big gateway.  When a request is received that must be compiled it will start compilation.  There is a special function called to yield during optimization which also checks how much memory has been used by that compile.  Once the memory usage reaches the threshold for a given gateway it will then acquire that semaphore before continuing.
+
+
+
+Slide: Unnecessary Recompilation
+
+Detection:
+Performance Monitor
+SQL Statistics object:
+Counters:
+SQL Server: SQL Statistics: Batch Requests/sec
+SQL Server: SQL Statistics: SQL Recompilations/sec
+SQL Server Profiler trace provides that information along with the reason for the recompilation. You can use the following events to get this information.
+SP:Recompile/SQL:StmtRecompile Refer to http://technet.microsoft.com/en-us/library/ms179294.aspx
+Use sys.dm_exec_query_stats DMV:
+select top 25
+    sql_text.text,
+    sql_handle,
+    plan_generation_num, -- number of times the query has recompiled
+    execution_count,
+    dbid,
+    objectid
+from
+    sys.dm_exec_query_stats a
+    cross apply sys.dm_exec_sql_text(sql_handle) as sql_text
+where
+    plan_generation_num >1
+order by plan_generation_num desc
+
+Lets take a look at a few DMVs which can show us the contents of the procedure cache.
+{SELECT usecounts, size_in_bytes, cacheobjtype, objtype, plan_handle FROM sys.dm_exec_cached_plans}
+[sys.dm_exec_cached_plans: Each row that this DMV returns is for each query plan that is cached by SQL Server for faster query execution. You can use this DMV to find cached query plans, cached query text, the amount of memory taken by cached plans, and the reuse count of the cached plans]
+--The plan_handle is a binary value used to identify a particular cached compiled plan or parse tree.
+You can pass the plan_handle value to other DMVs and dynamic management functions (DMF) to get additional information about the plan.
+For example you can see the SQL text of the top 10 most frequently reused stored procedures in your procedure cache by running this query:
+SELECT TOP 10 usecounts, size_in_bytes, cacheobjtype, objtype, plan_handle, REPLACE(REPLACE([text], CHAR(13), ' ' ), CHAR(10), ' ' ) AS sql_text
+FROM sys.dm_exec_cached_plans AS p
+CROSS APPLY sys.dm_exec_sql_text (p.plan_handle)
+WHERE p.objtype = 'Proc' AND cacheobjtype = 'Compiled Plan'
+ORDER BY usecounts DESC
+Procedure Cache also maintains statistics for each of the cached plan. Using sys.dm_exec_query_stats one can check the top consuming CPU, or Reads or Writes queries using a query like this one:
+use [Master]
+--IDENTIFY EXPENSIVE QUERIES (Below gets the top queries by cumulative CPU cost)
+--Remember "sys.dm_exec_query_stats" gives us runtime CPU usage not compile time.
+--Also the statistics are rolled to Batch level. So once the Batch identified you will need to drill down further to the high CPU Stmt.
+SELECT TOP 20
+LEFT(P.CACHEOBJTYPE + '(' +P.OBJTYPE + ')', 35) AS cacheobjtype,
+p.usecounts,
+p.size_in_bytes / 1024 AS SIZE_IN_KB,
+stat.total_worker_time/1000 AS TOT_CPU_MS,
+stat.total_elapsed_time/1000 AS TOT_DURATION_MS,
+stat.total_physical_reads,
+stat.total_logical_writes,
+stat.total_logical_reads,
+LEFT (CASE 
+	WHEN PA.VALUE=32767 THEN 'ResourceDb'
+	ELSE ISNULL (DB_NAME (CONVERT (sysname, pa.value)), CONVERT (sysname, pa.value))
+	END, 40) AS dbname,
+sql.objectid,
+CONVERT (NVARCHAR(50), CASE 
+	WHEN sql.objectid IS NULL THEN NULL
+	ELSE REPLACE (REPLACE (sql.[text], CHAR(13), ' '), CHAR(10), '') 
+	END) as PROCNAME,
+	REPLACE(REPLACE(SUBSTRING (sql.[text], stat.statement_start_offset/2 + 1,
+CASE WHEN stat.statement_end_offset = -1 THEN LEN (CONVERT (nvarchar(max), sql.[text]))
+ELSE stat.statement_end_offset / 2 - stat.statement_start_offset / 2 + 1 END),
+	CHAR(13), ' '), CHAR(10), ' ') AS STMT_TEXT,
+	QPLAN.Query_Plan
+FROM sys.dm_exec_cached_plans p
+OUTER APPLY sys.dm_exec_plan_attributes (p.plan_handle) pa
+INNER JOIN sys.dm_exec_query_stats stat ON p.plan_handle = stat.plan_handle
+OUTER APPLY sys.dm_exec_sql_text (p.plan_handle) AS sql
+OUTER APPLY sys.dm_exec_query_plan(p.plan_handle) as QPLAN
+WHERE pa.attribute = 'dbid'
+ORDER BY tot_cpu_ms DESC
+The DMV sys.dm_exec_cached_plans doesn’t show cached execution contexts, to see them you can pass a plan handle to the DMF sys.dm_exec_cached_plan_dependent_objects , This DMF returns one row for every dependent object of a compiled plan when you pass a valid plan_handle in as a parameter. 
+Example:=
+---------
+SELECT usecounts, size_in_bytes, cacheobjtype, objtype, plan_handle FROM sys.dm_exec_cached_plans
+go
+--Pick the PlanHandle and you can use the below:
+-- This example uses sys.dm_exec_cached_plan_dependent_objects, as well as sys.dm_exec_cached_plans, to retrieve the dependent objects for all compiled plans, the plan_handle, and their usecounts. It also calls the sys.dm_exec_sql_text function to return the associated Transact-SQL batch.
+SELECT text, plan_handle, d.usecounts, d.cacheobjtype 
+FROM sys.dm_exec_cached_plans 
+CROSS APPLY sys.dm_exec_sql_text(plan_handle) 
+CROSS APPLY 
+ 	sys.dm_exec_cached_plan_dependent_objects(plan_handle) d
+
+
+
+
+
+
+
+
+
+
+Slide: Inefficient Query Plan
+Certain types of query plan operators are more CPU-intensive than others. Just by their nature, the Hash operator and Sort operator scan are CPU driven.
+The most significant input the optimizer uses in evaluating the cost of various alternative query plans is the cardinality estimates for each operator, which you can see in the Showplan (EstimateRows and EstimateExecutions attributes). Without accurate cardinality estimates, the primary input used in optimization is flawed, and many times so is the final plan.
+Detection:
+The Performance Monitor “ACCESS METHODS” object shows the counters:
+“Workfiles Created/sec” - used to store temporary results for hash joins and hash aggregates.
+“Worktables Created/sec” - used to store temporary results for  query spool, LOB variables, XML variables, and cursors.
+The following query against sys.dm_exec_query_stats is an efficient way to determine which query is using the most cumulative CPU.
+select
+    highest_cpu_queries.plan_handle,
+    highest_cpu_queries.total_worker_time,
+    q.dbid,
+    q.objectid,
+    q.number,
+    q.encrypted,
+    q.[text]
+from
+    (select top 50
+        qs.plan_handle,
+        qs.total_worker_time
+    from
+        sys.dm_exec_query_stats qs
+    order by qs.total_worker_time desc) as highest_cpu_queries
+    cross apply sys.dm_exec_sql_text(plan_handle) as q
+order by highest_cpu_queries.total_worker_time desc
+Another way would be to use a query which shows some operators that may be CPU intensive, such as ‘%Hash Match%’, ‘%Sort%’ to look for suspects:
+select *
+from
+      sys.dm_exec_cached_plans
+      cross apply sys.dm_exec_query_plan(plan_handle)
+where
+      cast(query_plan as nvarchar(max)) like '%Sort%'
+      or cast(query_plan as nvarchar(max)) like '%Hash Match%'
+
+
+Slide: Intraquery Parallelism
+A parallel query typically uses a similar but slightly higher amount of CPU time as compared to the corresponding serial execution plan, but it does so in a shorter amount of time.
+Running with a parallel plan is not inherently bad and should provide the fastest response time for that query. However, the response time for a given query must be weighed against the overall throughput and responsiveness of the rest of the queries on the system. Parallel queries are generally best suited to batch processing and decision support workloads and might not be useful in a transaction processing environment
+You can determine whether any active requests are running in parallel for a given session by using the following query.
+select
+    r.session_id,
+    r.request_id,
+    max(isnull(exec_context_id, 0)) as number_of_workers,
+    r.sql_handle,
+    r.statement_start_offset,
+    r.statement_end_offset,
+    r.plan_handle
+from
+    sys.dm_exec_requests r
+    join sys.dm_os_tasks t on r.session_id = t.session_id
+    join sys.dm_exec_sessions s on r.session_id = s.session_id
+where
+    s.is_user_process = 0x1
+group by
+    r.session_id, r.request_id,
+    r.sql_handle, r.plan_handle,
+    r.statement_start_offset, r.statement_end_offset
+having max(isnull(exec_context_id, 0)) > 0
+With this information, you can easily retrieve the text of the query by using sys.dm_exec_sql_text, and you can retrieve the plan by using sys.dm_exec_cached_plan.
+
+
+
+
+
+
+
+
+
+•	SQL Trace -  look for the following signs of parallel queries, which could be either statements or batches that have CPU time greater than the duration.
+Select EventClass, TextData
+From     ::fn_trace_gettable('c:\temp\high_cpu_trace.trc', default)
+Where EventClass in (10, 12)    -- RPC:Completed, SQL:BatchCompleted
+and CPU > Duration/1000   -- CPU is in milliseconds, Duration in microseconds
+•	Or can be that Showplans (un-encoded) have Parallelism operators in them
+Select EventClass, TextData
+From ::fn_trace_gettable('c:\temp\high_cpu_trace.trc', default)
+Where TextData LIKE '%Parallelism%'
+
+

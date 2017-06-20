@@ -1,0 +1,7 @@
+USE AdventureWorks2014;
+GO
+BEGIN TRANSACTION
+SELECT * FROM Person.Person WITH (TABLOCKX, HOLDLOCK);
+WAITFOR DELAY '00:01:00' ---Wait a minute!
+ROLLBACK TRANSACTION
+--Release the lock

@@ -1,0 +1,1 @@
+sqlcmd -E -S .\SQLEXPRESS -d srvdba -Q "EXECUTE dbo.DatabaseBackup @Databases = 'USER_DATABASES', @Directory = NULL, @CleanupTime = 168, @BackupType = 'LOG', @ChangeBackupType = 'Y'" -b -o "C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\Backup\DatabaseBackupLog.txt"

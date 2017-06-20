@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/ -->
+<html class="no-touch" lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" slick-uniqueid="3"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+		<title>Getting Started with Diskspd - Brent Ozar Unlimited®</title>
+
+	
+<!-- This site is optimized with the Yoast SEO plugin v3.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/">
+<link rel="publisher" href="https://plus.google.com/u/0/b/114746152195367054449/114746152195367054449/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting Started with Diskspd - Brent Ozar Unlimited®">
+<meta property="og:description" content="Diskspeed, or diskspd.exe, is Microsoft’s replacement for SQLIO. While I’m not going to replace our SQLIO tutorial, you can use the information in here to replicate the same type of tests on your systems to get the information you need. During the Dell DBA Days, Doug and I used diskspd as one of our techniques...">
+<meta property="og:url" content="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/">
+<meta property="og:site_name" content="Brent Ozar Unlimited®">
+<meta property="article:publisher" content="https://www.facebook.com/BrentOzarUnlimited">
+<meta property="article:author" content="https://www.facebook.com/jeremiah.peschka">
+<meta property="article:section" content="SQL Server">
+<meta property="article:published_time" content="2015-09-15T08:15:07-05:00">
+<meta property="article:modified_time" content="2015-09-15T11:14:41-05:00">
+<meta property="og:updated_time" content="2015-09-15T11:14:41-05:00">
+<meta property="fb:admins" content="708763106">
+<meta property="og:image" content="https://www.brentozar.com/wp-content/uploads/2015/11/BOU-WhitePocket-giant.png">
+<meta property="og:image:width" content="910">
+<meta property="og:image:height" content="910">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Diskspeed, or diskspd.exe, is Microsoft’s replacement for SQLIO. While I’m not going to replace our SQLIO tutorial, you can use the information in here to replicate the same type of tests on your systems to get the information you need. During the Dell DBA Days, Doug and I used diskspd as one of our techniques...">
+<meta name="twitter:title" content="Getting Started with Diskspd - Brent Ozar Unlimited®">
+<meta name="twitter:site" content="@BrentOzarULTD">
+<meta name="twitter:image" content="https://www.brentozar.com/wp-content/uploads/2015/11/BOU-WhitePocket-giant.png">
+<meta name="twitter:creator" content="@peschkaj">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Brent Ozar Unlimited® » Feed" href="https://www.brentozar.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Brent Ozar Unlimited® » Comments Feed" href="https://www.brentozar.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Brent Ozar Unlimited® » Getting Started with Diskspd Comments Feed" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/feed/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+<meta name="og:title" content="Getting Started with Diskspd">
+<meta name="og:type" content="website">
+<meta name="og:url" content="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/">
+<meta name="og:image" content="https://www.brentozar.com/wp-content/uploads/2015/11/BOU-WhitePocket-giant-200x200.png">
+<meta name="og:description" content="Diskspeed, or diskspd.exe, is Microsoft’s replacement for SQLIO. While I’m not going to replace our SQLIO tutorial, you can use the information in here to replicate the same type of tests on your systems to get the information you need. During the Dell DBA Days, Doug and I used diskspd as one of our techniques...">
+		<script async="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/analytics.js.téléchargement"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.brentozar.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.6.1"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/wp-emoji-release.min.js.téléchargement" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="rs-plugin-settings-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/settings.css" type="text/css" media="all">
+<style id="rs-plugin-settings-inline-css" type="text/css">
+#rs-demo-id {}
+</style>
+<link rel="stylesheet" id="ye_dynamic-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/main.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="us-font-1-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="us-font-2-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="us-gravityforms-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/us.gravityforms.css" type="text/css" media="all">
+<link rel="stylesheet" id="us-base-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/us-base.css" type="text/css" media="all">
+<link rel="stylesheet" id="us-font-awesome-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/font-awesome.css" type="text/css" media="all">
+<link rel="stylesheet" id="us-font-mdfi-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/font-mdfi.css" type="text/css" media="all">
+<link rel="stylesheet" id="us-style-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="us-responsive-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/responsive.css" type="text/css" media="all">
+<link rel="stylesheet" id="theme-style-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="enlighter-local-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/EnlighterJS.yui.css" type="text/css" media="all">
+<link rel="stylesheet" id="bsf-Defaults-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/Defaults.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jetpack.css" type="text/css" media="all">
+<!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.4 - Universal enabled - https://www.monsterinsights.com/ -->
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-8760947-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jquery.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jquery-migrate.min.js.téléchargement"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/related-posts.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jquery.themepunch.tools.min.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jquery.themepunch.revolution.min.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/mootools-core-1.5.1-full-nocompat-yc.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/EnlighterJS.yui.js.téléchargement"></script>
+<link rel="https://api.w.org/" href="https://www.brentozar.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.brentozar.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.brentozar.com/wp-includes/wlwmanifest.xml"> 
+<link rel="shortlink" href="https://www.brentozar.com/?p=23676">
+<link rel="alternate" type="application/json+oembed" href="https://www.brentozar.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.brentozar.com%2Farchive%2F2015%2F09%2Fgetting-started-with-diskspd%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.brentozar.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.brentozar.com%2Farchive%2F2015%2F09%2Fgetting-started-with-diskspd%2F&amp;format=xml">
+<script type="text/javascript">/* <![CDATA[ */window.addEvent('domready', function(){if (typeof EnlighterJS == "undefined"){return;};EnlighterJS.Util.Init('pre.EnlighterJSRAW', 'code.EnlighterJSRAW', {"language":"tsql","theme":"enlighter","indent":2,"hover":"hoverEnabled","showLinenumbers":true,"rawButton":true,"infoButton":false,"windowButton":true,"rawcodeDoubleclick":false,"grouping":true});});/* ]]> */</script>
+<script type="text/javascript"><!--
+function powerpress_pinw(pinw_url){window.open(pinw_url, 'PowerPressPlayer','toolbar=0,status=0,resizable=1,width=460,height=320');	return false;}
+//-->
+</script>
+<style type="text/css">img#wpstats{display:none}</style><meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress.">
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://www.brentozar.com/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><!--[if IE  8]><link rel="stylesheet" type="text/css" href="https://www.brentozar.com/wp-content/plugins/js_composer/assets/css/vc-ie8.min.css" media="screen"><![endif]--><meta name="generator" content="Powered by Slider Revolution 5.3.0.1 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+<link rel="icon" href="https://www.brentozar.com/wp-content/uploads/2015/08/cropped-Brent_Ozar_Unlimited-32x32.jpg" sizes="32x32">
+<link rel="icon" href="https://www.brentozar.com/wp-content/uploads/2015/08/cropped-Brent_Ozar_Unlimited-192x192.jpg" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://www.brentozar.com/wp-content/uploads/2015/08/cropped-Brent_Ozar_Unlimited-180x180.jpg">
+<meta name="msapplication-TileImage" content="https://www.brentozar.com/wp-content/uploads/2015/08/cropped-Brent_Ozar_Unlimited-270x270.jpg">
+<noscript>&lt;style type="text/css"&gt; .wpb_animate_when_almost_visible { opacity: 1; }&lt;/style&gt;</noscript>
+			<style id="us-theme-options-css" type="text/css">body {font-family:"Open Sans", sans-serif;font-size:14px;line-height:24px;font-weight:400;}.w-blog-post {font-size:14px;}.w-text.font_main_menu,.w-nav .menu-item-language,.w-nav-item {font-family:"Questrial", sans-serif;font-weight:400;}h1, h2, h3, h4, h5, h6,.w-text.font_heading,.w-blog-post.format-quote blockquote,.w-counter-number,.w-pricing-item-price,.w-tabs-item-title,.ult_price_figure,.ult_countdown-amount,.ultb3-box .ultb3-title,.stats-block .stats-desc .stats-number {font-family:"Questrial", sans-serif;font-weight:400;}h1 {font-size:40px;letter-spacing:0px;text-transform:;}h2 {font-size:34px;letter-spacing:0px;text-transform:;}h3 {font-size:28px;letter-spacing:0px;text-transform:;}h4,.widgettitle,.comment-reply-title,.woocommerce #reviews h2,.woocommerce .related > h2,.woocommerce .upsells > h2,.woocommerce .cross-sells > h2 {font-size:24px;letter-spacing:0px;text-transform:;}h5,.w-blog:not(.cols_1) .w-blog-list .w-blog-post-title {font-size:20px;letter-spacing:0px;text-transform:;}h6 {font-size:18px;letter-spacing:0px;text-transform:;}@media (max-width:767px) {body {font-size:16px;line-height:28px;}.w-blog-post {font-size:16px;}h1 {font-size:30px;}h2 {font-size:26px;}h3 {font-size:22px;}h4,.widgettitle,.comment-reply-title,.woocommerce #reviews h2,.woocommerce .related > h2,.woocommerce .upsells > h2,.woocommerce .cross-sells > h2 {font-size:20px;}h5 {font-size:18px;}h6 {font-size:16px;}}body,.header_hor .l-header.pos_fixed {min-width:1300px;}.l-canvas.type_boxed,.l-canvas.type_boxed .l-subheader,.l-canvas.type_boxed ~ .l-footer .l-subfooter {max-width:1300px;}.header_hor .l-subheader-h,.l-titlebar-h,.l-main-h,.l-section-h,.l-subfooter-h,.w-tabs-section-content-h,.w-blog-post-body {max-width:1140px;}.l-sidebar {width:25%;}.l-content {width:70%;}@media (max-width:767px) {.g-cols > div:not([class*="-xs-"]) {float:none;width:100%;margin:0 0 25px;}.g-cols.offset_none > div,.g-cols > div:last-child,.g-cols > div.vc_col-has-fill {margin-bottom:0;}} .w-btn,.button,.l-body .cl-btn,.l-body .ubtn,.l-body .ultb3-btn,.l-body .btn-modal,.l-body .flip-box-wrap .flip_link a,.l-body .ult_pricing_table_wrap .ult_price_link .ult_price_action_button,.tribe-events-button,button,input[type="submit"] {font-weight:bold;text-transform:uppercase;font-size:15px;line-height:2.8;padding:0 1.8em;border-radius:0.3em;letter-spacing:0px;}.w-btn.icon_atleft i {left:1.8em;}.w-btn.icon_atright i {right:1.8em;}@media (min-width:901px) {.l-subheader.at_top { display:none; }.header_hor .l-subheader.at_top {line-height:36px;height:36px;}.header_hor .l-header.sticky .l-subheader.at_top {line-height:36px;height:36px;}.header_hor .l-subheader.at_middle {line-height:100px;height:100px;}.header_hor .l-header.sticky .l-subheader.at_middle {line-height:60px;height:60px;}.l-subheader.at_bottom { display:none; }.header_hor .l-subheader.at_bottom {line-height:50px;height:50px;}.header_hor .l-header.sticky .l-subheader.at_bottom {line-height:50px;height:50px;}.header_hor .l-header.pos_fixed ~ .l-titlebar,.header_hor .titlebar_none.sidebar_left .l-header.pos_fixed ~ .l-main,.header_hor .titlebar_none.sidebar_right .l-header.pos_fixed ~ .l-main,.header_hor .titlebar_none.sidebar_none .l-header.pos_fixed ~ .l-main .l-section:first-child,.header_hor.header_inpos_below .l-header.pos_fixed ~ .l-main .l-section:nth-child(2),.header_hor .l-header.pos_static.bg_transparent ~ .l-titlebar,.header_hor .titlebar_none.sidebar_left .l-header.pos_static.bg_transparent ~ .l-main,.header_hor .titlebar_none.sidebar_right .l-header.pos_static.bg_transparent ~ .l-main,.header_hor .titlebar_none.sidebar_none .l-header.pos_static.bg_transparent ~ .l-main .l-section:first-child {padding-top:100px;}.header_hor .l-header.pos_static.bg_solid + .l-main .l-section.preview_trendy .w-blog-post-preview {top:-100px;}.header_hor.header_inpos_bottom .l-header.pos_fixed ~ .l-main .l-section:first-child {padding-bottom:100px;}.header_hor .l-header.bg_transparent ~ .l-main .l-section.valign_center:first-child > .l-section-h {top:-50px;}.header_hor.header_inpos_bottom .l-header.pos_fixed.bg_transparent ~ .l-main .l-section.valign_center:first-child > .l-section-h {top:50px;}.header_hor .l-header.pos_fixed ~ .l-main .l-section.height_full:not(:first-child) {min-height:calc(100vh - 60px);}.admin-bar.header_hor .l-header.pos_fixed ~ .l-main .l-section.height_full:not(:first-child) {min-height:calc(100vh - 60px - 32px);}.l-subheader.at_middle {background-image:url(https://www.brentozar.com/wp-content/uploads/2016/09/bg-texture-blog.png);background-attachment:scroll;background-position:top center;background-repeat:repeat;background-size:cover;}.header_ver {padding-left:300px;position:relative;}.rtl.header_ver {padding-left:0;padding-right:300px;}.header_ver .l-header,.header_ver .l-header .w-cart-notification {width:300px;}.header_ver .l-navigation-item.to_next {left:100px;}.no-touch .header_ver .l-navigation-item.to_next:hover {left:300px;}.rtl.header_ver .l-navigation-item.to_next {right:100px;}.no-touch .rtl.header_ver .l-navigation-item.to_next:hover {right:300px;}.header_ver .w-nav.type_desktop [class*="columns"] .w-nav-list.level_2 {width:calc(100vw - 300px);max-width:980px;}}@media (min-width:601px) and (max-width:900px) {.l-subheader.at_top { display:none; }.header_hor .l-subheader.at_top {line-height:36px;height:36px;}.header_hor .l-header.sticky .l-subheader.at_top {line-height:36px;height:36px;}.header_hor .l-subheader.at_middle {line-height:80px;height:80px;}.header_hor .l-header.sticky .l-subheader.at_middle {line-height:50px;height:50px;}.l-subheader.at_bottom { display:none; }.header_hor .l-subheader.at_bottom {line-height:50px;height:50px;}.header_hor .l-header.sticky .l-subheader.at_bottom {line-height:50px;height:50px;}.header_hor .l-header.pos_fixed ~ .l-titlebar,.header_hor .titlebar_none.sidebar_left .l-header.pos_fixed ~ .l-main,.header_hor .titlebar_none.sidebar_right .l-header.pos_fixed ~ .l-main,.header_hor .titlebar_none.sidebar_none .l-header.pos_fixed ~ .l-main .l-section:first-child,.header_hor .l-header.pos_static.bg_transparent ~ .l-titlebar,.header_hor .titlebar_none.sidebar_left .l-header.pos_static.bg_transparent ~ .l-main,.header_hor .titlebar_none.sidebar_right .l-header.pos_static.bg_transparent ~ .l-main,.header_hor .titlebar_none.sidebar_none .l-header.pos_static.bg_transparent ~ .l-main .l-section:first-child {padding-top:80px;}.header_hor .l-header.pos_static.bg_solid + .l-main .l-section.preview_trendy .w-blog-post-preview {top:-80px;}.l-subheader.at_middle {background-image:url(https://www.brentozar.com/wp-content/uploads/2016/09/bg-texture-blog.png);background-attachment:scroll;background-position:top center;background-repeat:repeat;background-size:cover;}.header_ver .l-header {width:300px;}}@media (max-width:600px) {.header_hor .l-subheader.at_top {line-height:36px;height:36px;}.header_hor .l-header.sticky .l-subheader.at_top {line-height:0px;height:0px;overflow:hidden;}.header_hor .l-subheader.at_middle {line-height:50px;height:50px;}.header_hor .l-header.sticky .l-subheader.at_middle {line-height:60px;height:60px;}.l-subheader.at_bottom { display:none; }.header_hor .l-subheader.at_bottom {line-height:50px;height:50px;}.header_hor .l-header.sticky .l-subheader.at_bottom {line-height:50px;height:50px;}.header_hor .l-header.pos_fixed ~ .l-titlebar,.header_hor .titlebar_none.sidebar_left .l-header.pos_fixed ~ .l-main,.header_hor .titlebar_none.sidebar_right .l-header.pos_fixed ~ .l-main,.header_hor .titlebar_none.sidebar_none .l-header.pos_fixed ~ .l-main .l-section:first-child,.header_hor .l-header.pos_static.bg_transparent ~ .l-titlebar,.header_hor .titlebar_none.sidebar_left .l-header.pos_static.bg_transparent ~ .l-main,.header_hor .titlebar_none.sidebar_right .l-header.pos_static.bg_transparent ~ .l-main,.header_hor .titlebar_none.sidebar_none .l-header.pos_static.bg_transparent ~ .l-main .l-section:first-child {padding-top:86px;}.header_hor .l-header.pos_static.bg_solid + .l-main .l-section.preview_trendy .w-blog-post-preview {top:-86px;}}@media (min-width:901px) {.ush_image_1 { height:35px; }.l-header.sticky .ush_image_1 { height:35px; }}@media (min-width:601px) and (max-width:900px) {.ush_image_1 { height:30px; }.l-header.sticky .ush_image_1 { height:30px; }}@media (max-width:600px) {.ush_image_1 { height:20px; }.l-header.sticky .ush_image_1 { height:20px; }}.header_hor .ush_menu_1.type_desktop .w-nav-list.level_1 > .menu-item > a {padding:0 30px;}.header_ver .ush_menu_1.type_desktop {line-height:60px;}.ush_menu_1.type_desktop .btn.w-nav-item.level_1 > .w-nav-anchor {margin:15px;}.ush_menu_1.type_desktop .w-nav-list.level_1 > .menu-item > a,.ush_menu_1.type_desktop [class*="columns"] .menu-item-has-children .w-nav-anchor.level_2 {font-size:18px;}.ush_menu_1.type_desktop .submenu-languages .menu-item-language > a,.ush_menu_1.type_desktop .w-nav-anchor:not(.level_1) {font-size:15px;}.ush_menu_1.type_mobile .w-nav-anchor.level_1 {font-size:15px;}.ush_menu_1.type_mobile .menu-item-language > a,.ush_menu_1.type_mobile .w-nav-anchor:not(.level_1) {font-size:14px;}@media (min-width:901px) {.ush_search_1.layout_simple {max-width:240px;}.ush_search_1.layout_modern.active {width:240px;}}@media (min-width:601px) and (max-width:900px) {.ush_search_1.layout_simple {max-width:200px;}.ush_search_1.layout_modern.active {width:200px;}}@media (min-width:901px) {.ush_socials_1 {font-size:20px;}}@media (min-width:601px) and (max-width:900px) {.ush_socials_1 {font-size:18px;}}@media (max-width:600px) {.ush_socials_1 {font-size:18px;}}.ush_socials_1 .custom .w-socials-item-link-hover {background-color:#1abc9c;}.ush_socials_1.style_colored .custom .w-socials-item-link {color:#1abc9c;}@media (min-width:901px) {.ush_socials_1{margin-right:-10px!important;}}@media (min-width:601px) and (max-width:900px) {.ush_image_1{margin-right:0px!important;}.ush_socials_1{margin-right:-8px!important;}}@media (max-width:600px) {.ush_image_1{margin-right:0px!important;}}html {background-color:#ffffff;}.l-subheader.at_top,.l-subheader.at_top .w-dropdown-list,.header_hor .l-subheader.at_top .type_mobile .w-nav-list.level_1 {background-color:#f6f6f6;}.l-subheader.at_top,.l-subheader.at_top .w-dropdown.active,.header_hor .l-subheader.at_top .type_mobile .w-nav-list.level_1 {color:#777777;}.no-touch .l-subheader.at_top a:hover,.no-touch .l-subheader.at_top .w-cart-quantity,.no-touch .l-header.bg_transparent .l-subheader.at_top .w-dropdown.active a:hover {color:#ef4135;}.header_ver .l-header,.header_hor .l-subheader.at_middle,.l-subheader.at_middle .w-dropdown-list,.header_hor .l-subheader.at_middle .type_mobile .w-nav-list.level_1 {background-color:#ffffff;}.l-subheader.at_middle,.l-subheader.at_middle .w-dropdown.active,.header_hor .l-subheader.at_middle .type_mobile .w-nav-list.level_1 {color:#777777;}.no-touch .l-subheader.at_middle a:hover,.no-touch .l-subheader.at_middle .w-cart-quantity,.no-touch .l-header.bg_transparent .l-subheader.at_middle .w-dropdown.active a:hover {color:#ef4135;}.l-subheader.at_bottom,.l-subheader.at_bottom .w-dropdown-list,.header_hor .l-subheader.at_bottom .type_mobile .w-nav-list.level_1 {background-color:#ffffff;}.l-subheader.at_bottom,.l-subheader.at_bottom .w-dropdown.active,.header_hor .l-subheader.at_bottom .type_mobile .w-nav-list.level_1 {color:#777777;}.no-touch .l-subheader.at_bottom a:hover,.no-touch .l-subheader.at_bottom .w-cart-quantity,.no-touch .l-header.bg_transparent .l-subheader.at_bottom .w-dropdown.active a:hover {color:#000000;}.l-header.bg_transparent:not(.sticky) .l-subheader {color:rgba(255,255,255,0.66);}.no-touch .l-header.bg_transparent:not(.sticky) a:not(.w-nav-anchor):hover,.no-touch .l-header.bg_transparent:not(.sticky) .type_desktop .menu-item-language > a:hover,.no-touch .l-header.bg_transparent:not(.sticky) .type_desktop .menu-item-language:hover > a,.no-touch .l-header.bg_transparent:not(.sticky) .type_desktop .w-nav-item.level_1:hover > .w-nav-anchor {color:#ffffff;}.l-header.bg_transparent:not(.sticky) .w-nav-title:after {background-color:#ffffff;}.w-search-form {background-color:#ffffff;color:#000000;}.w-search.layout_fullscreen .w-search-form:before {background-color:#ffffff;}.no-touch .w-nav.type_desktop .menu-item-language:hover > a,.no-touch .w-nav-item.level_1:hover > .w-nav-anchor {background-color:;color:#000000;}.w-nav-title:after {background-color:#000000;}.w-nav-item.level_1.current-menu-item > .w-nav-anchor,.w-nav-item.level_1.current-menu-parent > .w-nav-anchor,.w-nav-item.level_1.current-menu-ancestor > .w-nav-anchor {background-color:;color:#ef4135;}.l-header.bg_transparent:not(.sticky) .type_desktop .w-nav-item.level_1.current-menu-item > .w-nav-anchor,.l-header.bg_transparent:not(.sticky) .type_desktop .w-nav-item.level_1.current-menu-ancestor > .w-nav-anchor {color:#ffffff;}.w-nav.type_desktop .submenu-languages,.w-nav-list:not(.level_1) {background-color:#ffffff;color:#777777;}.no-touch .w-nav.type_desktop .submenu-languages .menu-item-language:hover > a,.no-touch .w-nav-item:not(.level_1):hover > .w-nav-anchor {background-color:;color:#000000;}.w-nav-item:not(.level_1).current-menu-item > .w-nav-anchor,.w-nav-item:not(.level_1).current-menu-parent > .w-nav-anchor,.w-nav-item:not(.level_1).current-menu-ancestor > .w-nav-anchor {background-color:;color:#ef4135;}.btn.w-menu-item,.btn.w-nav-item .w-nav-anchor.level_1 {background-color:#777777 !important;color:#ffffff !important;}.no-touch .btn.w-menu-item:hover,.no-touch .btn.w-nav-item .w-nav-anchor.level_1:before {background-color:#000000 !important;}.no-touch .btn.w-menu-item:hover,.no-touch .btn.w-nav-item .w-nav-anchor.level_1:hover {color:#ffffff !important;}.l-preloader,.l-canvas,.w-blog.layout_flat .w-blog-post-h,.w-blog.layout_cards .w-blog-post-h,.w-cart-dropdown,.g-filters.style_1 .g-filters-item.active,.no-touch .g-filters-item.active:hover,.w-tabs.layout_default .w-tabs-item.active,.w-tabs.layout_ver .w-tabs-item.active,.no-touch .w-tabs.layout_default .w-tabs-item.active:hover,.no-touch .w-tabs.layout_ver .w-tabs-item.active:hover,.w-tabs.layout_timeline .w-tabs-item,.w-tabs.layout_timeline .w-tabs-section-header-h,.no-touch #lang_sel ul ul a:hover,.no-touch #lang_sel_click ul ul a:hover,#lang_sel_footer,.us-woo-shop_modern .product-h,.us-woo-shop_modern .product-meta,.no-touch .us-woo-shop_trendy .product:hover .product-h,.woocommerce-tabs .tabs li.active,.no-touch .woocommerce-tabs .tabs li.active:hover,.woocommerce .stars span:after,.woocommerce .stars span a:after,.woocommerce .shipping-calculator-form,.woocommerce #payment .payment_box,#bbp-user-navigation li.current,.gform_wrapper .chosen-container-single .chosen-search input[type="text"],.gform_wrapper .chosen-container-multi .chosen-choices li.search-choice {background-color:#ffffff;}.woocommerce #payment .payment_methods li > input:checked + label,.woocommerce .blockUI.blockOverlay {background-color:#ffffff !important;}.w-tabs.layout_modern .w-tabs-item:after {border-bottom-color:#ffffff;}a.w-btn.color_contrast,.w-btn.color_contrast,.no-touch a.w-btn.color_contrast:hover,.no-touch .w-btn.color_contrast:hover,.no-touch a.w-btn.color_contrast.style_outlined:hover,.no-touch .w-btn.color_contrast.style_outlined:hover,.w-iconbox.style_circle.color_contrast .w-iconbox-icon,.tribe-events-calendar thead th {color:#ffffff;}input,textarea,select,.l-section.for_blogpost .w-blog-post-preview,.w-actionbox.color_light,.g-filters.style_1,.g-filters.style_2 .g-filters-item.active,.w-iconbox.style_circle.color_light .w-iconbox-icon,.g-loadmore-btn,.w-pricing-item-header,.w-progbar-bar,.w-progbar.style_3 .w-progbar-bar:before,.w-progbar.style_3 .w-progbar-bar-count,.w-tabs.layout_default .w-tabs-list,.w-tabs.layout_ver .w-tabs-list,.w-testimonial.style_4:before,.no-touch .l-main .widget_nav_menu a:hover,.l-content .wp-caption-text,#lang_sel a,#lang_sel_click a,.smile-icon-timeline-wrap .timeline-wrapper .timeline-block,.smile-icon-timeline-wrap .timeline-feature-item.feat-item,.us-woo-shop_trendy .products .product-category > a,.woocommerce .quantity .plus,.woocommerce .quantity .minus,.select2-container a.select2-choice,.select2-drop .select2-search input,.woocommerce-tabs .tabs,.woocommerce .cart_totals,.woocommerce-checkout #order_review,.woocommerce ul.order_details,#subscription-toggle,#favorite-toggle,#bbp-user-navigation,.tablepress .row-hover tr:hover td,.tribe-bar-views-list,.tribe-events-day-time-slot h5,.tribe-events-present,.tribe-events-single-section,.gform_wrapper .chosen-container-single .chosen-single,.gform_wrapper .chosen-container .chosen-drop,.gform_wrapper .chosen-container-multi .chosen-choices {background-color:#f6f6f6;}.timeline-wrapper .timeline-post-right .ult-timeline-arrow l,.timeline-wrapper .timeline-post-left .ult-timeline-arrow l,.timeline-feature-item.feat-item .ult-timeline-arrow l {border-color:#f6f6f6;}hr,td,th,.l-section,.g-cols > div,.w-author,.w-comments-list,.w-pricing-item-h,.w-profile,.w-separator,.w-sharing-item,.w-tabs-list,.w-tabs-section,.w-tabs-section-header:before,.w-tabs.layout_timeline.accordion .w-tabs-section-content,.g-tags > a,.w-testimonial.style_1,.widget_calendar #calendar_wrap,.l-main .widget_nav_menu > div,.l-main .widget_nav_menu .menu-item a,.widget_nav_menu .menu-item.menu-item-has-children + .menu-item > a,.select2-container a.select2-choice,.smile-icon-timeline-wrap .timeline-line,.woocommerce .login,.woocommerce .track_order,.woocommerce .checkout_coupon,.woocommerce .lost_reset_password,.woocommerce .register,.woocommerce .cart.variations_form,.woocommerce .commentlist .comment-text,.woocommerce .comment-respond,.woocommerce .related,.woocommerce .upsells,.woocommerce .cross-sells,.woocommerce .checkout #order_review,.widget_price_filter .ui-slider-handle,.widget_layered_nav ul,.widget_layered_nav ul li,#bbpress-forums fieldset,.bbp-login-form fieldset,#bbpress-forums .bbp-body > ul,#bbpress-forums li.bbp-header,.bbp-replies .bbp-body,div.bbp-forum-header,div.bbp-topic-header,div.bbp-reply-header,.bbp-pagination-links a,.bbp-pagination-links span.current,span.bbp-topic-pagination a.page-numbers,.bbp-logged-in,.tribe-events-list-separator-month span:before,.tribe-events-list-separator-month span:after,.type-tribe_events + .type-tribe_events,.gform_wrapper .gsection,.gform_wrapper .gf_page_steps,.gform_wrapper li.gfield_creditcard_warning,.form_saved_message {border-color:#ebebeb;}.w-separator,.w-iconbox.color_light .w-iconbox-icon,.w-testimonial.style_3 .w-testimonial-text:after,.w-testimonial.style_3 .w-testimonial-text:before {color:#ebebeb;}a.w-btn.color_light,.w-btn.color_light,.w-btn.color_light.style_outlined:before,.w-btn.w-blog-post-more:before,.w-iconbox.style_circle.color_light .w-iconbox-icon,.no-touch .g-loadmore-btn:hover,.woocommerce .button,.no-touch .woocommerce .quantity .plus:hover,.no-touch .woocommerce .quantity .minus:hover,.no-touch .woocommerce #payment .payment_methods li > label:hover,.widget_price_filter .ui-slider,#tribe-bar-collapse-toggle,.gform_wrapper .gform_page_footer .gform_previous_button {background-color:#ebebeb;}a.w-btn.color_light.style_outlined,.w-btn.color_light.style_outlined,.w-btn.w-blog-post-more,.w-iconbox.style_outlined.color_light .w-iconbox-icon,.w-person-links-item,.w-socials-item-link,.pagination .page-numbers {box-shadow:0 0 0 2px #ebebeb inset;}.w-tabs.layout_trendy .w-tabs-list {box-shadow:0 -1px 0 #ebebeb inset;}h1, h2, h3, h4, h5, h6,.w-counter-number,.w-pricing-item-header,.woocommerce .product .price,.gform_wrapper .chosen-container-single .chosen-single {color:#000000;}.w-progbar.color_contrast .w-progbar-bar-h {background-color:#000000;}input,textarea,select,.l-canvas,a.w-btn.color_contrast.style_outlined,.w-btn.color_contrast.style_outlined,.w-cart-dropdown,.w-form-row-field:before,.w-iconbox.color_contrast .w-iconbox-icon,.w-iconbox.color_light.style_circle .w-iconbox-icon,.w-tabs.layout_timeline .w-tabs-item,.w-tabs.layout_timeline .w-tabs-section-header-h,.woocommerce .button {color:#777777;}a.w-btn.color_light,.w-btn.color_light,.w-btn.w-blog-post-more {color:#777777 !important;}a.w-btn.color_contrast,.w-btn.color_contrast,.w-btn.color_contrast.style_outlined:before,.w-iconbox.style_circle.color_contrast .w-iconbox-icon,.tribe-mobile #tribe-events-footer a,.tribe-events-calendar thead th {background-color:#777777;}.tribe-events-calendar thead th {border-color:#777777;}a.w-btn.color_contrast.style_outlined,.w-btn.color_contrast.style_outlined,.w-iconbox.style_outlined.color_contrast .w-iconbox-icon {box-shadow:0 0 0 2px #777777 inset;}a {color:#ef4135;}.no-touch a:hover,.no-touch a:hover + .w-blog-post-body .w-blog-post-title a,.no-touch .w-blog-post-title a:hover {color:#ef4135;}.no-touch .w-cart-dropdown a:not(.button):hover {color:#ef4135 !important;}.highlight_primary,.l-preloader,.no-touch .l-titlebar .g-nav-item:hover,a.w-btn.color_primary.style_outlined,.w-btn.color_primary.style_outlined,.l-main .w-contacts-item:before,.w-counter.color_primary .w-counter-number,.g-filters-item.active,.no-touch .g-filters.style_1 .g-filters-item.active:hover,.no-touch .g-filters.style_2 .g-filters-item.active:hover,.w-form-row.focused .w-form-row-field:before,.w-iconbox.color_primary .w-iconbox-icon,.no-touch .w-iconbox-link:hover .w-iconbox-title,.no-touch .w-logos .owl-prev:hover,.no-touch .w-logos .owl-next:hover,.w-separator.color_primary,.w-sharing.type_outlined.color_primary .w-sharing-item,.no-touch .w-sharing.type_simple.color_primary .w-sharing-item:hover .w-sharing-icon,.w-tabs.layout_default .w-tabs-item.active,.w-tabs.layout_trendy .w-tabs-item.active,.w-tabs.layout_ver .w-tabs-item.active,.w-tabs-section.active .w-tabs-section-header,.no-touch .g-tags > a:hover,.w-testimonial.style_2:before,.us-woo-shop_standard .product-h .button,.woocommerce .star-rating span:before,.woocommerce-tabs .tabs li.active,.no-touch .woocommerce-tabs .tabs li.active:hover,.woocommerce .stars span a:after,.woocommerce #payment .payment_methods li > input:checked + label,#subscription-toggle span.is-subscribed:before,#favorite-toggle span.is-favorite:before {color:#222222;}.l-section.color_primary,.l-titlebar.color_primary,.no-touch .l-navigation-item:hover .l-navigation-item-arrow,.highlight_primary_bg,.w-actionbox.color_primary,.w-blog-post-preview-icon,.w-blog.layout_cards .format-quote .w-blog-post-h,button,input[type="submit"],a.w-btn.color_primary,.w-btn.color_primary,.w-btn.color_primary.style_outlined:before,.no-touch .g-filters-item:hover,.w-iconbox.style_circle.color_primary .w-iconbox-icon,.no-touch .w-iconbox.style_circle .w-iconbox-icon:before,.no-touch .w-iconbox.style_outlined .w-iconbox-icon:before,.no-touch .w-person-links,.w-pricing-item.type_featured .w-pricing-item-header,.w-progbar.color_primary .w-progbar-bar-h,.w-sharing.type_solid.color_primary .w-sharing-item,.w-sharing.type_fixed.color_primary .w-sharing-item,.w-sharing.type_outlined.color_primary .w-sharing-item:before,.w-tabs.layout_modern .w-tabs-list,.w-tabs.layout_trendy .w-tabs-item:after,.w-tabs.layout_timeline .w-tabs-item:before,.w-tabs.layout_timeline .w-tabs-section-header-h:before,.no-touch .w-header-show:hover,.no-touch .w-toplink.active:hover,.no-touch .pagination .page-numbers:before,.pagination .page-numbers.current,.l-main .widget_nav_menu .menu-item.current-menu-item > a,.rsDefault .rsThumb.rsNavSelected,.no-touch .tp-leftarrow.tparrows.custom:before,.no-touch .tp-rightarrow.tparrows.custom:before,.smile-icon-timeline-wrap .timeline-separator-text .sep-text,.smile-icon-timeline-wrap .timeline-wrapper .timeline-dot,.smile-icon-timeline-wrap .timeline-feature-item .timeline-dot,.tablepress .sorting:hover,.tablepress .sorting_asc,.tablepress .sorting_desc,p.demo_store,.woocommerce .button.alt,.woocommerce .button.checkout,.woocommerce .product-h .button.loading,.no-touch .woocommerce .product-h .button:hover,.woocommerce .onsale,.widget_price_filter .ui-slider-range,.widget_layered_nav ul li.chosen,.widget_layered_nav_filters ul li a,.no-touch .bbp-pagination-links a:hover,.bbp-pagination-links span.current,.no-touch span.bbp-topic-pagination a.page-numbers:hover,.tribe-events-calendar td.mobile-active,.tribe-events-button,.datepicker td.day.active,.datepicker td span.active,.gform_wrapper .gform_page_footer .gform_next_button,.gform_wrapper .gf_progressbar_percentage,.gform_wrapper .chosen-container .chosen-results li.highlighted,.l-body .cl-btn {background-color:#222222;}.l-content blockquote,.no-touch .l-titlebar .g-nav-item:hover,.g-filters.style_3 .g-filters-item.active,.no-touch .w-logos .owl-prev:hover,.no-touch .w-logos .owl-next:hover,.no-touch .w-logos.style_1 .w-logos-item:hover,.w-separator.color_primary,.w-tabs.layout_default .w-tabs-item.active,.w-tabs.layout_ver .w-tabs-item.active,.no-touch .g-tags > a:hover,.no-touch .w-testimonial.style_1:hover,.l-main .widget_nav_menu .menu-item.current-menu-item > a,.woocommerce-tabs .tabs li.active,.no-touch .woocommerce-tabs .tabs li.active:hover,.widget_layered_nav ul li.chosen,.bbp-pagination-links span.current,.no-touch #bbpress-forums .bbp-pagination-links a:hover,.no-touch #bbpress-forums .bbp-topic-pagination a:hover,#bbp-user-navigation li.current {border-color:#222222;}a.w-btn.color_primary.style_outlined,.w-btn.color_primary.style_outlined,.l-main .w-contacts-item:before,.w-iconbox.color_primary.style_outlined .w-iconbox-icon,.w-sharing.type_outlined.color_primary .w-sharing-item,.w-tabs.layout_timeline .w-tabs-item,.w-tabs.layout_timeline .w-tabs-section-header-h,.us-woo-shop_standard .product-h .button {box-shadow:0 0 0 2px #222222 inset;}input:focus,textarea:focus,select:focus,.tp-bullets.custom .tp-bullet.selected {box-shadow:0 0 0 2px #222222;}.highlight_secondary,.no-touch .w-blognav-prev:hover .w-blognav-title,.no-touch .w-blognav-next:hover .w-blognav-title,a.w-btn.color_secondary.style_outlined,.w-btn.color_secondary.style_outlined,.w-counter.color_secondary .w-counter-number,.w-iconbox.color_secondary .w-iconbox-icon,.w-separator.color_secondary,.w-sharing.type_outlined.color_secondary .w-sharing-item,.no-touch .w-sharing.type_simple.color_secondary .w-sharing-item:hover .w-sharing-icon {color:#000000;}.l-section.color_secondary,.l-titlebar.color_secondary,.highlight_secondary_bg,.no-touch .w-blog.layout_cards .w-blog-post-meta-category a:hover,.no-touch .w-blog.layout_tiles .w-blog-post-meta-category a:hover,.no-touch .l-section.preview_trendy .w-blog-post-meta-category a:hover,.no-touch input[type="submit"]:hover,a.w-btn.color_secondary,.w-btn.color_secondary,.w-btn.color_secondary.style_outlined:before,.w-actionbox.color_secondary,.w-iconbox.style_circle.color_secondary .w-iconbox-icon,.w-progbar.color_secondary .w-progbar-bar-h,.w-sharing.type_solid.color_secondary .w-sharing-item,.w-sharing.type_fixed.color_secondary .w-sharing-item,.w-sharing.type_outlined.color_secondary .w-sharing-item:before,.no-touch .woocommerce .button:hover,.no-touch .woocommerce .product-remove a.remove:hover,.no-touch .tribe-events-button:hover,.no-touch .widget_layered_nav_filters ul li a:hover {background-color:#000000;}.w-separator.color_secondary {border-color:#000000;}a.w-btn.color_secondary.style_outlined,.w-btn.color_secondary.style_outlined,.w-iconbox.color_secondary.style_outlined .w-iconbox-icon,.w-sharing.type_outlined.color_secondary .w-sharing-item {box-shadow:0 0 0 2px #000000 inset;}.highlight_faded,.w-author-url,.w-blog-post-meta > *,.w-profile-link.for_logout,.w-testimonial-person-meta,.w-testimonial.style_4:before,.l-main .widget_tag_cloud,.l-main .widget_product_tag_cloud,.woocommerce-breadcrumb,.woocommerce .star-rating:before,.woocommerce .stars span:after,p.bbp-topic-meta,.bbp_widget_login .logout-link {color:#aaaaaa;}.w-blog.layout_latest .w-blog-post-meta-date {border-color:#aaaaaa;}.tribe-events-cost,.tribe-events-list .tribe-events-event-cost {background-color:#aaaaaa;}.l-section.color_alternate,.l-titlebar.color_alternate,.color_alternate .g-filters.style_1 .g-filters-item.active,.no-touch .color_alternate .g-filters-item.active:hover,.color_alternate .w-tabs.layout_default .w-tabs-item.active,.no-touch .color_alternate .w-tabs.layout_default .w-tabs-item.active:hover,.color_alternate .w-tabs.layout_ver .w-tabs-item.active,.no-touch .color_alternate .w-tabs.layout_ver .w-tabs-item.active:hover,.color_alternate .w-tabs.layout_timeline .w-tabs-item,.color_alternate .w-tabs.layout_timeline .w-tabs-section-header-h {background-color:#f6f6f6;}.color_alternate a.w-btn.color_contrast,.color_alternate .w-btn.color_contrast,.no-touch .color_alternate a.w-btn.color_contrast:hover,.no-touch .color_alternate .w-btn.color_contrast:hover,.no-touch .color_alternate a.w-btn.color_contrast.style_outlined:hover,.no-touch .color_alternate .w-btn.color_contrast.style_outlined:hover,.color_alternate .w-iconbox.style_circle.color_contrast .w-iconbox-icon {color:#f6f6f6;}.color_alternate .w-tabs.layout_modern .w-tabs-item:after {border-bottom-color:#f6f6f6;}.color_alternate input,.color_alternate textarea,.color_alternate select,.color_alternate .w-blog-post-preview-icon,.color_alternate .w-blog.layout_flat .w-blog-post-h,.color_alternate .w-blog.layout_cards .w-blog-post-h,.color_alternate .g-filters.style_1,.color_alternate .g-filters.style_2 .g-filters-item.active,.color_alternate .w-iconbox.style_circle.color_light .w-iconbox-icon,.color_alternate .g-loadmore-btn,.color_alternate .w-pricing-item-header,.color_alternate .w-progbar-bar,.color_alternate .w-tabs.layout_default .w-tabs-list,.color_alternate .w-testimonial.style_4:before,.l-content .color_alternate .wp-caption-text {background-color:#ffffff;}.l-section.color_alternate,.l-section.color_alternate hr,.l-section.color_alternate th,.l-section.color_alternate td,.color_alternate .g-cols > div,.color_alternate .w-blog-post,.color_alternate .w-comments-list,.color_alternate .w-pricing-item-h,.color_alternate .w-profile,.color_alternate .w-separator,.color_alternate .w-tabs-list,.color_alternate .w-tabs-section,.color_alternate .w-tabs-section-header:before,.color_alternate .w-tabs.layout_timeline.accordion .w-tabs-section-content,.color_alternate .w-testimonial.style_1 {border-color:#e2e2e2;}.color_alternate .w-separator,.color_alternate .w-iconbox.color_light .w-iconbox-icon,.color_alternate .w-testimonial.style_3 .w-testimonial-text:after,.color_alternate .w-testimonial.style_3 .w-testimonial-text:before {color:#e2e2e2;}.color_alternate a.w-btn.color_light,.color_alternate .w-btn.color_light,.color_alternate .w-btn.color_light.style_outlined:before,.color_alternate .w-btn.w-blog-post-more:before,.color_alternate .w-iconbox.style_circle.color_light .w-iconbox-icon,.no-touch .color_alternate .g-loadmore-btn:hover {background-color:#e2e2e2;}.color_alternate a.w-btn.color_light.style_outlined,.color_alternate .w-btn.color_light.style_outlined,.color_alternate .w-btn.w-blog-post-more,.color_alternate .w-iconbox.style_outlined.color_light .w-iconbox-icon,.color_alternate .w-person-links-item,.color_alternate .w-socials-item-link,.color_alternate .pagination .page-numbers {box-shadow:0 0 0 2px #e2e2e2 inset;}.color_alternate .w-tabs.layout_trendy .w-tabs-list {box-shadow:0 -1px 0 #e2e2e2 inset;}.color_alternate h1,.color_alternate h2,.color_alternate h3,.color_alternate h4,.color_alternate h5,.color_alternate h6,.color_alternate .w-counter-number,.color_alternate .w-pricing-item-header {color:#000000;}.color_alternate .w-progbar.color_contrast .w-progbar-bar-h {background-color:#000000;}.l-titlebar.color_alternate,.l-section.color_alternate,.color_alternate input,.color_alternate textarea,.color_alternate select,.color_alternate a.w-btn.color_contrast.style_outlined,.color_alternate .w-btn.color_contrast.style_outlined,.color_alternate .w-form-row-field:before,.color_alternate .w-iconbox.color_contrast .w-iconbox-icon,.color_alternate .w-iconbox.color_light.style_circle .w-iconbox-icon,.color_alternate .w-tabs.layout_timeline .w-tabs-item,.color_alternate .w-tabs.layout_timeline .w-tabs-section-header-h {color:#777777;}.color_alternate a.w-btn.color_light,.color_alternate .w-btn.color_light,.color_alternate .w-btn.w-blog-post-more {color:#777777 !important;}.color_alternate a.w-btn.color_contrast,.color_alternate .w-btn.color_contrast,.color_alternate .w-btn.color_contrast.style_outlined:before,.color_alternate .w-iconbox.style_circle.color_contrast .w-iconbox-icon {background-color:#777777;}.color_alternate a.w-btn.color_contrast.style_outlined,.color_alternate .w-btn.color_contrast.style_outlined,.color_alternate .w-iconbox.style_outlined.color_contrast .w-iconbox-icon {box-shadow:0 0 0 2px #777777 inset;}.color_alternate a {color:#ef4135;}.no-touch .color_alternate a:hover,.no-touch .color_alternate a:hover + .w-blog-post-body .w-blog-post-title a,.no-touch .color_alternate .w-blog-post-title a:hover {color:#ef4135;}.color_alternate .highlight_primary,.no-touch .l-titlebar.color_alternate .g-nav-item:hover,.color_alternate a.w-btn.color_primary.style_outlined,.color_alternate .w-btn.color_primary.style_outlined,.l-main .color_alternate .w-contacts-item:before,.color_alternate .w-counter.color_primary .w-counter-number,.color_alternate .g-filters-item.active,.no-touch .color_alternate .g-filters-item.active:hover,.color_alternate .w-form-row.focused .w-form-row-field:before,.color_alternate .w-iconbox.color_primary .w-iconbox-icon,.no-touch .color_alternate .w-iconbox-link:hover .w-iconbox-title,.no-touch .color_alternate .w-logos .owl-prev:hover,.no-touch .color_alternate .w-logos .owl-next:hover,.color_alternate .w-separator.color_primary,.color_alternate .w-tabs.layout_default .w-tabs-item.active,.color_alternate .w-tabs.layout_trendy .w-tabs-item.active,.color_alternate .w-tabs.layout_ver .w-tabs-item.active,.color_alternate .w-tabs-section.active .w-tabs-section-header,.color_alternate .w-testimonial.style_2:before {color:#222222;}.color_alternate .highlight_primary_bg,.color_alternate .w-actionbox.color_primary,.color_alternate .w-blog-post-preview-icon,.color_alternate .w-blog.layout_cards .format-quote .w-blog-post-h,.color_alternate button,.color_alternate input[type="submit"],.color_alternate a.w-btn.color_primary,.color_alternate .w-btn.color_primary,.color_alternate .w-btn.color_primary.style_outlined:before,.no-touch .color_alternate .g-filters-item:hover,.color_alternate .w-iconbox.style_circle.color_primary .w-iconbox-icon,.no-touch .color_alternate .w-iconbox.style_circle .w-iconbox-icon:before,.no-touch .color_alternate .w-iconbox.style_outlined .w-iconbox-icon:before,.no-touch .color_alternate .w-person-links,.color_alternate .w-pricing-item.type_featured .w-pricing-item-header,.color_alternate .w-progbar.color_primary .w-progbar-bar-h,.color_alternate .w-tabs.layout_modern .w-tabs-list,.color_alternate .w-tabs.layout_trendy .w-tabs-item:after,.color_alternate .w-tabs.layout_timeline .w-tabs-item:before,.color_alternate .w-tabs.layout_timeline .w-tabs-section-header-h:before,.no-touch .color_alternate .pagination .page-numbers:before,.color_alternate .pagination .page-numbers.current {background-color:#222222;}.l-content .color_alternate blockquote,.no-touch .l-titlebar.color_alternate .g-nav-item:hover,.color_alternate .g-filters.style_3 .g-filters-item.active,.no-touch .color_alternate .w-logos .owl-prev:hover,.no-touch .color_alternate .w-logos .owl-next:hover,.no-touch .color_alternate .w-logos.style_1 .w-logos-item:hover,.color_alternate .w-separator.color_primary,.color_alternate .w-tabs.layout_default .w-tabs-item.active,.color_alternate .w-tabs.layout_ver .w-tabs-item.active,.no-touch .color_alternate .w-tabs.layout_default .w-tabs-item.active:hover,.no-touch .color_alternate .w-tabs.layout_ver .w-tabs-item.active:hover,.no-touch .color_alternate .g-tags > a:hover,.no-touch .color_alternate .w-testimonial.style_1:hover {border-color:#222222;}.color_alternate a.w-btn.color_primary.style_outlined,.color_alternate .w-btn.color_primary.style_outlined,.l-main .color_alternate .w-contacts-item:before,.color_alternate .w-iconbox.color_primary.style_outlined .w-iconbox-icon,.color_alternate .w-tabs.layout_timeline .w-tabs-item,.color_alternate .w-tabs.layout_timeline .w-tabs-section-header-h {box-shadow:0 0 0 2px #222222 inset;}.color_alternate input:focus,.color_alternate textarea:focus,.color_alternate select:focus {box-shadow:0 0 0 2px #222222;}.color_alternate .highlight_secondary,.color_alternate a.w-btn.color_secondary.style_outlined,.color_alternate .w-btn.color_secondary.style_outlined,.color_alternate .w-counter.color_secondary .w-counter-number,.color_alternate .w-iconbox.color_secondary .w-iconbox-icon,.color_alternate .w-separator.color_secondary {color:#000000;}.color_alternate .highlight_secondary_bg,.no-touch .color_alternate input[type="submit"]:hover,.color_alternate a.w-btn.color_secondary,.color_alternate .w-btn.color_secondary,.color_alternate .w-btn.color_secondary.style_outlined:before,.color_alternate .w-actionbox.color_secondary,.color_alternate .w-iconbox.style_circle.color_secondary .w-iconbox-icon,.color_alternate .w-progbar.color_secondary .w-progbar-bar-h {background-color:#000000;}.color_alternate .w-separator.color_secondary {border-color:#000000;}.color_alternate a.w-btn.color_secondary.style_outlined,.color_alternate .w-btn.color_secondary.style_outlined,.color_alternate .w-iconbox.color_secondary.style_outlined .w-iconbox-icon {box-shadow:0 0 0 2px #000000 inset;}.color_alternate .highlight_faded,.color_alternate .w-blog-post-meta > *,.color_alternate .w-profile-link.for_logout,.color_alternate .w-testimonial-person-meta,.color_alternate .w-testimonial.style_4:before {color:#aaaaaa;}.color_alternate .w-blog.layout_latest .w-blog-post-meta-date {border-color:#aaaaaa;}.l-subfooter.at_top,.no-touch .l-subfooter.at_top #lang_sel ul ul a:hover,.no-touch .l-subfooter.at_top #lang_sel_click ul ul a:hover {background-color:#f6f6f6;}.l-subfooter.at_top input,.l-subfooter.at_top textarea,.l-subfooter.at_top select,.no-touch .l-subfooter.at_top #lang_sel a,.no-touch .l-subfooter.at_top #lang_sel_click a {background-color:#ffffff;}.l-subfooter.at_top,.l-subfooter.at_top .w-profile,.l-subfooter.at_top .widget_calendar #calendar_wrap {border-color:#e2e2e2;}.l-subfooter.at_top .w-socials-item-link {box-shadow:0 0 0 2px #e2e2e2 inset;}.l-subfooter.at_top h1,.l-subfooter.at_top h2,.l-subfooter.at_top h3,.l-subfooter.at_top h4,.l-subfooter.at_top h5,.l-subfooter.at_top h6,.l-subfooter.at_top input,.l-subfooter.at_top textarea,.l-subfooter.at_top select,.l-subfooter.at_top .w-form-row-field:before {color:#000000;}.l-subfooter.at_top {color:#777777;}.l-subfooter.at_top a,.l-subfooter.at_top .widget_tag_cloud .tagcloud a,.l-subfooter.at_top .widget_product_tag_cloud .tagcloud a {color:#222222;}.no-touch .l-subfooter.at_top a:hover,.no-touch .l-subfooter.at_top .w-form-row.focused .w-form-row-field:before,.no-touch .l-subfooter.at_top .widget_tag_cloud .tagcloud a:hover,.no-touch .l-subfooter.at_top .widget_product_tag_cloud .tagcloud a:hover {color:#000000;}.l-subfooter.at_top input:focus,.l-subfooter.at_top textarea:focus,.l-subfooter.at_top select:focus {box-shadow:0 0 0 2px #000000;}.l-subfooter.at_bottom {background-color:#ffffff;}.l-subfooter.at_bottom {color:#777777;}.l-subfooter.at_bottom a {color:#ef4135;}.no-touch .l-subfooter.at_bottom a:hover {color:#000000;}</style>
+	</head>
+<body class="single single-post postid-23676 single-format-standard l-body Impreza_3.7.1 Header_Builder header_hor header_inpos_top state_default wpb-js-composer js-comp-ver-4.12.1 vc_responsive" itemscope="itemscope" itemtype="https://schema.org/WebPage">
+
+<!-- CANVAS -->
+<div class="l-canvas sidebar_right type_wide titlebar_none">
+
+	
+		
+		<header class="l-header pos_fixed bg_solid shadow_thin with_bgimg" itemscope="itemscope" itemtype="https://schema.org/WPHeader"><div class="l-subheader at_top"><div class="l-subheader-h"><div class="l-subheader-cell at_left"></div><div class="l-subheader-cell at_center"></div><div class="l-subheader-cell at_right"></div></div></div><div class="l-subheader at_middle width_full"><div class="l-subheader-h"><div class="l-subheader-cell at_left"><div class="w-img ush_image_1"><a class="w-img-h" href="https://www.brentozar.com/"><img class="for_default" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/Brent_Ozar_Unlimited_201609.png" width="254" height="72" alt="Brent_Ozar_Unlimited_201609"></a></div></div><div class="l-subheader-cell at_center"><nav class="w-nav animation_height height_full ush_menu_1 type_desktop" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement"><a class="w-nav-control" href="javascript:void(0);"></a><ul class="w-nav-list level_1 hover_simple"><li id="menu-item-25018" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_1 menu-item-25018"><a class="w-nav-anchor level_1" href="https://www.brentozar.com/sql-critical-care/"><span class="w-nav-title">CONSULTING</span><span class="w-nav-arrow"></span></a></li>
+<li id="menu-item-25020" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children w-nav-item level_1 menu-item-25020 togglable"><a class="w-nav-anchor level_1" href="https://learnfrom.brentozar.com/"><span class="w-nav-title">TRAINING</span><span class="w-nav-arrow"></span></a>
+<ul class="w-nav-list level_2" style="display: none;">
+	<li id="menu-item-25114" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25114"><a class="w-nav-anchor level_2" href="https://learnfrom.brentozar.com/product-category/in-person-training-classes/"><span class="w-nav-title">LIVE INSTRUCTOR-LED CLASSES</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25115" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25115"><a class="w-nav-anchor level_2" href="https://learnfrom.brentozar.com/product-category/online-training-videos/"><span class="w-nav-title">SELF-PACED ONLINE CLASSES</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25118" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25118"><a class="w-nav-anchor level_2" href="https://www.brentozar.com/conferences/"><span class="w-nav-title">CONFERENCES</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25021" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25021"><a class="w-nav-anchor level_2" href="https://learnfrom.brentozar.com/my-account/"><span class="w-nav-title">MY ACCOUNT</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25023" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25023"><a class="w-nav-anchor level_2" href="https://learnfrom.brentozar.com/help/"><span class="w-nav-title">TRAINING FAQ</span><span class="w-nav-arrow"></span></a>	</li>
+</ul>
+</li>
+<li id="menu-item-25025" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_1 menu-item-25025"><a class="w-nav-anchor level_1" href="https://www.brentozar.com/blog/"><span class="w-nav-title">BLOG</span><span class="w-nav-arrow"></span></a></li>
+<li id="menu-item-25024" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children w-nav-item level_1 menu-item-25024 togglable"><a class="w-nav-anchor level_1" href="https://www.brentozar.com/first-aid/"><span class="w-nav-title">FREE STUFF</span><span class="w-nav-arrow"></span></a>
+<ul class="w-nav-list level_2" style="display: none;">
+	<li id="menu-item-25028" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25028"><a class="w-nav-anchor level_2" href="https://www.brentozar.com/office-hours-podcast/"><span class="w-nav-title">OFFICE HOURS PODCAST</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25122" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25122"><a class="w-nav-anchor level_2" href="https://www.brentozar.com/pastetheplan/"><span class="w-nav-title">PASTE THE PLAN</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25147" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25147"><a class="w-nav-anchor level_2" href="https://www.brentozar.com/blitz/"><span class="w-nav-title">SP_BLITZ</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25145" class="menu-item menu-item-type-post_type menu-item-object-page w-nav-item level_2 menu-item-25145"><a class="w-nav-anchor level_2" href="https://www.brentozar.com/blitzcache/"><span class="w-nav-title">SP_BLITZCACHE</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25144" class="menu-item menu-item-type-post_type menu-item-object-page w-nav-item level_2 menu-item-25144"><a class="w-nav-anchor level_2" href="https://www.brentozar.com/askbrent/"><span class="w-nav-title">SP_BLITZFIRST</span><span class="w-nav-arrow"></span></a>	</li>
+	<li id="menu-item-25148" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25148"><a class="w-nav-anchor level_2" href="https://www.brentozar.com/blitzindex/"><span class="w-nav-title">SP_BLITZINDEX</span><span class="w-nav-arrow"></span></a>	</li>
+</ul>
+</li>
+<li id="menu-item-25031" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children w-nav-item level_1 menu-item-25031 togglable"><a class="w-nav-anchor level_1" href="https://www.brentozar.com/contact/"><span class="w-nav-title">CONTACT US</span><span class="w-nav-arrow"></span></a>
+<ul class="w-nav-list level_2" style="display: none;">
+	<li id="menu-item-25032" class="menu-item menu-item-type-custom menu-item-object-custom w-nav-item level_2 menu-item-25032"><a class="w-nav-anchor level_2" href="https://www.brentozar.com/team/"><span class="w-nav-title">ABOUT THE TEAM</span><span class="w-nav-arrow"></span></a>	</li>
+</ul>
+</li>
+</ul><div class="w-nav-options hidden" onclick="return {&quot;mobileWidth&quot;:900,&quot;mobileBehavior&quot;:0}"></div></nav></div><div class="l-subheader-cell at_right"><div class="w-search layout_fullwidth ush_search_1"><div class="w-search-form"><form class="w-search-form-h" autocomplete="off" action="https://www.brentozar.com/" method="get"><div class="w-search-form-field"><input type="text" name="s" id="us_form_search_s" placeholder="Search"><span class="w-form-row-field-bar"></span></div><div class="w-search-close"></div></form></div><a class="w-search-open" href="javascript:void(0);"></a></div><div class="w-socials style_desaturated hover_none ush_socials_1"><div class="w-socials-list"><div class="w-socials-item facebook">
+		<a class="w-socials-item-link" target="_blank" href="https://www.facebook.com/BrentOzarUnlimited/">
+			<span class="w-socials-item-link-hover"></span>
+		</a>
+		<div class="w-socials-item-popup">
+			<span>Facebook</span>
+		</div>
+	</div><div class="w-socials-item twitter">
+		<a class="w-socials-item-link" target="_blank" href="https://twitter.com/BrentOzarULTD">
+			<span class="w-socials-item-link-hover"></span>
+		</a>
+		<div class="w-socials-item-popup">
+			<span>Twitter</span>
+		</div>
+	</div><div class="w-socials-item linkedin">
+		<a class="w-socials-item-link" target="_blank" href="https://www.linkedin.com/company/brent-ozar-unlimited">
+			<span class="w-socials-item-link-hover"></span>
+		</a>
+		<div class="w-socials-item-popup">
+			<span>LinkedIn</span>
+		</div>
+	</div><div class="w-socials-item youtube">
+		<a class="w-socials-item-link" target="_blank" href="https://www.youtube.com/user/BrentOzar">
+			<span class="w-socials-item-link-hover"></span>
+		</a>
+		<div class="w-socials-item-popup">
+			<span>YouTube</span>
+		</div>
+	</div><div class="w-socials-item github">
+		<a class="w-socials-item-link" target="_blank" href="https://github.com/BrentOzarULTD">
+			<span class="w-socials-item-link-hover"></span>
+		</a>
+		<div class="w-socials-item-popup">
+			<span>GitHub</span>
+		</div>
+	</div></div></div></div></div></div><div class="l-subheader at_bottom"><div class="l-subheader-h"><div class="l-subheader-cell at_left"></div><div class="l-subheader-cell at_center"></div><div class="l-subheader-cell at_right"></div></div></div><div class="l-subheader for_hidden hidden"></div></header>
+		
+	<!-- MAIN -->
+<div class="l-main">
+	<div class="l-main-h i-cf">
+
+		<main class="l-content" itemprop="mainContentOfPage">
+
+			
+			<article class="l-section for_blogpost preview_none post-23676 post type-post status-publish format-standard has-post-thumbnail hentry category-sql-server">
+	<div class="l-section-h i-cf">
+		<div class="w-blog">
+						<div class="w-blog-post-body">
+				<h1 class="w-blog-post-title entry-title" itemprop="headline">Getting Started with Diskspd</h1>
+
+				<div class="w-blog-post-meta">
+					<time class="w-blog-post-meta-date date updated" itemprop="datePublished">September 15, 2015</time><span class="w-blog-post-meta-author vcard author"><a href="https://www.brentozar.com/archive/author/jeremiah-peschka/" class="fn">Jeremiah Peschka</a></span><span class="w-blog-post-meta-comments"><a href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comments">36 comments</a></span>				</div>
+			</div>
+		</div>
+
+			</div>
+</article>
+
+<section class="l-section"><div class="l-section-h i-cf" itemprop="text"><p>Diskspeed, or <code>diskspd.exe</code>, is Microsoft’s replacement for SQLIO. While I’m not going to replace our <a href="http://brentozar.com/go/sqlio">SQLIO tutorial</a>, you can use the information in here to replicate the same type of tests on your systems to get the information you need. During the Dell DBA Days, Doug and I used <code>diskspd</code> as one of our techniques for getting a baseline of raw performance. We wanted to get an idea of how fast the servers and storage before running SQL Server specific tests.</p>
+<h3 id="how-do-i-get-diskspd"><a class="headeranchor-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#how-do-i-get-diskspd" name="user-content-how-do-i-get-diskspd"></a>How do I get <code>diskspd</code>?</h3>
+<p>You can download <code>diskspd</code> directly from Microsoft – <a href="https://gallery.technet.microsoft.com/DiskSpd-a-robust-storage-6cd2f223">Diskspd, a Robust Storage Testing Tool, Now Publically Available</a>. That page has a download link as well as a sample command.</p>
+<p>The upside is that <code>diskspd</code> is a fully self-contained download. You don’t need Java, .NET, or anything else installed to run it. Apart from Windows – you’ll still need Windows.</p>
+<h3 id="how-do-i-use-diskspd"><a class="headeranchor-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#how-do-i-use-diskspd" name="user-content-how-do-i-use-diskspd"></a>How do I use <code>diskspd</code>?</h3>
+<p>With the command line, of course!</p>
+<p>In all seriousness, although <code>diskspd</code> is the engine behind Crystal Disk Mark, it stands on its own as a separate tool. Download the executable and unzip it to an appropriate folder. There are going to be three sub-folders:</p>
+<ul>
+<li><code>amd64fre</code> – this is what you need if you have a 64-bit SQL Server</li>
+<li><code>armfre</code></li>
+<li><code>x86fre</code></li>
+</ul>
+<p>I took the <code>diskspd.exe</code> file from the appropriate folder and dumped it in <code>C:\diskspd</code> so I could easily re-run the command. Let’s fire up a command prompt and try it out.</p>
+<p>Here’s a sample that we ran: <code>diskspd.exe -b2M -d60 -o32 -h -L -t56 -W -w0 O:\temp\test.dat &gt; output.txt</code></p>
+<p>Breaking it down:</p>
+<ul>
+<li><code>-b2M</code> – Use a 2 MB I/O size. For this test, we wanted to simulate SQL Server read ahead performance.</li>
+<li><code>-d60</code> – Run for 60 seconds. I’m lazy and don’t like to wait.</li>
+<li><code>-o32</code> – 32 outstanding I/O requests. This is your queue depth 32.</li>
+<li><code>-h</code> – This disables both hardware and software buffering. SQL Server does this, so we want to be the same.</li>
+<li><code>-L</code> – Grab disk latency numbers. You know, just because.</li>
+<li><code>-t56</code> – Use 56 threads per file. We only have one file, but we have 56 cores.</li>
+<li><code>-W</code> – Warm up the workload for 5 seconds.</li>
+<li><code>-w0</code> – No writes, just reads. We’re pretending this is a data warehouse.</li>
+<li><code>D:\temp\test.dat</code> – our sample file. You could create a sample file (or files) by running<code>diskspd</code> with the <code>-c&lt;size&gt;</code> flag.</li>
+<li><code>&gt; output.txt</code> – I used output redirection to send the output to a file instead of my screen.</li>
+</ul>
+<h3 id="how-do-i-read-diskspd-results"><a class="headeranchor-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#how-do-i-read-diskspd-results" name="user-content-how-do-i-read-diskspd-results"></a>How do I read <code>diskspd</code> results?</h3>
+<p>You’re going to get a lot of information back from this command. You’re going to want to close the window and back away quickly. Don’t. This is good stuff, I promise.</p>
+<p>The first thing you’ll see is a recap of the command line you used. Then you’ll immediately see a summary of the commands:</p>
+<pre><code>timespan:   1
+-------------
+duration: 60s
+warm up time: 0s
+cool down time: 0s
+measuring latency
+random seed: 0
+path: 'O:\temp\test.dat'
+    think time: 0ms
+    burst size: 0
+    software and hardware write cache disabled
+    performing read test
+    block size: 2097152
+    using interlocked sequential I/O (stride: 2097152)
+    number of outstanding I/O operations: 32
+    thread stride size: 0
+    threads per file: 56
+    using I/O Completion Ports
+    IO priority: normal
+</code></pre>
+<p>That’s a lot easier than trying to read a set of command line flags. Six months from now, I can review older runs of <code>diskspd</code> and understand the options that I used. <code>diskspd</code> is already winning over <code>sqlio</code>.</p>
+<p>Next up, you’ll see a summary of CPU information. This information will help you understand if your storage test is CPU bottlenecked – if you know the storage has more throughput or IOPS capability, but your tests won’t go faster, you should check for bottlencks. The last line of this section (and every section) will provide an average across all CPUs/threads/whatevers.</p>
+<pre><code>actual test time:   60.01s
+thread count:       56
+proc count:     56
+
+CPU |  Usage |  User  |  Kernel |  Idle
+-------------------------------------------
+   0|  23.17%|  10.36%|   12.81%|  76.83%
+   1|   4.24%|   2.40%|    1.85%|  95.76%
+   2|   9.71%|   7.37%|    2.34%|  90.29%
+   3|   1.48%|   0.70%|    0.78%|  98.52%
+...
+...
+-------------------------------------------
+avg.|  14.11%|  12.48%|    1.63%|  85.89%
+</code></pre>
+<p>After the CPU round up, you’ll see a total I/O round up – this includes both reads and writes.</p>
+<div style="overflow: auto;">
+<pre><code>Total IO
+thread |       bytes     |     I/Os     |     MB/s   |  I/O per s |  AvgLat  | LatStdDev |  file
+-----------------------------------------------------------------------------------------------------
+     0 |      2950692864 |         1407 |      46.89 |      23.44 | 1323.427 |   107.985 | O:\temp\test.dat (50GB)
+     1 |      3013607424 |         1437 |      47.89 |      23.94 | 1310.516 |   141.360 | O:\temp\test.dat (50GB)
+     2 |      2950692864 |         1407 |      46.89 |      23.44 | 1319.540 |   113.993 | O:\temp\test.dat (50GB)
+     3 |      2950692864 |         1407 |      46.89 |      23.44 | 1315.959 |   122.280 | O:\temp\test.dat (50GB)
+-----------------------------------------------------------------------------------------------------
+total:      167975583744 |        80097 |    2669.28 |    1334.64 | 1307.112 |   162.013
+</code></pre>
+</div>
+<p>Look at all of those bytes!</p>
+<p>If the I/O numbers initially seem small, remember that the data is split up per worker thread. Scroll down to the bottom of each section (total, reads, writes) and look at the <code>total</code> line. This rounds up the overall volume of data you’ve collected. The I/Os are recorded in whateverunit of measure you supplied. In our case, the I/Os are 2MB I/Os.</p>
+<p><strong>Important Sidebar</strong> Your storage vendor probably records their I/O numbers in a smaller I/O measurement, so make sure you do some rough translation if you want to compare your numbers to the advertised numbers. For more discussion, visit <a href="https://www.brentozar.com/archive/2013/09/iops-are-a-scam/">IOPS are a scam</a>.</p>
+<p>Finally, latency! Everybody wants to know about latency – this is part of what the end users are complaining about when they say “SQL Server is slow, fix it!”</p>
+<pre><code>  %-ile |  Read (ms) | Write (ms) | Total (ms)
+----------------------------------------------
+    min |     13.468 |        N/A |     13.468
+...
+    max |   1773.534 |        N/A |   1773.534
+</code></pre>
+<p>This table keeps the min, max, and a variety of percentiles about how the storage performed while you were beating on. This information is just as helpful as the raw throughput data – under load your storage may have increased latencies. It’s important to know the storage will behave and respond under load.</p>
+<h3 id="how-often-should-i-use-diskspd"><a class="headeranchor-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#how-often-should-i-use-diskspd" name="user-content-how-often-should-i-use-diskspd"></a>How often should I use <code>diskspd</code>?</h3>
+<p>Ideally, you should use <code>diskspd</code> whenever you’re setting up new storage or a new server. In addition, you should take the time to use <code>diskspd</code> when you make big changes to storage – use <code>diskspd</code> to verify that your changes are actually an improvement. No, <code>diskspd</code> doesn’t include the work that SQL Server does, but it does show you how your storage can perform. Use it to make sure you’re getting the performance you’ve been promised by your storage vendor.</p>
+
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-visual"><div class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs" data-post-id="14109" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://www.brentozar.com/archive/2012/03/how-fast-your-san-or-how-slow/" title="How to Test Your Storage with CrystalDiskMark
+
+A few years ago, Erika and I went to the VW dealership to trade in her old Jetta and get a new one.  The choice of a Jetta was already a foregone conclusion - she loved VWs at the time - and it was just a matter of picking out…" rel="nofollow" data-origin="23676" data-position="0"><img class="jp-relatedposts-post-img" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/bringing-our-jetta-home.jpg" width="350" alt="How to Test Your Storage with CrystalDiskMark"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://www.brentozar.com/archive/2012/03/how-fast-your-san-or-how-slow/" title="How to Test Your Storage with CrystalDiskMark
+
+A few years ago, Erika and I went to the VW dealership to trade in her old Jetta and get a new one.  The choice of a Jetta was already a foregone conclusion - she loved VWs at the time - and it was just a matter of picking out…" rel="nofollow" data-origin="23676" data-position="0">How to Test Your Storage with CrystalDiskMark</a></h4><p class="jp-relatedposts-post-excerpt">A few years ago, Erika and I went to the VW dealership to trade in her old Jetta and get a new one.&nbsp; The choice of a Jetta was already a foregone conclusion - she loved VWs at the time - and it was just a matter of picking out…</p><p class="jp-relatedposts-post-date">March 29, 2012</p><p class="jp-relatedposts-post-context">In "SQL Server 2012 News"</p></div><div class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-thumbs" data-post-id="14573" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://www.brentozar.com/archive/2012/05/how-big-your-log-writes-spying-on-sql-server-transaction-log/" title="How Big Are Your Log Writes? Spying on the SQL Server Transaction Log
+
+I’m a bit of a researcher. When I want to know about a topic, I start off by doing a lot of reading. After I take a lot in, I want to make  sure I understand the details. At that point, I try to think like a scientist. I come up…" rel="nofollow" data-origin="23676" data-position="1"><img class="jp-relatedposts-post-img" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/SizeOnDisk_64K.png" width="350" alt="How Big Are Your Log Writes? Spying on the SQL Server Transaction Log"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://www.brentozar.com/archive/2012/05/how-big-your-log-writes-spying-on-sql-server-transaction-log/" title="How Big Are Your Log Writes? Spying on the SQL Server Transaction Log
+
+I’m a bit of a researcher. When I want to know about a topic, I start off by doing a lot of reading. After I take a lot in, I want to make  sure I understand the details. At that point, I try to think like a scientist. I come up…" rel="nofollow" data-origin="23676" data-position="1">How Big Are Your Log Writes? Spying on the SQL Server Transaction Log</a></h4><p class="jp-relatedposts-post-excerpt">I’m a bit of a researcher. When I want to know about a topic, I start off by doing a lot of reading. After I take a lot in, I want to make&nbsp;&nbsp;sure I understand the details. At that point, I try to think like a scientist. I come up…</p><p class="jp-relatedposts-post-date">May 29, 2012</p><p class="jp-relatedposts-post-context">With 37 comments</p></div><div class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs" data-post-id="20456" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://www.brentozar.com/archive/2013/09/iops-are-a-scam/" title="IOPS Are A Scam
+
+Storage vendors brag about the IOPS that their hardware can provide. Cloud providers have offered guaranteed IOPS for a while now. It seems that no matter where we turn, we can&#39;t get away from IOPS.What Are You Measuring?When someone says IOPS, what are they referring to? IOPS is an acronym…" rel="nofollow" data-origin="23676" data-position="2"><img class="jp-relatedposts-post-img" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/5015986012_569d52125a_o.jpg" width="350" alt="IOPS Are A Scam"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://www.brentozar.com/archive/2013/09/iops-are-a-scam/" title="IOPS Are A Scam
+
+Storage vendors brag about the IOPS that their hardware can provide. Cloud providers have offered guaranteed IOPS for a while now. It seems that no matter where we turn, we can&#39;t get away from IOPS.What Are You Measuring?When someone says IOPS, what are they referring to? IOPS is an acronym…" rel="nofollow" data-origin="23676" data-position="2">IOPS Are A Scam</a></h4><p class="jp-relatedposts-post-excerpt">Storage vendors brag about the IOPS that their hardware can provide. Cloud providers have offered guaranteed IOPS for a while now. It seems that no matter where we turn, we can't get away from IOPS.What Are You Measuring?When someone says IOPS, what are they referring to? IOPS is an acronym…</p><p class="jp-relatedposts-post-date">September 11, 2013</p><p class="jp-relatedposts-post-context">In "SQL Server"</p></div></div></div></div></section>
+
+	<section class="l-section for_sharing">
+		<div class="l-section-h i-cf">
+			<div class="w-sharing type_simple align_left color_default"><a class="w-sharing-item facebook" title="Share this" href="javascript:void(0)" data-sharing-url="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/" data-sharing-image="https://www.brentozar.com/wp-content/uploads/2015/11/BOU-WhitePocket-giant.png"><span class="w-sharing-icon"></span></a><a class="w-sharing-item twitter" title="Tweet this" href="javascript:void(0)" data-sharing-url="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/" data-sharing-image="https://www.brentozar.com/wp-content/uploads/2015/11/BOU-WhitePocket-giant.png"><span class="w-sharing-icon"></span></a><a class="w-sharing-item gplus" title="Share this" href="javascript:void(0)" data-sharing-url="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/" data-sharing-image="https://www.brentozar.com/wp-content/uploads/2015/11/BOU-WhitePocket-giant.png"><span class="w-sharing-icon"></span><span class="w-sharing-count">1</span></a><a class="w-sharing-item linkedin" title="Share this" href="javascript:void(0)" data-sharing-url="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/" data-sharing-image="https://www.brentozar.com/wp-content/uploads/2015/11/BOU-WhitePocket-giant.png"><span class="w-sharing-icon"></span><span class="w-sharing-count">92</span></a></div>		</div>
+	</section>
+
+	
+<section class="l-section for_author">
+	<div class="l-section-h i-cf">
+		<div class="w-author" itemscope="itemscope" itemtype="https://schema.org/Person" itemprop="author">
+			<div class="w-author-img">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/740378c166b627c54c0341a4ee155c0f" srcset="https://secure.gravatar.com/avatar/740378c166b627c54c0341a4ee155c0f?s=192&amp;d=mm&amp;r=g 2x" class="avatar avatar-96 photo" height="96" width="96">			</div>
+			<div class="w-author-name" itemprop="name">
+				<a href="https://www.brentozar.com/archive/author/jeremiah-peschka/">Jeremiah Peschka</a>
+			</div>
+			<div class="w-author-url" itemprop="url">
+							</div>
+			<div class="w-author-desc" itemprop="description">When I’m not working with databases, you’ll find me at a food truck in Portland, Oregon, or at conferences such as DevLink, Stir Trek, and OSCON. My sessions have been highly rated and I pride myself on their quality.</div>
+		</div>
+	</div>
+</section>
+
+	<section class="l-section for_blognav">
+		<div class="l-section-h i-cf">
+			<div class="w-blognav">
+									<a class="w-blognav-prev" href="https://www.brentozar.com/archive/2015/09/consulting-lines-lets-put-that-in-the-parking-lot/">
+						<span class="w-blognav-meta">Previous post</span>
+						<span class="w-blognav-title">Consulting Lines: “Let’s put that in the parking lot.”</span>
+					</a>
+									<a class="w-blognav-next" href="https://www.brentozar.com/archive/2015/09/filtered-indexes-and-is-not-null/">
+						<span class="w-blognav-meta">Next post</span>
+						<span class="w-blognav-title">Filtered Indexes and IS NOT NULL</span>
+					</a>
+							</div>
+		</div>
+	</section>
+
+
+	<section class="l-section for_comments">
+		<div class="l-section-h i-cf">
+						<div id="comments" class="w-comments">
+			<h4 class="w-comments-title">
+			<span>36 comments.</span> <a href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#respond">Leave new</a>		</h4>
+
+		<div class="w-comments-list">
+			
+	<div class="w-comments-item" id="comment-2222135">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/d10ca8d11301c2f4993ac2279ce4b930" srcset="https://secure.gravatar.com/avatar/d10ca8d11301c2f4993ac2279ce4b930?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">a</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222135">September 15, 2015 4:54 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>•-t56 – Use 56 threads per file. We only have one file, but we have 56 cores.</p>
+<p>Does this mean that the number of threads to be used in the testing depends on the number of processor of the machines?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222135#respond" onclick="return addComment.moveForm( &quot;comment-2222135&quot;, &quot;2222135&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to a">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2222141">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/740378c166b627c54c0341a4ee155c0f(1)" srcset="https://secure.gravatar.com/avatar/740378c166b627c54c0341a4ee155c0f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://brentozar.com/" target="_blank" rel="nofollow">Jeremiah Peschka</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222141">September 15, 2015 5:12 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>I would vary it, yes. Too many threads can lead to CPU problems and too few won’t put load on the storage.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222141#respond" onclick="return addComment.moveForm( &quot;comment-2222141&quot;, &quot;2222141&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jeremiah Peschka">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2222256">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/b0e21df58cccf1a4aa344199e7dd7eaf" srcset="https://secure.gravatar.com/avatar/b0e21df58cccf1a4aa344199e7dd7eaf?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Andy Bassitt</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222256">September 16, 2015 5:17 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Hi Jeremiah,<br>
+Its interesting to get new tools to test performance, we’ve been playing with SQLIO on our new datawarehouse server and have had some good results.  What we cant figure out is how to test multiple disks at once for multiple LUNS.<br>
+For instance, if we want to spread our SQL datafiles over 7 disks.  Is it possible to emulate this and get a combined throughput using the diskspd tool?<br>
+We’ve been looking at tools recently and, as yet, havent found anything suitable for our requirements.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222256#respond" onclick="return addComment.moveForm( &quot;comment-2222256&quot;, &quot;2222256&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Andy Bassitt">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2222273">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/740378c166b627c54c0341a4ee155c0f(1)" srcset="https://secure.gravatar.com/avatar/740378c166b627c54c0341a4ee155c0f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://brentozar.com/" target="_blank" rel="nofollow">Jeremiah Peschka</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222273">September 16, 2015 7:47 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Great question – you can just list multiple files when you write the command. For example, you could run <code>diskspd -b2M -d60 -o32 -h -L -t56 -W -w0 file1.dat file2.dat file3.dat &gt; output.txt</code></p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222273#respond" onclick="return addComment.moveForm( &quot;comment-2222273&quot;, &quot;2222273&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jeremiah Peschka">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2222274">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/b0e21df58cccf1a4aa344199e7dd7eaf" srcset="https://secure.gravatar.com/avatar/b0e21df58cccf1a4aa344199e7dd7eaf?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Andy Bassitt</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222274">September 16, 2015 7:48 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Fantastic, thanks.<br>
+I’ll give it a crack once I figure out the file access errors I’m seeing <img draggable="false" class="emoji" alt="🙂" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/1f642.svg"></p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222274#respond" onclick="return addComment.moveForm( &quot;comment-2222274&quot;, &quot;2222274&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Andy Bassitt">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2280586">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/57d9dbda7b211b22798f79b9f04d9901" srcset="https://secure.gravatar.com/avatar/57d9dbda7b211b22798f79b9f04d9901?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Mike Smith</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2280586">March 31, 2016 9:29 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>The -t parameter is per target, where the -F parameter is fixed.  So you want to be careful in how you use the -t parameter with multiple targets or you could wind up with more threads than you intended.</p>
+<p>Example:<br>
+-t56 target1 target2 target3 will create 3 sets of 56 threads; 168 threads total.<br>
+-F56 target1 target2 target3 will create 56 threads total that test all three targets at the same time.</p>
+<p>So if you’re testing 8 targets simultaneously, how you specify the thread count could make the difference between 56 threads sharing 8 targets or 448 threads attacking in dedicated groups of 56.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2280586#respond" onclick="return addComment.moveForm( &quot;comment-2280586&quot;, &quot;2280586&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Mike Smith">Reply</a></div>	</div>
+
+
+</div>
+</div>
+
+	<div class="w-comments-item" id="comment-2301379">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/62f93c3e211908a6d0ac3d9c0e27c4a0" srcset="https://secure.gravatar.com/avatar/62f93c3e211908a6d0ac3d9c0e27c4a0?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">wei jing</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2301379">July 8, 2016 6:55 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>How is this better than SQLIO and are there any graphical interpretation tools like the SQLAnalyzer?</p>
+<p>Thanks for all the articles JP!</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2301379#respond" onclick="return addComment.moveForm( &quot;comment-2301379&quot;, &quot;2301379&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to wei jing">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2222272">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/dadff4dd21a37a3328c7661bb72c80af" srcset="https://secure.gravatar.com/avatar/dadff4dd21a37a3328c7661bb72c80af?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Carm Vecchio</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222272">September 16, 2015 7:45 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Jeremiah,<br>
+Nice description on how diskspd works. I am looking for ways to determine the ‘simulated workload’ for existing servers. Most customer servers I see are multi use so CPU and I/O patterns are all over the place. I want to go to the WINTEL and Storage Admins with this tool and a plan for testing the systems to make sure the hardware is performing as required before I tune SQL. I am considering using the PLAN CACHE to look for CPU threading through paralellism and sys.dm_io_virtual_file_stats for I/O patterns. How do you determine your test parameters for both new and existing servers?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222272#respond" onclick="return addComment.moveForm( &quot;comment-2222272&quot;, &quot;2222272&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Carm Vecchio">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2222279">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/740378c166b627c54c0341a4ee155c0f(1)" srcset="https://secure.gravatar.com/avatar/740378c166b627c54c0341a4ee155c0f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://brentozar.com/" target="_blank" rel="nofollow">Jeremiah Peschka</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222279">September 16, 2015 8:03 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>I ask the users what kind of patterns they need to see and if they can repeat those I/O patterns on a test system. If they can, I monitor that I/O pattern and build tests to mimic that pattern. If they can’t repeat the I/O pattern, then I devise multiple artificial stress tests that hit various axes of performance.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222279#respond" onclick="return addComment.moveForm( &quot;comment-2222279&quot;, &quot;2222279&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jeremiah Peschka">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2222292">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/dadff4dd21a37a3328c7661bb72c80af" srcset="https://secure.gravatar.com/avatar/dadff4dd21a37a3328c7661bb72c80af?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Carm Vecchio</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222292">September 16, 2015 8:55 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>My customers don’t have any idea – really. Thanks J. I appreciate your insight.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222292#respond" onclick="return addComment.moveForm( &quot;comment-2222292&quot;, &quot;2222292&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Carm Vecchio">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2222293">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/740378c166b627c54c0341a4ee155c0f(1)" srcset="https://secure.gravatar.com/avatar/740378c166b627c54c0341a4ee155c0f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://brentozar.com/" target="_blank" rel="nofollow">Jeremiah Peschka</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222293">September 16, 2015 9:02 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Most people don’t. And it’s really hard to get an accurate picture. I would have been shocked if they both knew and could reproduce a typical workload.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222293#respond" onclick="return addComment.moveForm( &quot;comment-2222293&quot;, &quot;2222293&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jeremiah Peschka">Reply</a></div>	</div>
+
+
+</div>
+</div>
+</div>
+
+	<div class="w-comments-item" id="comment-2222297">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/5034cc634f6068e7bb4a3c7ac1d9fc06" srcset="https://secure.gravatar.com/avatar/5034cc634f6068e7bb4a3c7ac1d9fc06?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Rudy Panigas</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222297">September 16, 2015 9:19 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Hello Jeremiah,</p>
+<p>Thanks for the write up! Didn’t know that this tool is replacing SQLIO. Just wanted to know if you have loaded the results into a database table for analyses and if so, is there a lot of cleanup to? </p>
+<p>Thanks,</p>
+<p>Rudy</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222297#respond" onclick="return addComment.moveForm( &quot;comment-2222297&quot;, &quot;2222297&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Rudy Panigas">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2222300">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/740378c166b627c54c0341a4ee155c0f(1)" srcset="https://secure.gravatar.com/avatar/740378c166b627c54c0341a4ee155c0f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://brentozar.com/" target="_blank" rel="nofollow">Jeremiah Peschka</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2222300">September 16, 2015 9:27 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>I have not loaded the data into a database table. I’m sure someone will come out with a nice PowerShell script to do it, but I don’t have the patience for text parsing these days.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2222300#respond" onclick="return addComment.moveForm( &quot;comment-2222300&quot;, &quot;2222300&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jeremiah Peschka">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2225191">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/7e6c0838b192befc8a80c41c6fb3cdbe" srcset="https://secure.gravatar.com/avatar/7e6c0838b192befc8a80c41c6fb3cdbe?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://sqlservertoolbox.blogspot.com/" target="_blank" rel="nofollow">Enrique Argüelles</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2225191">September 24, 2015 10:10 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Thanks Jeremish</p>
+<p>So long using Crystal Disk and I didn’t know that little detail.</p>
+<p>Kinda unrelated, but can you also talk sometime later of iometer and which you find to be more accurate?.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2225191#respond" onclick="return addComment.moveForm( &quot;comment-2225191&quot;, &quot;2225191&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Enrique Argüelles">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2225220">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/740378c166b627c54c0341a4ee155c0f(1)" srcset="https://secure.gravatar.com/avatar/740378c166b627c54c0341a4ee155c0f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://brentozar.com/" target="_blank" rel="nofollow">Jeremiah Peschka</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2225220">September 24, 2015 12:24 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Glad you enjoyed it.</p>
+<p>Your question about iometer sounds like a great idea for a blog post. I’ve never used iometer, so I’ll leave that to you.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2225220#respond" onclick="return addComment.moveForm( &quot;comment-2225220&quot;, &quot;2225220&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jeremiah Peschka">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2267981">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/2d9c690219890820b85ab714c41f3419" srcset="https://secure.gravatar.com/avatar/2d9c690219890820b85ab714c41f3419?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Jorgen</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2267981">March 1, 2016 8:03 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Hi Jeremiah</p>
+<p>Thanks for an excellent post. I’m trying to simulate a typical datawarehouse load on SQL2014 but I’m unsure about which parameters to use.</p>
+<p>I’m thinking:<br>
+-b64<br>
+-d60<br>
+-o8<br>
+-h<br>
+-L<br>
+-t8<br>
+-W<br>
+-w0</p>
+<p>Do you have an opinion if these parameters can be used to simulate a “typical” workload in a datawarehouse?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2267981#respond" onclick="return addComment.moveForm( &quot;comment-2267981&quot;, &quot;2267981&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jorgen">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2267986">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/77f776c2eaf0cc691e8a0880bb8a191f" srcset="https://secure.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://www.brentozar.com/" target="_blank" rel="nofollow">Brent Ozar</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2267986">March 1, 2016 8:10 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Jorgen – for help simulating typical workload in a data warehouse, check out the Microsoft Fast Track Data Warehouse Reference Architecture:</p>
+<p><a href="https://msdn.microsoft.com/en-us/library/hh918452.aspx" rel="nofollow">https://msdn.microsoft.com/en-us/library/hh918452.aspx</a></p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2267986#respond" onclick="return addComment.moveForm( &quot;comment-2267986&quot;, &quot;2267986&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Brent Ozar">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2268389">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/2d9c690219890820b85ab714c41f3419" srcset="https://secure.gravatar.com/avatar/2d9c690219890820b85ab714c41f3419?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Jorgen</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2268389">March 4, 2016 2:04 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Thanks Brent – I’ll give it a try</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2268389#respond" onclick="return addComment.moveForm( &quot;comment-2268389&quot;, &quot;2268389&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jorgen">Reply</a></div>	</div>
+
+
+</div>
+</div>
+
+	<div class="w-comments-item" id="comment-2269212">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/5965644afbfad591bd1e8ea4363edd48" srcset="https://secure.gravatar.com/avatar/5965644afbfad591bd1e8ea4363edd48?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Manoj</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2269212">March 8, 2016 1:34 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Hi Jeremiah<br>
+Nice write up…I have three questions </p>
+<p>1. If I have multiple drives/mount points presented to a SQL environment and data/log files will be spread account these mount points. How do I run concurrent tests? can you share a sample script?</p>
+<p>2. Can we run test scripts concurrently?<br>
+e.g.<br>
+one script pointing to data file with random read/write (30/70) and<br>
+another script file pointing to log file with sequential write</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2269212#respond" onclick="return addComment.moveForm( &quot;comment-2269212&quot;, &quot;2269212&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Manoj">Reply</a></div>	</div>
+
+
+
+	<div class="w-comments-item" id="comment-2272422">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/e3e2d5889872e35264429cdb3ce06424" srcset="https://secure.gravatar.com/avatar/e3e2d5889872e35264429cdb3ce06424?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Ranjith</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2272422">March 16, 2016 11:58 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Can i set timeout value while running Diskspd tool</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2272422#respond" onclick="return addComment.moveForm( &quot;comment-2272422&quot;, &quot;2272422&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Ranjith">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2272457">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/77f776c2eaf0cc691e8a0880bb8a191f" srcset="https://secure.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://www.brentozar.com/" target="_blank" rel="nofollow">Brent Ozar</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2272457">March 16, 2016 3:15 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Ranjith – can you tell me more about why you would want to do that? If your storage times out…</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2272457#respond" onclick="return addComment.moveForm( &quot;comment-2272457&quot;, &quot;2272457&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Brent Ozar">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2298235">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/98f39f86e7adbb15f9dfd411a5f7169c" srcset="https://secure.gravatar.com/avatar/98f39f86e7adbb15f9dfd411a5f7169c?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Andrew</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298235">June 17, 2016 2:33 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Super great thread. Thanks!</p>
+<p>Question: When I am running tests of diskspd, why am I seeing different values ht eh bytes column? Here is what I mean:</p>
+<p>diskspd -d15 -F1 -w0 -r -b32k -o10 C:\mytestfile.dat</p>
+<p>Total IO<br>
+thread |       bytes     |     I/Os     |     MB/s   |  I/O per s |  file<br>
+——————————————————————————<br>
+     0 |      1413742592 |        43144 |    1776.97 |   56863.00 | C:\myDelete\testfile.dat (5120KB)<br>
+——————————————————————————<br>
+total:        1413742592 |        43144 |    1776.97 |   56863.00</p>
+<p>vs</p>
+<p>diskspd -d15 -F1 -w0 -r -b64k -o10 C:\mytestfile.dat</p>
+<p>Total IO<br>
+thread |       bytes     |     I/Os     |     MB/s   |  I/O per s |  file<br>
+——————————————————————————<br>
+     0 |     35270623232 |       538187 |    2242.34 |   35877.48 | C:\mytestfile.dat (5120KB)<br>
+——————————————————————————<br>
+total:       35270623232 |       538187 |    2242.34 |   35877.48</p>
+<p>Why am I seeing a difference in bytes between the two runs?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298235#respond" onclick="return addComment.moveForm( &quot;comment-2298235&quot;, &quot;2298235&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Andrew">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2298299">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/77f776c2eaf0cc691e8a0880bb8a191f" srcset="https://secure.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://www.brentozar.com/" target="_blank" rel="nofollow">Brent Ozar</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298299">June 18, 2016 6:38 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Andrew – let’s think through that. You’re saying when you run it with two different sets of parameters, it does two different things. So what are those different parameters that you’re using, and how might those impact the amount of IO performed?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298299#respond" onclick="return addComment.moveForm( &quot;comment-2298299&quot;, &quot;2298299&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Brent Ozar">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2298336">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/98f39f86e7adbb15f9dfd411a5f7169c" srcset="https://secure.gravatar.com/avatar/98f39f86e7adbb15f9dfd411a5f7169c?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Andrew</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298336">June 18, 2016 3:15 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Hi Brent, thanks for your reply. I have the commands shown above, but I’ll put them here again:</p>
+<p>First run:<br>
+diskspd -d15 -F1 -w0 -r -b32k -o10 C:\mytestfile.dat</p>
+<p>Second run:<br>
+diskspd -d15 -F1 -w0 -r -b64k -o10 C:\mytestfile.dat</p>
+<p>The only difference is the block size I am using. All other parameters are the same, and I’m targeting the same 5MB file in each case.</p>
+<p>My question is, during the first run it shows  1413742592 bytes, but in the second run it shows  35270623232 bytes. If I am using the same file, then why is the value in the bytes column different?</p>
+<p>I guess I don’t know what the bytes column represents, and that is why I am questioning it.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298336#respond" onclick="return addComment.moveForm( &quot;comment-2298336&quot;, &quot;2298336&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Andrew">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2298348">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/77f776c2eaf0cc691e8a0880bb8a191f" srcset="https://secure.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://www.brentozar.com/" target="_blank" rel="nofollow">Brent Ozar</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298348">June 18, 2016 7:14 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Hmm, so if you make the same number of requests, and you use a larger block size, I wonder if that would impact the amount of IO that you’re doing?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298348#respond" onclick="return addComment.moveForm( &quot;comment-2298348&quot;, &quot;2298348&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Brent Ozar">Reply</a></div>	</div>
+
+
+
+	<div class="w-comments-item" id="comment-2298349">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/77f776c2eaf0cc691e8a0880bb8a191f" srcset="https://secure.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://www.brentozar.com/" target="_blank" rel="nofollow">Brent Ozar</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298349">June 18, 2016 7:15 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Or to put it another way – if I hand you a book with 1,000 pages,<br>
+and I ask you ten times to get me a 5-page section,<br>
+and then I ask you ten times to get me a 500-page section,<br>
+would you read a different amount of pages during those two tests?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298349#respond" onclick="return addComment.moveForm( &quot;comment-2298349&quot;, &quot;2298349&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Brent Ozar">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2298589">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/98f39f86e7adbb15f9dfd411a5f7169c" srcset="https://secure.gravatar.com/avatar/98f39f86e7adbb15f9dfd411a5f7169c?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Andrew</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298589">June 20, 2016 12:18 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Thanks again Brent. That is one heck of an analogy. Here is the crux of my question: I was thinking that the number of bytes in that column represents the amount of data moved. If I am moving the same amount of data in each case, wouldn’t the number of bytes be the same in each case?</p>
+<p>My apologies if this is an ignorant question.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298589#respond" onclick="return addComment.moveForm( &quot;comment-2298589&quot;, &quot;2298589&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Andrew">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2298610">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/77f776c2eaf0cc691e8a0880bb8a191f" srcset="https://secure.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://www.brentozar.com/" target="_blank" rel="nofollow">Brent Ozar</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298610">June 20, 2016 3:22 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Andrew – no, you’re not moving the same amount of data.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298610#respond" onclick="return addComment.moveForm( &quot;comment-2298610&quot;, &quot;2298610&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Brent Ozar">Reply</a></div>	</div>
+
+
+</div>
+</div>
+</div>
+
+	<div class="w-comments-item" id="comment-2298588">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/74f4bbedfe72c4f722c4f0d29fdd9b8a" srcset="https://secure.gravatar.com/avatar/74f4bbedfe72c4f722c4f0d29fdd9b8a?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Jon Baker</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298588">June 20, 2016 11:54 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Is 2MB really an indicative byte size for a SQL Server workload even in a DW scenario?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298588#respond" onclick="return addComment.moveForm( &quot;comment-2298588&quot;, &quot;2298588&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jon Baker">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2298611">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/77f776c2eaf0cc691e8a0880bb8a191f" srcset="https://secure.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://www.brentozar.com/" target="_blank" rel="nofollow">Brent Ozar</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2298611">June 20, 2016 3:22 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Jon – you can check your own SQL Server’s Perfmon counters to see the Avg Disk Bytes/Read and Bytes/Write in order to see your workloads.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2298611#respond" onclick="return addComment.moveForm( &quot;comment-2298611&quot;, &quot;2298611&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Brent Ozar">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2301933">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/e8f14fbc8d74f37d2430e110ce411312" srcset="https://secure.gravatar.com/avatar/e8f14fbc8d74f37d2430e110ce411312?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Jim</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2301933">July 14, 2016 6:33 pm</a>
+		</div>
+		<div class="w-comments-item-text"><p>Great tool, if only I could get it working! </p>
+<p>Is there something obvious I’m missing with using this tool? I get “error opening file” no matter what target I specify on the command line. Am I supposed to generate a file beforehand?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2301933#respond" onclick="return addComment.moveForm( &quot;comment-2301933&quot;, &quot;2301933&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jim">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2304049">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/30570086b1ce22e2b7869c6bfd4e1e2c" srcset="https://secure.gravatar.com/avatar/30570086b1ce22e2b7869c6bfd4e1e2c?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Ted Strome</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2304049">July 27, 2016 2:48 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Hi Jim – I was having the same problem – then discovered the option -c[K|M|G|b] (which will then generate the test file for you)<br>
+Not sure if the option was recently added, but the example in the doco at 2.1 will not work without it.</p>
+<p>Try:<br>
+diskspd -d15 -F1 -w0 -r -b4k -o10 -c50M testfile.dat</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2304049#respond" onclick="return addComment.moveForm( &quot;comment-2304049&quot;, &quot;2304049&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Ted Strome">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2304057">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/e8f14fbc8d74f37d2430e110ce411312" srcset="https://secure.gravatar.com/avatar/e8f14fbc8d74f37d2430e110ce411312?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Jim</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2304057">July 27, 2016 3:52 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Thanks; I was also having permissions issues, which added to my confusion.</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2304057#respond" onclick="return addComment.moveForm( &quot;comment-2304057&quot;, &quot;2304057&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Jim">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2317030">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/281397935c2677fa28d05781ca4e53d0" srcset="https://secure.gravatar.com/avatar/281397935c2677fa28d05781ca4e53d0?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">Dragos</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2317030">September 15, 2016 2:51 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>Hi,<br>
+you have to use the option -c in order to create the output file :<br>
+e.g: diskspd.exe -b2M -d60 -o32 -h -L -t56 -W -w0 -c1G E:\temp\2iotest.dat &gt; output.txt</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2317030#respond" onclick="return addComment.moveForm( &quot;comment-2317030&quot;, &quot;2317030&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Dragos">Reply</a></div>	</div>
+
+
+</div>
+
+	<div class="w-comments-item" id="comment-2307328">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/7fcd86a197cd12ccf634dd32878442a4" srcset="https://secure.gravatar.com/avatar/7fcd86a197cd12ccf634dd32878442a4?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author">JAMES YOUKHANIS</div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2307328">August 10, 2016 8:23 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>What parameter should I pass if i want to test a specific drive?</p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2307328#respond" onclick="return addComment.moveForm( &quot;comment-2307328&quot;, &quot;2307328&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to JAMES YOUKHANIS">Reply</a></div>	</div>
+
+
+<div class="w-comments-childlist">
+
+	<div class="w-comments-item" id="comment-2307341">
+		<div class="w-comments-item-meta">
+			<div class="w-comments-item-icon">
+				<img alt="" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/77f776c2eaf0cc691e8a0880bb8a191f" srcset="https://secure.gravatar.com/avatar/77f776c2eaf0cc691e8a0880bb8a191f?s=100&amp;d=mm&amp;r=g 2x" class="avatar avatar-50 photo" height="50" width="50">			</div>
+			<div class="w-comments-item-author"><a href="http://www.brentozar.com/" target="_blank" rel="nofollow">Brent Ozar</a></div>
+			<a class="w-comments-item-date" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#comment-2307341">August 10, 2016 9:39 am</a>
+		</div>
+		<div class="w-comments-item-text"><p>I would get started with CrystalDiskMark instead: <a href="http://brentozar.com/go/cdm" rel="nofollow">http://brentozar.com/go/cdm</a></p>
+</div>
+		<div class="w-comments-item-answer"><a rel="nofollow" class="comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/?replytocom=2307341#respond" onclick="return addComment.moveForm( &quot;comment-2307341&quot;, &quot;2307341&quot;, &quot;respond&quot;, &quot;23676&quot; )" aria-label="Reply to Brent Ozar">Reply</a></div>	</div>
+
+
+</div>
+		</div>
+
+		<div class="w-comments-pagination">
+								</div>
+								<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#respond" style="display:none;">Cancel reply</a></small></h3>				<form action="https://www.brentozar.com/wp-comments-post.php?wpe-comment-post=brentozarultd" method="post" id="commentform" class="comment-form">
+					<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><div class="w-form-row for_comment required">
+	<div class="w-form-row-label">
+		<label for="us_form__comment"></label>
+	</div>
+	<div class="w-form-row-field">
+				<textarea name="comment" id="us_form__comment" cols="30" rows="10" placeholder="Comment *" data-required="true" aria-required="true"></textarea>
+		<span class="w-form-row-field-bar"></span>
+			</div>
+	<div class="w-form-row-state"></div>
+	</div>
+<div class="w-form-row for_author required">
+	<div class="w-form-row-label">
+		<label for="us_form__author"></label>
+	</div>
+	<div class="w-form-row-field">
+				<input type="text" name="author" id="us_form__author" value="" placeholder="Name *" data-required="true" aria-required="true">
+		<span class="w-form-row-field-bar"></span>
+			</div>
+	<div class="w-form-row-state"></div>
+	</div>
+
+<div class="w-form-row for_email required">
+	<div class="w-form-row-label">
+		<label for="us_form__email"></label>
+	</div>
+	<div class="w-form-row-field">
+				<input type="email" name="email" id="us_form__email" value="" placeholder="Email *" data-required="true" aria-required="true">
+		<span class="w-form-row-field-bar"></span>
+			</div>
+	<div class="w-form-row-state"></div>
+	</div>
+
+<div class="w-form-row for_url">
+	<div class="w-form-row-label">
+		<label for="us_form__url"></label>
+	</div>
+	<div class="w-form-row-field">
+				<input type="text" name="url" id="us_form__url" value="" placeholder="Website">
+		<span class="w-form-row-field-bar"></span>
+			</div>
+	<div class="w-form-row-state"></div>
+	</div>
+
+<!-- Subscribe to Comments Reloaded version 160915 --><!-- BEGIN: subscribe to comments reloaded --><p><label for="subscribe-reloaded"><input style="width:30px" type="checkbox" name="subscribe-reloaded" id="subscribe-reloaded" value="yes"> Notify me of followup comments via e-mail. You can also <a href="https://www.brentozar.com/comment-subscriptions?srp=23676&amp;srk=5b53cc33adc6321fd99b61fedb762485&amp;sra=s&amp;srsrc=f">subscribe</a> without commenting.</label></p><!-- END: subscribe to comments reloaded --><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="23676" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="db317f0605"></p><p style="display: none;"></p>				<input type="hidden" id="ak_js" name="ak_js" value="1477493472891"></form>
+					</div><!-- #respond -->
+			</div>
+		</div>
+	</section>
+
+			
+		</main>
+
+					<aside class="l-sidebar at_right default_sidebar" itemscope="itemscope" itemtype="https://schema.org/WPSideBar">
+				<div id="gform_widget-2" class="widget gform_widget"><h3 class="widgettitle">Subscribe</h3><link rel="stylesheet" id="gforms_reset_css-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/formreset.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="gforms_formsmain_css-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/formsmain.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="gforms_ready_class_css-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/readyclass.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="gforms_browsers_css-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/browsers.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jquery.json.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/gravityforms.min.js.téléchargement"></script>
+<script type="text/javascript"> var gf_global = {"gf_currency_config":{"name":"U.S. Dollar","symbol_left":"$","symbol_right":"","symbol_padding":"","thousand_separator":",","decimal_separator":".","decimals":2},"base_url":"https:\/\/www.brentozar.com\/wp-content\/plugins\/gravityforms","number_formats":[],"spinnerUrl":"https:\/\/www.brentozar.com\/wp-content\/plugins\/gravityforms\/images\/spinner.gif"}; </script>
+                <div class="gf_browser_chrome gform_wrapper" id="gform_wrapper_11"><a id="gf_11" class="gform_anchor"></a><form method="post" enctype="multipart/form-data" target="gform_ajax_frame_11" id="gform_11" action="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#gf_11">
+                        <div class="gform_body"><ul id="gform_fields_11" class="gform_fields top_label form_sublabel_below description_below"><li id="field_11_1" class="gfield gfield_contains_required field_sublabel_below field_description_below"><label class="gfield_label" for="input_11_1">Email<span class="gfield_required">*</span></label><div class="ginput_container ginput_container_email">
+                            <input name="input_1" id="input_11_1" type="text" value="" class="medium" tabindex="1">
+                        </div></li><li id="field_11_2" class="gfield gfield_contains_required field_sublabel_below field_description_below"><label class="gfield_label">Give me the:<span class="gfield_required">*</span></label><div class="ginput_container ginput_container_checkbox"><ul class="gfield_checkbox" id="input_11_2"><li class="gchoice_11_2_1">
+								<input name="input_2.1" type="checkbox" value="Blog posts" checked="checked" id="choice_11_2_1" tabindex="2">
+								<label for="choice_11_2_1" id="label_11_2_1">Blog posts</label>
+							</li><li class="gchoice_11_2_2">
+								<input name="input_2.2" type="checkbox" value="Monday Recap - our favorite links" checked="checked" id="choice_11_2_2" tabindex="3">
+								<label for="choice_11_2_2" id="label_11_2_2">Monday Recap - our favorite links</label>
+							</li><li class="gchoice_11_2_3">
+								<input name="input_2.3" type="checkbox" value="6-Month DBA Training Plan" id="choice_11_2_3" tabindex="4">
+								<label for="choice_11_2_3" id="label_11_2_3">6-Month DBA Training Plan</label>
+							</li><li class="gchoice_11_2_4">
+								<input name="input_2.4" type="checkbox" value="DBAreactions.com - DBA gifs" id="choice_11_2_4" tabindex="5">
+								<label for="choice_11_2_4" id="label_11_2_4">DBAreactions.com - DBA gifs</label>
+							</li><li class="gchoice_11_2_5">
+								<input name="input_2.5" type="checkbox" value="Superpowers and free burgers" id="choice_11_2_5" tabindex="6">
+								<label for="choice_11_2_5" id="label_11_2_5">Superpowers and free burgers</label>
+							</li></ul></div></li>
+                            </ul></div>
+        <div class="gform_footer top_label"> <input type="submit" id="gform_submit_button_11" class="gform_button button" value="Subscribe" tabindex="7" onclick="if(window[&quot;gf_submitting_11&quot;]){return false;}  window[&quot;gf_submitting_11&quot;]=true;  " onkeypress="if( event.keyCode == 13 ){ if(window[&quot;gf_submitting_11&quot;]){return false;} window[&quot;gf_submitting_11&quot;]=true;  jQuery(&quot;#gform_11&quot;).trigger(&quot;submit&quot;,[true]); }"> <input type="hidden" name="gform_ajax" value="form_id=11&amp;title=&amp;description=&amp;tabindex=1">
+            <input type="hidden" class="gform_hidden" name="is_submit_11" value="1">
+            <input type="hidden" class="gform_hidden" name="gform_submit" value="11">
+            
+            <input type="hidden" class="gform_hidden" name="gform_unique_id" value="">
+            <input type="hidden" class="gform_hidden" name="state_11" value="WyJbXSIsImE5OWM1NDE2NTJlNDgzNGNkYzJmNDQ0ODRiNDlmYzBkIl0=">
+            <input type="hidden" class="gform_hidden" name="gform_target_page_number_11" id="gform_target_page_number_11" value="0">
+            <input type="hidden" class="gform_hidden" name="gform_source_page_number_11" id="gform_source_page_number_11" value="1">
+            <input type="hidden" name="gform_field_values" value="">
+            
+        </div>
+                        </form>
+                        </div>
+                <iframe style="display:none;width:0px;height:0px;" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/saved_resource.html" name="gform_ajax_frame_11" id="gform_ajax_frame_11">This iframe contains the logic required to handle AJAX powered Gravity Forms.</iframe>
+                <script type="text/javascript">jQuery(document).ready(function($){gformInitSpinner( 11, 'https://www.brentozar.com/wp-content/plugins/gravityforms/images/spinner.gif' );jQuery('#gform_ajax_frame_11').load( function(){var contents = jQuery(this).contents().find('*').html();var is_postback = contents.indexOf('GF_AJAX_POSTBACK') >= 0;if(!is_postback){return;}var form_content = jQuery(this).contents().find('#gform_wrapper_11');var is_confirmation = jQuery(this).contents().find('#gform_confirmation_wrapper_11').length > 0;var is_redirect = contents.indexOf('gformRedirect(){') >= 0;var is_form = form_content.length > 0 && ! is_redirect && ! is_confirmation;if(is_form){jQuery('#gform_wrapper_11').html(form_content.html());if(form_content.hasClass('gform_validation_error')){jQuery('#gform_wrapper_11').addClass('gform_validation_error');} else {jQuery('#gform_wrapper_11').removeClass('gform_validation_error');}setTimeout( function() { /* delay the scroll by 50 milliseconds to fix a bug in chrome */ jQuery(document).scrollTop(jQuery('#gform_wrapper_11').offset().top); }, 50 );if(window['gformInitDatepicker']) {gformInitDatepicker();}if(window['gformInitPriceFields']) {gformInitPriceFields();}var current_page = jQuery('#gform_source_page_number_11').val();gformInitSpinner( 11, 'https://www.brentozar.com/wp-content/plugins/gravityforms/images/spinner.gif' );jQuery(document).trigger('gform_page_loaded', [11, current_page]);window['gf_submitting_11'] = false;}else if(!is_redirect){var confirmation_content = jQuery(this).contents().find('#gforms_confirmation_message_11').html();if(!confirmation_content){confirmation_content = contents;}setTimeout(function(){jQuery('#gform_wrapper_11').replaceWith('<' + 'div id=\'gforms_confirmation_message_11\' class=\'gform_confirmation_message_11 gforms_confirmation_message\'' + '>' + confirmation_content + '<' + '/div' + '>');jQuery(document).scrollTop(jQuery('#gforms_confirmation_message_11').offset().top);jQuery(document).trigger('gform_confirmation_loaded', [11]);window['gf_submitting_11'] = false;}, 50);}else{jQuery('#gform_11').append(contents);if(window['gformRedirect']) {gformRedirect();}}jQuery(document).trigger('gform_post_render', [11, current_page]);} );} );</script><script type="text/javascript"> if(typeof gf_global == 'undefined') var gf_global = {"gf_currency_config":{"name":"U.S. Dollar","symbol_left":"$","symbol_right":"","symbol_padding":"","thousand_separator":",","decimal_separator":".","decimals":2},"base_url":"https:\/\/www.brentozar.com\/wp-content\/plugins\/gravityforms","number_formats":[],"spinnerUrl":"https:\/\/www.brentozar.com\/wp-content\/plugins\/gravityforms\/images\/spinner.gif"};jQuery(document).bind('gform_post_render', function(event, formId, currentPage){if(formId == 11) {} } );jQuery(document).bind('gform_post_conditional_logic', function(event, formId, fields, isInit){} );</script><script type="text/javascript"> jQuery(document).ready(function(){jQuery(document).trigger('gform_post_render', [11, 1]) } ); </script></div><div id="text-2" class="widget widget_text"><h3 class="widgettitle">SQL Critical Care®</h3>			<div class="textwidget"><p>If your SQL Server is too slow or unreliable, and you're tired of guessing, we'll help.</p>
+<p>In just 3 days, we find the root cause, explain it to you, and teach you how to get permanent pain relief. <a href="https://www.brentozar.com/sql-critical-care/">Learn more and see sample reports.</a></p>
+</div>
+		</div><div id="search-2" class="widget widget_search"><div class="w-form for_search" id="us_form_1">
+	<form class="w-form-h" autocomplete="off" action="https://www.brentozar.com/" method="get">
+							<div class="w-form-row for_s">
+	<div class="w-form-row-label">
+		<label for="us_form_1_s"></label>
+	</div>
+	<div class="w-form-row-field">
+				<input type="text" name="s" id="us_form_1_s" value="" placeholder="search ...">
+		<span class="w-form-row-field-bar"></span>
+			</div>
+	<div class="w-form-row-state"></div>
+	</div>
+					<div class="w-form-row for_submit">
+	<div class="w-form-row-field">
+		<button class="w-btn" type="submit"><span class="g-preloader type_1"></span><span class="w-btn-label">Search</span></button>
+	</div>
+</div>
+				<div class="w-form-message"></div>
+			</form>
+	</div>
+</div><div id="text-3" class="widget widget_text"><h3 class="widgettitle">Archives by Author</h3>			<div class="textwidget"><a href="https://www.brentozar.com/archive/author/brento/">Brent Ozar</a><br>
+
+<a href="https://www.brentozar.com/archive/author/erik-darling/">Erik Darling</a><br>
+
+<a href="https://www.brentozar.com/archive/author/richie/">Richie Rump</a><br>
+
+<a href="https://www.brentozar.com/archive/author/tara/">Tara Kizer</a><br></div>
+		</div>			</aside>
+		
+	</div>
+</div>
+
+</div>
+<!-- /CANVAS -->
+
+
+
+<!-- FOOTER -->
+<footer class="l-footer layout_compact" itemscope="itemscope" itemtype="https://schema.org/WPFooter">
+
+
+	<!-- subfooter: bottom -->
+	<div class="l-subfooter at_bottom">
+		<div class="l-subfooter-h i-cf">
+
+			
+			<div class="w-menu "><div class="w-menu-list"><a class="w-menu-item menu-item menu-item-type-custom menu-item-object-custom" href="https://www.brentozar.com/sql-critical-care/"><span>CONSULTING</span></a><a class="w-menu-item menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" href="https://learnfrom.brentozar.com/"><span>TRAINING</span></a><a class="w-menu-item menu-item menu-item-type-custom menu-item-object-custom" href="https://www.brentozar.com/blog/"><span>BLOG</span></a><a class="w-menu-item menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" href="https://www.brentozar.com/first-aid/"><span>FREE STUFF</span></a><a class="w-menu-item menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children" href="https://www.brentozar.com/contact/"><span>CONTACT US</span></a></div></div>
+			<div class="w-copyright">Brent Ozar Unlimited® © 2016 All Rights Reserved. <a href="https://www.brentozar.com/privacy-policy/">Privacy Policy</a></div>
+
+			
+		</div>
+	</div>
+
+</footer>
+<!-- /FOOTER -->
+
+
+
+<a class="w-header-show" href="javascript:void(0);"></a>
+<a class="w-toplink" href="https://www.brentozar.com/archive/2015/09/getting-started-with-diskspd/#" title="Back to top"></a>
+<script type="text/javascript">
+	if (window.$us === undefined) window.$us = {};
+	$us.canvasOptions = ($us.canvasOptions || {});
+	$us.canvasOptions.disableEffectsWidth = 900;
+	$us.canvasOptions.responsive = true;
+
+	$us.langOptions = ($us.langOptions || {});
+	$us.langOptions.magnificPopup = ($us.langOptions.magnificPopup || {});
+	$us.langOptions.magnificPopup.tPrev = 'Previous (Left arrow key)'; // Alt text on left arrow
+	$us.langOptions.magnificPopup.tNext = 'Next (Right arrow key)'; // Alt text on right arrow
+	$us.langOptions.magnificPopup.tCounter = '%curr% of %total%'; // Markup for "1 of 7" counter
+
+	$us.navOptions = ($us.navOptions || {});
+	$us.navOptions.mobileWidth = 900;
+	$us.navOptions.togglable = true;
+</script>
+<img alt="css.php" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/css.php" width="1" height="1"><script type="text/javascript">$us.headerSettings = {"default":{"options":{"orientation":"hor","sticky":1,"scroll_breakpoint":100,"transparent":0,"width":300,"elm_align":"center","shadow":"thin","top_show":"0","top_height":36,"top_sticky_height":36,"top_fullwidth":0,"middle_height":100,"middle_sticky_height":60,"middle_fullwidth":1,"bg_img":"25121|full","bg_img_wrapper_start":"","bg_img_size":"cover","bg_img_repeat":"repeat","bg_img_attachment":"scroll","bg_img_position":"top center","bgimage_wrapper_end":"","bottom_show":0,"bottom_height":50,"bottom_sticky_height":50,"bottom_fullwidth":0},"layout":{"top_left":[],"top_center":[],"top_right":[],"middle_left":["image:1"],"middle_center":["menu:1"],"middle_right":["search:1","socials:1"],"bottom_left":[],"bottom_center":[],"bottom_right":[],"hidden":[]}},"tablets":{"options":{"orientation":"hor","sticky":1,"scroll_breakpoint":100,"transparent":0,"width":300,"elm_align":"center","shadow":"thin","top_show":0,"top_height":36,"top_sticky_height":36,"top_fullwidth":0,"middle_height":80,"middle_sticky_height":50,"middle_fullwidth":1,"bg_img":"25121|full","bg_img_wrapper_start":"","bg_img_size":"cover","bg_img_repeat":"repeat","bg_img_attachment":"scroll","bg_img_position":"top center","bgimage_wrapper_end":"","bottom_show":0,"bottom_height":50,"bottom_sticky_height":50,"bottom_fullwidth":0},"layout":{"top_left":[],"top_center":[],"top_right":[],"middle_left":["image:1"],"middle_center":["menu:1"],"middle_right":["socials:1","search:1"],"bottom_left":[],"bottom_center":[],"bottom_right":[],"hidden":[]}},"mobiles":{"options":{"orientation":"hor","sticky":1,"scroll_breakpoint":50,"transparent":0,"width":300,"elm_align":"center","shadow":"thin","top_show":1,"top_height":36,"top_sticky_height":0,"top_fullwidth":0,"middle_height":50,"middle_sticky_height":60,"middle_fullwidth":1,"bg_img":"","bg_img_wrapper_start":"","bg_img_size":"cover","bg_img_repeat":"repeat","bg_img_attachment":"scroll","bg_img_position":"top center","bgimage_wrapper_end":"","bottom_show":0,"bottom_height":50,"bottom_sticky_height":50,"bottom_fullwidth":0},"layout":{"top_left":[],"top_center":["socials:1"],"top_right":[],"middle_left":["image:1"],"middle_center":["menu:1"],"middle_right":["menu:1","search:1"],"bottom_left":[],"bottom_center":[],"bottom_right":[],"hidden":[]}}};</script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/form.js.téléchargement"></script>
+<link rel="stylesheet" id="stcr-plugin-style-css" href="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/stcr-plugin-style.css" type="text/css" media="all">
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/devicepx-jetpack.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jquery.easing.min.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jquery.magnific-popup.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/jquery.simpleplaceholder.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/imagesloaded.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/us.core.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/us.widgets.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/us.theme.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/comment-reply.min.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/wp-embed.min.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/stcr-plugin.js.téléchargement"></script>
+<script type="text/javascript" src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/e-201643.js.téléchargement" async="" defer=""></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.3.2',blog:'111456981',post:'23676',tz:'-5',srv:'www.brentozar.com'} ]);
+	_stq.push([ 'clickTrackerInit', '111456981', '23676' ]);
+</script>
+
+
+<img src="./Getting Started with Diskspd - Brent Ozar Unlimited®_files/g.gif" alt=":)" width="6" height="5" id="wpstats"></body></html>

@@ -4,7 +4,7 @@
 
 SELECT ag.name AS ag_name,
        ar.replica_server_name AS ag_replica_server,
-       dr_state.database_id AS database_id,
+       DB_NAME(dr_state.database_id) AS database_name,
        is_ag_replica_local = CASE
                                  WHEN ar_state.is_local = 1
                                  THEN N'LOCAL'

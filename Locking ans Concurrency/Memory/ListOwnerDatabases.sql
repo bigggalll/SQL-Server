@@ -1,0 +1,1 @@
+select suser_sname(sid),name from master..sysdatabases 
