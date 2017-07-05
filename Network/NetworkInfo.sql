@@ -1,3 +1,6 @@
+USE master
+GO
+
 SELECT  
 @@servername,
    CONNECTIONPROPERTY('net_transport') AS net_transport,
@@ -6,3 +9,6 @@ SELECT
    CONNECTIONPROPERTY('local_net_address') AS local_net_address,
    CONNECTIONPROPERTY('local_tcp_port') AS local_tcp_port,
    CONNECTIONPROPERTY('client_net_address') AS client_net_address 
+
+xp_readerrorlog 0, 1, N'Server is listening on' 
+GO
