@@ -19,8 +19,7 @@ BEGIN
 
 END
 
-USE [DBA_SQL00P]
-GO
+
 
 /****** Object:  UserDefinedFunction [dbo].[DecimalToBinary_V2]    Script Date: 2017-03-02 09:25:31 ******/
 SET ANSI_NULLS ON

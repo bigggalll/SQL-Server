@@ -1,0 +1,1 @@
+select min(run_date), name from msdb..sysjobhistory inner join msdb..sysjobs on sysjobhistory.job_id=sysjobs.job_id group by name order by 1
