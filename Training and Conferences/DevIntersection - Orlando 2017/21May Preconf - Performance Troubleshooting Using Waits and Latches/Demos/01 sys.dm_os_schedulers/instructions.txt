@@ -1,0 +1,2 @@
+Put all these files in the C:\Pluralsight directory
+Follow the instructions in the ExaminingTasks.sql file

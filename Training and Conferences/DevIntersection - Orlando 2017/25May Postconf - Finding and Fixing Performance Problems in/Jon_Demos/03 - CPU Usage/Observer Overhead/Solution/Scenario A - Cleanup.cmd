@@ -1,0 +1,1 @@
+start /b sqlcmd /E /S. /dCredit /i"Scenario A - Cleanup.sql"

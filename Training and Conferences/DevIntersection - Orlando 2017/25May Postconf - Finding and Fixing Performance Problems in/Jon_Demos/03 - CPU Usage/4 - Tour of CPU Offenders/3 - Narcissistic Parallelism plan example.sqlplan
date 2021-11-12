@@ -1,0 +1,61 @@
+<ShowPlanXML xmlns="http://schemas.microsoft.com/sqlserver/2004/07/showplan" Version="1.1" Build="10.50.2500.0">
+  <BatchSequence>
+    <Batch>
+      <Statements>
+        <StmtSimple StatementText="(@charge_dt datetime)SELECT charge_no FROM dbo.charge&#xD;&#xA;&#x9;WHERE charge_dt = @charge_dt" StatementId="1" StatementCompId="6" StatementType="SELECT" StatementSubTreeCost="8.18609" StatementEstRows="14.8802" StatementOptmLevel="FULL" QueryHash="0xE7BEB91ED58335DE" QueryPlanHash="0xBDB58A1CC36B5C3C">
+          <StatementSetOptions QUOTED_IDENTIFIER="false" ARITHABORT="false" CONCAT_NULL_YIELDS_NULL="true" ANSI_NULLS="true" ANSI_PADDING="true" ANSI_WARNINGS="true" NUMERIC_ROUNDABORT="false" />
+          <QueryPlan CachedPlanSize="16" CompileTime="0" CompileCPU="0" CompileMemory="120">
+            <MissingIndexes>
+              <MissingIndexGroup Impact="99.6045">
+                <MissingIndex Database="[Credit]" Schema="[dbo]" Table="[charge]">
+                  <ColumnGroup Usage="EQUALITY">
+                    <Column Name="[charge_dt]" ColumnId="5" />
+                  </ColumnGroup>
+                </MissingIndex>
+              </MissingIndexGroup>
+            </MissingIndexes>
+            <RelOp NodeId="0" PhysicalOp="Parallelism" LogicalOp="Gather Streams" EstimateRows="14.8802" EstimateIO="0" EstimateCPU="0.0285139" AvgRowSize="11" EstimatedTotalSubtreeCost="8.18609" Parallel="1" EstimateRebinds="0" EstimateRewinds="0">
+              <OutputList>
+                <ColumnReference Database="[Credit]" Schema="[dbo]" Table="[charge]" Column="charge_no" />
+              </OutputList>
+              <Parallelism>
+                <RelOp NodeId="1" PhysicalOp="Clustered Index Scan" LogicalOp="Clustered Index Scan" EstimateRows="14.8802" EstimateIO="6.8935" EstimateCPU="0.880078" AvgRowSize="19" EstimatedTotalSubtreeCost="7.77357" TableCardinality="1.6e+006" Parallel="1" EstimateRebinds="0" EstimateRewinds="0">
+                  <OutputList>
+                    <ColumnReference Database="[Credit]" Schema="[dbo]" Table="[charge]" Column="charge_no" />
+                  </OutputList>
+                  <IndexScan Ordered="0" ForcedIndex="0" ForceScan="0" NoExpandHint="0">
+                    <DefinedValues>
+                      <DefinedValue>
+                        <ColumnReference Database="[Credit]" Schema="[dbo]" Table="[charge]" Column="charge_no" />
+                      </DefinedValue>
+                    </DefinedValues>
+                    <Object Database="[Credit]" Schema="[dbo]" Table="[charge]" Index="[ChargePK]" IndexKind="Clustered" />
+                    <Predicate>
+                      <ScalarOperator ScalarString="[Credit].[dbo].[charge].[charge_dt]=[@charge_dt]">
+                        <Compare CompareOp="EQ">
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Database="[Credit]" Schema="[dbo]" Table="[charge]" Column="charge_dt" />
+                            </Identifier>
+                          </ScalarOperator>
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Column="@charge_dt" />
+                            </Identifier>
+                          </ScalarOperator>
+                        </Compare>
+                      </ScalarOperator>
+                    </Predicate>
+                  </IndexScan>
+                </RelOp>
+              </Parallelism>
+            </RelOp>
+            <ParameterList>
+              <ColumnReference Column="@charge_dt" ParameterCompiledValue="'1999-07-20 10:49:11.833'" />
+            </ParameterList>
+          </QueryPlan>
+        </StmtSimple>
+      </Statements>
+    </Batch>
+  </BatchSequence>
+</ShowPlanXML>

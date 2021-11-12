@@ -1,0 +1,1 @@
+start /b sqlcmd /E /S. /dCredit /i"3 - Narcissistic Parallelism.sql"

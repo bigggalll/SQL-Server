@@ -1,0 +1,1 @@
+ostress -E -Q"exec letstesttempproc 8" -n500 -q -S.\SQL2014 -r100 -dtempdb_test -T146 -o.\tempstress_2014

@@ -1,0 +1,17 @@
+Hey there SQLintersection attendees - Thanks so much for attending our sessions. Most of us have posted the EXACT version that we demo'ed on the snapboard site. However, we've also posted all of our SQLskills presenter's demo scripts on our own website just in case we need to update / tweak them.
+
+You can find all of our conference resources here:
+https://www.sqlskills.com/sql-server-resources/sql-server-demos/
+
+Everything is stored by date (year), conference event, and then by session.
+
+And, if you can't find anything from the SQL speakers of the SQLintersection conference - feel free to email me directly!
+
+Thanks so much for your attendance and we hope to see you next year!
+
+Cheers,
+Kimberly
+
+Kimberly L. Tripp
+Kimberly@SQLskills.com
+SQLintersection Tech/Content Manager

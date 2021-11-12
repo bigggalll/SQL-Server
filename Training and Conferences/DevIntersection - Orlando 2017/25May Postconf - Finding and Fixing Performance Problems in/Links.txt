@@ -1,0 +1,94 @@
+COST / PARALLELISM
+
+Tuning CTP from cache
+https://www.sqlskills.com/blogs/jonathan/tuning-cost-threshold-for-parallelism-from-the-plan-cache/
+
+
+
+MEMORY
+
+Setting max server memory
+https://www.sqlskills.com/blogs/jonathan/how-much-memory-does-my-sql-server-actually-need/
+https://www.sqlskills.com/blogs/jonathan/wow-an-online-calculator-to-misconfigure-your-sql-server-memory/
+
+
+
+WAIT STATISTICS
+
+Wait Statistics Intro
+https://www.sqlskills.com/blogs/paul/wait-statistics-or-please-tell-me-where-it-hurts/
+
+Capture for a period of time (snapshot)
+https://www.sqlskills.com/blogs/paul/capturing-wait-statistics-period-time/
+
+Waits library
+https://www.sqlskills.com/help/waits/
+
+
+
+PROFILER / XE
+
+Observer Overhead
+https://sqlperformance.com/2012/10/sql-trace/observer-overhead-trace-extended-events
+
+
+
+BLOCKING
+
+Capture blocked process report
+https://www.sqlskills.com/blogs/erin/capture-blocking-information-with-extended-events-and-the-blocked-process-report/
+
+
+
+WHO_IS_ACTIVE
+
+Download
+http://whoisactive.com/
+
+A month of posts about how to use whoisactive
+http://sqlblog.com/blogs/adam_machanic/archive/tags/month+of+monitoring/default.aspx
+
+
+
+INDEXES
+
+Missing indexes
+https://blogs.msdn.microsoft.com/bartd/2007/07/19/are-you-using-sqls-missing-index-dmvs/
+
+Kimberly's post about GUIDs as primary keys and other fun stories
+https://www.sqlskills.com/blogs/kimberly/category/are-you-kidding-me/
+
+How can you tell if an index is duplicate?
+https://www.sqlskills.com/blogs/kimberly/category/are-you-kidding-me/
+
+Script to remove duplicate indexes
+https://www.sqlskills.com/blogs/kimberly/removing-duplicate-indexes/
+
+
+
+PLAN CACHE / OPTIMIZE FOR AD HOC WORKLOADS
+
+Plan cache and optimizing for adhoc workloads
+https://www.sqlskills.com/blogs/kimberly/plan-cache-and-optimizing-for-adhoc-workloads/
+
+
+
+TEST DATA
+
+AdventureWorks
+https://msftdbprodsamples.codeplex.com/
+
+WorldWideImporters (2016)
+https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/wide-world-importers
+
+BOL Workload Generator from Jon
+https://www.sqlskills.com/blogs/jonathan/the-adventureworks2008r2-books-online-random-workload-generator/
+
+
+
+VMs
+Troubleshooting CPU on VMware
+https://sqlperformance.com/2017/05/monitoring/troubleshooting-cpu-vmware
+
+Querying VMware VCenter Database
+https://www.sqlskills.com/blogs/jonathan/querying-the-vmware-vcenter-database-vcdb-for-performance-and-configuration-information/
