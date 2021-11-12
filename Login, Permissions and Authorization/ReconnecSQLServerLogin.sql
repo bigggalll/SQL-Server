@@ -1,6 +1,6 @@
-SET NOCOUNT ON
-USE grpJeanCoutuCorp_PrePROD
-GO
+--SET NOCOUNT ON
+--USE grpJeanCoutuCorp_PrePROD
+--GO
 DECLARE @loop INT
 DECLARE @USER sysname
  

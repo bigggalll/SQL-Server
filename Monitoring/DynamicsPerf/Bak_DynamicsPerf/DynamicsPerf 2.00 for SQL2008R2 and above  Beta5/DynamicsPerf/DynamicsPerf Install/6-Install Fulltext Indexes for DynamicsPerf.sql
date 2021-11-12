@@ -1,0 +1,47 @@
+/*************************************************************************************************************************
+
+FULLTEXT Indexing Service MUST BE INSTALLED on the server that hosts the DynamicsPerf database 
+in order to deploy this script.  This script is meant ONLY for the DynamicsPerf database not
+the databases being monitored. 
+
+***************************************************************************************************************************/
+
+USE [DynamicsPerf]
+GO
+
+
+CREATE FULLTEXT CATALOG DynamicsPerf_FT AS DEFAULT;
+GO
+
+CREATE FULLTEXT INDEX ON QUERY_TEXT(SQL_TEXT)
+	 KEY INDEX IX_QUERY_TEXT_FT WITH STOPLIST = SYSTEM, CHANGE_TRACKING AUTO;
+GO
+
+ALTER FULLTEXT INDEX ON QUERY_TEXT ENABLE;
+GO
+
+ALTER FULLTEXT INDEX ON QUERY_TEXT START FULL POPULATION;
+GO
+
+CREATE FULLTEXT INDEX ON QUERY_PLANS(C_QUERY_PLAN) 
+	KEY INDEX IX_QUERY_PLANS_FT WITH STOPLIST = SYSTEM, CHANGE_TRACKING AUTO;
+GO
+
+ALTER FULLTEXT INDEX ON QUERY_PLANS ENABLE;
+GO
+
+ALTER FULLTEXT INDEX ON QUERY_PLANS START FULL POPULATION; 
+GO
+
+
+CREATE FULLTEXT INDEX ON AX_SQLTRACE(SQL_TEXT, CALL_STACK) 
+	KEY INDEX IX_AX_SQLTRACE_FT WITH STOPLIST = SYSTEM, CHANGE_TRACKING AUTO;
+GO
+
+ALTER FULLTEXT INDEX ON AX_SQLTRACE ENABLE;
+GO
+
+ALTER FULLTEXT INDEX ON AX_SQLTRACE START FULL POPULATION;
+GO
+
+

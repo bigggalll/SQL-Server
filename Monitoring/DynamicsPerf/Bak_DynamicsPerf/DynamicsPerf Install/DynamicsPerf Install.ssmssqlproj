@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DynamicsPerf Install">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="dvg031p:GJC\mara1">
+          <Created>2016-04-27T10:54:44.2331302-04:00</Created>
+          <Type>SQL</Type>
+          <Server>dvg031p</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName />
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="1-Create_Core_Objects.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LstnDefaultQ:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LstnDefaultQ</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>1-Create_Core_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Deploy DynamicsPerf Schedules.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LstnDefaultQ:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LstnDefaultQ</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>2-Deploy DynamicsPerf Schedules.sql</FullPath>
+        </FileNode>
+        <FileNode Name="3-Setup Linked Servers(optional).sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LstnDefaultQ:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LstnDefaultQ</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>3-Setup Linked Servers(optional).sql</FullPath>
+        </FileNode>
+        <FileNode Name="4-ConfigureDBs to Collect.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LstnDefaultQ:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LstnDefaultQ</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>4-ConfigureDBs to Collect.sql</FullPath>
+        </FileNode>
+        <FileNode Name="5-Setup SSRS Data Collection.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LstnDefaultQ:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LstnDefaultQ</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>5-Setup SSRS Data Collection.sql</FullPath>
+        </FileNode>
+        <FileNode Name="6-Install Fulltext Indexes for DynamicsPerf.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LstnDefaultQ:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LstnDefaultQ</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>6-Install Fulltext Indexes for DynamicsPerf.sql</FullPath>
+        </FileNode>
+        <FileNode Name="7-Deploy Extended Events.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:lstnax01q:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>lstnax01q</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>7-Deploy Extended Events.sql</FullPath>
+        </FileNode>
+        <FileNode Name="7A-SQL2008R2 Blocking Jobs.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>7A-SQL2008R2 Blocking Jobs.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Configure Optional Settings(optional).sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Configure Optional Settings(optional).sql</FullPath>
+        </FileNode>
+        <FileNode Name="Encrypt DynamicsPerf Database(Optional).sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Encrypt DynamicsPerf Database(Optional).sql</FullPath>
+        </FileNode>
+        <FileNode Name="CompressDynamicsPerf.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>CompressDynamicsPerf.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Monitor DynamicsPerf Health.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LstnDefaultQ:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LstnDefaultQ</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Monitor DynamicsPerf Health.sql</FullPath>
+        </FileNode>
+        <FileNode Name="ObsoleteSQLJobs.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LstnDefaultQ:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LstnDefaultQ</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>ObsoleteSQLJobs.sql</FullPath>
+        </FileNode>
+        <FileNode Name="AddNewViews.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>AddNewViews.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Uninstall Dynperf SQL Jobs.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Uninstall Dynperf SQL Jobs.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Setup Query Store.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Setup Query Store.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items>
+        <FileNode Name="ChangeLog.txt">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>ChangeLog.txt</FullPath>
+        </FileNode>
+        <FileNode Name="Simple Installation.txt">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Simple Installation.txt</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DynamicsPerf">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="1-Create_Core_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>1-Create_Core_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_AX_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_AX_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_GP_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_GP_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_NAV_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_NAV_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_SL_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_SL_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_CRM_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_CRM_Objects.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items>
+        <FileNode Name="ChangeLog.txt">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>ChangeLog.txt</FullPath>
+        </FileNode>
+        <FileNode Name="Factors that Impact Performance.jpg">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Factors that Impact Performance.jpg</FullPath>
+        </FileNode>
+        <FileNode Name="Perf Analysis Flowchart.jpg">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Perf Analysis Flowchart.jpg</FullPath>
+        </FileNode>
+        <FileNode Name="Performance Analyzer for Dynamics Deployment and User Guide.pdf">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Performance Analyzer for Dynamics Deployment and User Guide.pdf</FullPath>
+        </FileNode>
+        <FileNode Name="Recommended Reading.docx">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Recommended Reading.docx</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

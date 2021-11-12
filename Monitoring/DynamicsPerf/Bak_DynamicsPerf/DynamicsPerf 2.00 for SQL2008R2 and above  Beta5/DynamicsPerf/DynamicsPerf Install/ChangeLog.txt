@@ -1,0 +1,139 @@
+Original Author:  Mark Prazak  Sr. Escal Eng
+Current Author: Rod "Hotrod" Hansen  Sr. PFE
+
+A big THANK YOU to the Dynamics community that gave feedback and helped make this such a great
+release!!
+		Rod Hansen
+
+
+Please provide your feedback on this tool after you have installed:
+http://blogs.msdn.com/b/axinthefield/archive/2016/01/06/dynamicsperf-2-0-feedback.aspx
+
+We want to hear what version of Dynamics and SQL you installed on and whether you did a local or remote install
+
+
+
+Performance Analyzer 2.0 for Microsoft Dynamics is a tool developed in cooperation
+between the Microsoft Premier Field Engineering Team and Dynamics Developement teams. 
+You can find out more about us at:
+
+http://blogs.msdn.com/axinthefield/
+
+Other blogs:
+	http://pfedynamics.com/
+	http://blogs.msdn.com/pfedynamics/
+	http://blogs.msdn.com/crminthefield/
+	http://blogs.msdn.com/axperf/
+
+Lifecycle Services for Dynamics AX
+  What is it?
+	http://technet.microsoft.com/EN-US/library/dn268616.aspx
+	
+  Where is it?
+	http://lcs.dynmamics.com
+	
+
+Version 2.0
+
+	Added Performance Analyzer 2.0 Installation Solution (separate scripts to install vs. Analyze)
+	Added support for remote database collection
+	Added script to setup Linked Servers for Remote database collection
+	Added support to all stored procedures to deal with Time Zone differences for remote servers
+	Added support for AZURE SQL DB
+	Added support for next version of Dynamics AX 
+	Modified DynamicsPerf schema to support merging/DTS of multiple DynamicsPerf databases together
+	Added a scheduling engine to DynamicsPerf jobs to run each collector on it's own schedule
+	Added DYNAMICSPERF_CONFIGURATION for configuring parameters for some of the new collectors
+	Added new flags to SP_CAPTURESTATS for Dynamics Product version, can run collectors per product now
+	Converted SP_CAPTURESTATS into separate stored procedures for each collector
+	Added OS_SCHEDULER_COUNT to SERVERINFO table
+	Added db_inital_size(mb) to SYS_DATABASEFILES for TempDb initial size
+	Added SYSGLOBALCONFIGURATION to the Dynamics AX collection
+	Added is_cdc_enabled to SQL_DATABASES table
+	Added New table CDC to monitor which tables have Change Data Control enabled
+	Added New table SQL_REPLICATION to capture Database Replication information
+	Added New table SQL_CHANGETRACKING_DBS for collection of change tracking information
+	Added New Table SQL_CHANGETRACKING_TABLES for collection of change tracking information
+	Added new table SQL_PLAN_GUIDES for sys.plan_guides collection
+	Added new table SSRS_EXECUTIONLOG to collect runtime SSRS data 
+	Update the Sample script for auto-grow your database based on DynamicsPerf growth data
+	Added support for capturing EXECUTIONLOG2 from SSRS for analysis
+	Added MAX_ROW_SIZE and MAX_LOB_SIZE to the DYNSYSINDEXES table
+	Added new sample query SQL_RECORD_SIZES to Analyze SQL Configuration
+	Added new sample query TABLES_WITHOUT_UNIQUE_INDEX in Analyze AX Configuration
+	Added new table DYNSYSCOLUMNS 
+	Added new sample query UNIQUE_INDEXES_NOT_DEFINED_UNIQUE in Analyze Indexes
+	Added new sample query TOO_LARGE_INDEXES to Analyze SQL Indexes
+	Added SERVERINFO_VW and SERVERINFO_CURR_VW views
+	Added new query for Parallel execution plans when MAXDOP <> 1
+	Added current avg time to multiple execution plans sample query
+	Updated the EXACT_DUPLICATE_INDEXES sample query to show the index details
+	Added new sample script,MAX_TEMPDB_SIZE, to show largest size ever for TempDB files
+	Added new sample script to check if Transaction log 50% or greater of Database files, LOGFILE_BIGGER_THAN_DATABASE
+	Added the new CRM tables
+		CRM_ORGRANIZATION
+		CRM_PLUGINS
+		CRM_POA_TOTALS
+	Added new columns TOTAL_DOP, LAST_DOP, MIN_DOP, MAX_DOP to QUERY_STATS table (new in SQL 2016)
+	Added script to turn on Database Encryption (TDE) for DynamicsPerf
+	Added C_QUERY_PLAN computed column to QUERY_PLANS table to support Fulltext indexing this table
+	Added Script to setup Fulltext indexes on SQL_TEXT, QUERY_PLANS AND AX_SQL_TRACE tables
+	Added sample queries for use of the Fulltext indexes
+	Added new procedure, DYNPERF_REFRESH_QUERY_PLANS, to refresh query plans older then 1 week old
+	Added new procedure, DYNPERF_REFRESH_QUERY_TEXT, to refresh SQL TEXT older then 1 week old
+	Added QUERY_HASH to AX_SQLTRACE table
+	Added new table QUERY_HISTORY, daily and monthly query totals from QUERY_STATS table
+	Added new table INDEX_HISTORY, daily and monthly index totals from INDEX_STATS table
+	Added new sproc to rollup Query data into QUERY_HISTORY table
+	Added new sproc to rollup Index data into INDEX_HISTORY table
+	Added new SQL Job, DYNPERF_COLLECT_AOS_CONFIG so AOSANALYSIS.CMD no longer has to be run
+	Modified SP_PURGESTATS to be used to cleanup data outside of the new Scheduling Engine or in Dev/Test
+	Added new procedure DYNPERF_PURGE_DATA for scheduled deletion of data, use SP_PURGESTATS for exceptions to the schedule
+	Added new diagnostic print messages for debugging	
+	Added new queries to analyze SSRS data
+	Added new SYSTEM_COMMENTS table. Add comments about significant changes to your system such as Applied a Service Pack
+	Fixed AX_SQLTRACE.CREATED_DATETIME to handle Time Zone at remote servers, inserts as SQL Server time of the server collected from
+	Added enhanced error logging into CAPTURE_LOG table
+	Added new parsing procedure [DYNPERF_PROCESS_QUERY_PLANS] to offload that task and speed up QUERY_PLANS inserts
+	Added new SSRS_HISTORY table rollup data from SSRS_EXECUTIONLOG
+	Added new sample queries for the SSRS data collections
+	Added new sample queries that show total_elapsed_time and execution_count by 5 min or 1hr increments(requires SQL2012 for these queries)
+	Fixed Quicky Activity query to support remote servers
+	Added feature to remove stale Queries, aka, queries not seen in x days
+	Added new table INDEX_STAT_HEADER to collect Statistics Header information, we now have the UPDATED time for Statistics
+	Added new sproc DYNPERF_PROCESS_AXSQLTRACE, to update the QUERY_HASH column in AX_SQLTRACE from QUERY_TEXT table
+	Removed SET_AX_TRACE jobs, now managed by internal tables using the new scheduling engine in DynamicsPerf.  Can manually update AX_SQLTRACE_CONFIG or run SET_AX_SQLTRACE sproc which will also update that table 
+	Updated SET_AX_SQL_TRACE to support remote servers and update AX_SQLTRACE_CONFIG, so the settings "stick". 
+	Created new sproc DYNPERF_SET_AX_SQLTRACE that auto updates databases based on user configurable settings for each database
+	Removed DYNPERF_PURGE_SYSTRACETABLESQL_AX SQL Job, DYNPERF_SET_AX_SQLTRACE sproc now does the deletion based on settings in AX_SQLTRACE_CONFIG table
+	Moved Avg_time_ms computation from the QUERY views to COMPUTED COLUMNS on the tables, they are now part of the table definition
+	Added sample queries for Change Data Control
+	Added sample queries for Change Tracking
+	Added new sample queries for the QUERY_HISTORY tables
+	Added new sample queries for the INDEX_HISTORY tables
+	Added QUERY_ALERTS table
+	Added new sproc to populate QUERY_ALERTS table based upon QUERY_ALERTS_CONFIG settings
+	Added new table PERF_COUNTER_DATA
+	Added new collector for sys.dm_os_performance_counters data into PERF_COUNTER_DATA
+	Added new view INDEX_KEY_ORDER_VW and sample query to analyze Index Column Order
+	Enhanced AOTEXPORT class to insert directly into DynamicsPerf database
+		New tables for AOTEXPORT: AX_BATCHJOB_DETAIL, AX_BATCHSERVERGROUP_CONFIG, AX_LICENSEKEY_DETAIL, AX_CONFIGURATIONKEY_DETAIL
+	Significantly improved the performance of AOTEXPORT class
+	AOTEXPORT exports configuration key and license key names/flags
+	Added new sample query to show Database size by AX Configuration key
+	Added new sample query to show Database activity by AX Configuration key
+	Added new sample query for AX License key information
+	Added new sample query for AX Configuration Keys information
+	Added new sample query to check for enabled countries
+	Added new Views and Procedures to Parse the QUERY_PLANS table
+	Changed all of the SQL_TEXT column of all the QUERY views to use the new parsed out data
+	Added new query to show INDEX KEY order from Most Unique to Least Uniuqe of all indexes
+	Added QUERY_PLAN_PARSED column to all QUERY_XXX views, to aid with query analysis
+	Added MISSING_INDEX_INFO column to all QUERY_XXX views to aid with query analysis
+	Added new table AZURE_EVENTS
+	Added new data collector for sys.event_log for AZURE databases
+
+
+	Reworked all SQL Server Agent Jobs
+
+

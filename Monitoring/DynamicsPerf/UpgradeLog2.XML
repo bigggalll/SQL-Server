@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Performance Analyzer 2.00 Analyze Data">
+</Property><Property Name="Fichier solution" Value="C:\Users\mara1\OneDrive\DBA\SQL Server\DynamicsPerf\Performance Analyzer 2.00 Analyze Data.ssmssln">
+</Property><Property Name="Date" Value="2 mars 2016">
+</Property><Property Name="Time" Value="16:38">
+</Property><Property Name="Numéro de journal" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="Performance Analyzer 2.00 Analyze Data.ssmssln" Description="Solution correctement convertie">
+</Event><Event ErrorLevel="3" Project="" Source="Performance Analyzer 2.00 Analyze Data.ssmssln" Description="Converted">
+</Event></UpgradeLog>

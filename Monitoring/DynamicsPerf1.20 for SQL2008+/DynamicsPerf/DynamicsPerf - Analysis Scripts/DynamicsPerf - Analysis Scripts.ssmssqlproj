@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DynamicsPerf - Analysis Scripts">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="3-Analyze_SQL_Configuration.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>3-Analyze_SQL_Configuration.sql</FullPath>
+        </FileNode>
+        <FileNode Name="4-Analyze_SQL_Indexes.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>4-Analyze_SQL_Indexes.sql</FullPath>
+        </FileNode>
+        <FileNode Name="5-Analyze_SQL_Queries.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>5-Analyze_SQL_Queries.sql</FullPath>
+        </FileNode>
+        <FileNode Name="6-Analyze_Blocking.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>6-Analyze_Blocking.sql</FullPath>
+        </FileNode>
+        <FileNode Name="7-Baseline - Benchmark Queries.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>7-Baseline - Benchmark Queries.sql</FullPath>
+        </FileNode>
+        <FileNode Name="CaptureStats in TEST.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>CaptureStats in TEST.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Manual - CaptureStats.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Manual - CaptureStats.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Manual - Tracing.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Manual - Tracing.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Quick - Activity Monitor with Cursor Support.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Quick - Activity Monitor with Cursor Support.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Research Queries.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Research Queries.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

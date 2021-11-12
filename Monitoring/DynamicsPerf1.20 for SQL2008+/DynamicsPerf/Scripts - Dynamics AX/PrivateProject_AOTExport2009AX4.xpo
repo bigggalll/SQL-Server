@@ -1,0 +1,765 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AOTExport unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AOTExport
+    PROPERTIES
+      Name                #AOTExport
+      Extends             #RunBaseBatch
+      RunOn               #Called from
+    ENDPROPERTIES
+    
+    METHODS
+      Version: 3
+      SOURCE #canGoBatchJournal
+        #protected boolean canGoBatchJournal()
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #class AOTExport extends RunBaseBatch
+        #{
+        #
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return conNull();
+        #}
+        #
+      ENDSOURCE
+      SOURCE #run
+        #public void run()
+        #{
+        #    DictTable           dictTable;
+        #    DictIndex           dictIndex;
+        #    DictField           dictField;
+        #    str                 primaryKey;
+        #    str                 clusteredIndex;
+        #    Dictionary          dictionary = new Dictionary();
+        #    AotTableProperties  aotTableProperties;
+        #    AotIndexProperties  aotIndexProperties;
+        #    AotIndexFields      aotIndexFields;
+        #    RecordInsertList    tableList;
+        #    RecordInsertList    indexList;
+        #    RecordInsertList    fieldList;
+        #    DatabaseLog         databaseLog;
+        #    UtilIdElements        utilIdElements;
+        #    int64               start, stop;
+        # //
+        # // Variables used when looping through dictionary objects
+        # // The variable is either initialized to 1 or to max # of objects
+        # // Then set to the objects ID.
+        # // Variable is first character of object type:
+        # //     t for table
+        # //     i for index
+        # //     f for field
+        # //     m for method
+        # //
+        #    int                 t;
+        #    int                 i;
+        #    int                 f;
+        #    int                 m;
+        # //
+        # // Boolean variables used to indicate data method overrides or AOS validation
+        # //
+        #    boolean             insertmethodoverridden;
+        #    boolean             updatemethodoverridden;
+        #    boolean             deletemethodoverridden;
+        #    boolean             aosvalidateinsert;
+        #    boolean             aosvalidateupdate;
+        #    boolean             aosvalidatedelete;
+        # //
+        # // Boolean variables used to indicate database logging or events enabled
+        # //
+        #    boolean             databaseloginsert;
+        #    boolean             databaselogdelete;
+        #    boolean             databaselogupdate;
+        #    boolean             databaselogrenamekey;
+        #    boolean             eventinsert;
+        #    boolean             eventdelete;
+        #    boolean             eventupdate;
+        #    boolean             eventrenamekey;
+        #    ;
+        #    start = WinAPI::getTickCount();
+        #//
+        #//  Delete existing rows - we overwrite all 3 tables on each run
+        #//
+        #    delete_from aotTableProperties;
+        #    delete_from aotIndexProperties;
+        #    delete_from aotIndexFields;
+        #
+        #    tableList = new RecordInsertList(tableNum(aotTableProperties));
+        #    indexList = new RecordInsertList(tableNum(aotIndexProperties));
+        #    fieldList = new RecordInsertList(tableNum(aotIndexFields));
+        #
+        #//
+        #//  Loop through table object in the the dictionary
+        #//  Variable t is set to table id as we loop dictionary
+        #//  Only SQL tables (not tmp or map) are selected
+        #//
+        #    t = dictionary.tableNext(0);
+        #    while (t)
+        #    {
+        #
+        #        dictTable = dictionary.tableObject(t);
+        #        if (dictTable.isSql() && !dictTable.isView())
+        #        {
+        #
+        #//          Loop through all methods for the table
+        #//          Variable m is set to method #
+        #//          We lookup for data methods and AOS validate methods
+        #//
+        #            insertmethodoverridden  = false;
+        #            updatemethodoverridden  = false;
+        #            deletemethodoverridden  = false;
+        #            aosvalidateinsert       = false;
+        #            aosvalidateupdate       = false;
+        #            aosvalidatedelete       = false;
+        #
+        #            for(m=1;m<=dictTable.objectMethodCnt();m++)
+        #            {
+        #                switch (dictTable.objectMethod(m))
+        #                {
+        #                    case 'insert':
+        #                        insertmethodoverridden  = true;
+        #                        break;
+        #                    case 'update':
+        #                        updatemethodoverridden  = true;
+        #                        break;
+        #                    case 'delete':
+        #                        deletemethodoverridden  = true;
+        #                        break;
+        #                    case 'AosValidateInsert':
+        #                        aosvalidateinsert       = true;
+        #                        break;
+        #                    case 'AosValidateUpdate':
+        #                        aosvalidateupdate       = true;
+        #                        break;
+        #                    case 'AosValidateDelete':
+        #                        aosvalidatedelete       = true;
+        #                        break;
+        #                }
+        #            }
+        #//
+        #//          Loop through databaselog records for the table
+        #//          looking for logging and events
+        #//
+        #            databaseloginsert       = false;
+        #            databaselogdelete       = false;
+        #            databaselogupdate       = false;
+        #            databaselogrenamekey    = false;
+        #            eventinsert             = false;
+        #            eventdelete             = false;
+        #            eventupdate             = false;
+        #            eventrenamekey          = false;
+        #
+        #            while select logType from databaseLog
+        #                where databaseLog.logTable == dictTable.id()
+        #            {
+        #//
+        #//              Refer to "DatabaseLogType System Enumeration" in system documentation
+        #//
+        #                switch (databaseLog.logType)
+        #                {
+        #                    case 0:
+        #                        databaseloginsert   = true;
+        #                        break;
+        #                    case 1:
+        #                        databaselogdelete   = true;
+        #                        break;
+        #                    case 2:
+        #                        databaselogupdate   = true;
+        #                        break;
+        #                    case 3:
+        #                        databaselogrenamekey= true;
+        #                        break;
+        #                    case 4:
+        #                        eventinsert         = true;
+        #                        break;
+        #                    case 5:
+        #                        eventdelete         = true;
+        #                        break;
+        #                    case 6:
+        #                        eventupdate         = true;
+        #                        break;
+        #                    case 7:
+        #                        eventrenamekey      = true;
+        #                        break;
+        #                }
+        #            }
+        #//
+        #//          Set clustered amd primary key index names if present
+        #//
+        #            primaryKey      = '';
+        #            clusteredIndex  = '';
+        #
+        #            dictIndex = dictTable.indexObject(dictTable.primaryIndex());
+        #            if (dictIndex)
+        #                primaryKey = dictIndex.name();
+        #
+        #            dictIndex = dictTable.indexObject(dictTable.clusterIndex());
+        #            if (dictIndex)
+        #                clusteredIndex = dictIndex.name();
+        #
+        #//
+        #//          Set Highest Application Layer for Table
+        #//
+        #
+        #            select firstonly utilLevel from utilIdElements
+        #            order by utilLevel desc
+        #            where utilIdElements.id == dictTable.id()
+        #            &&    utilIdElements.recordType == UtilElementType::Table;
+        #
+        #
+        #
+        #
+        #//
+        #//          Set aotTableProperties and insert
+        #//
+        #            aotTableProperties.TableName                = dictTable.name();
+        #            aotTableProperties.TableGroup               = dictTable.tableGroup();
+        #            aotTableProperties.OCCEnabled               = dictTable.occEnabled();
+        #            aotTableProperties.CacheLookup              = dictTable.cacheLookup();
+        #            aotTableProperties.PrimaryKey               = primaryKey;
+        #            aotTableProperties.ClusteredIndex           = clusteredIndex;
+        #            aotTableProperties.InsertMethodOverridden   = insertmethodoverridden;
+        #            aotTableProperties.UpdateMethodOverridden   = updatemethodoverridden;
+        #            aotTableProperties.DeleteMethodOverridden   = deletemethodoverridden;
+        #            aotTableProperties.DataPerCompany           = dictTable.dataPrCompany();
+        #            aotTableProperties.AosValidateInsert        = aosvalidateinsert;
+        #            aotTableProperties.AosValidateUpdate        = aosvalidateupdate;
+        #            aotTableProperties.AosValidateDelete        = aosvalidatedelete;
+        #            aotTableProperties.DatabaseLogInsert        = databaseloginsert;
+        #            aotTableProperties.DatabaseLogDelete        = databaselogdelete;
+        #            aotTableProperties.DatabaseLogUpdate        = databaselogupdate;
+        #            aotTableProperties.DatabaseLogRenameKey     = databaselogrenamekey;
+        #            aotTableProperties.EventInsert              = eventinsert;
+        #            aotTableProperties.EventDelete              = eventdelete;
+        #            aotTableProperties.EventUpdate              = eventupdate;
+        #            aotTableProperties.EventRenameKey           = eventrenamekey;
+        #            aotTableProperties.TabId                    = dictTable.id();
+        #            aotTableProperties.applayer                 = enum2str(utilIdElements.utilLevel);
+        #
+        #            tableList.add(aotTableProperties);
+        #
+        #
+        #//
+        #//          Loop though table's indexes
+        #//          We bypass if index is not enabled
+        #//
+        #            i = dictTable.indexNext(0);
+        #            while (i)
+        #            {
+        #                dictIndex = dictTable.indexObject(i);
+        #                if (dictIndex && dictIndex.enabled() == true)
+        #                {
+        #//                  Set Highest Application Layer for Table
+        #//
+        #                    select firstonly utilLevel from utilIdElements
+        #                    order by utilLevel desc
+        #                    where utilIdElements.name == dictIndex.name()
+        #                    &&    utilIdElements.recordType == UtilElementType::TableIndex
+        #                    &&    utilIdElements.parentId == aotTableProperties.TabId;
+        #
+        #//
+        #
+        #//
+        #//                  Set aotIndexProperties and insert
+        #//
+        #                    aotIndexProperties.TableName        = dictTable.name(DbBackend::Sql);
+        #                    aotIndexProperties.IndexName        = dictIndex.name(DbBackend::Sql);
+        #                    aotIndexProperties.AllowDuplicates  = dictIndex.allowDuplicates();
+        #                    aotIndexProperties.IndexId          = dictIndex.id();
+        #                    aotIndexProperties.AppLayer         = enum2str(utilIdElements.utilLevel);
+        #                    indexList.add(aotIndexProperties);
+        #
+        #//
+        #//                  Loop though index key column
+        #//
+        #                    for (f=1;f<=dictIndex.numberOfFields(); f++)
+        #                    {
+        #//
+        #//                      Set aotIndexFields and insert
+        #//
+        #                        dictField                   = new DictField(dictTable.id(), dictIndex.field(f));
+        #                        aotIndexFields.TableName    = dictTable.name(DbBackend::Sql);
+        #                        aotIndexFields.IndexName    = dictIndex.name(DbBackend::Sql);
+        #                        aotIndexFields.FieldPosition= f;
+        #                        aotIndexFields.FieldName    = dictField.name(DbBackend::Sql);
+        #                        fieldList.add(aotIndexFields);
+        #                    }
+        #                }
+        #                i = dictTable.indexNext(i);
+        #            }
+        #        }
+        #        t = dictionary.tableNext(t);
+        #    }
+        #   tableList.insertDatabase();
+        #   indexList.insertDatabase();
+        #   fieldList.insertDatabase();
+        #   stop  = WinAPI::getTickCount();
+        #   Info(strFmt("AOTExport Duration: %1 ms", stop - start));
+        #}
+        #
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container packedClass)
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #public server static void main(Args args)
+        #{
+        #    AOTExport   aotExport;
+        #    ;
+        #
+        #
+        #
+        #    aotExport = new AOTExport();
+        #
+        #
+        #
+        #    aotExport.run();
+        #
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : AotIndexProperties unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #AotIndexProperties
+    PROPERTIES
+      Name                #AotIndexProperties
+      CreateRecIdIndex    #Yes
+      SaveDataPerCompany  #No
+      PrimaryIndex        #RecId
+      ClusterIndex        #RecId
+      CreatedDateTime     #Yes
+      DEL_createdTime     #Yes
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #TableName
+        STRING
+        PROPERTIES
+          Name                #TableName
+          Table               #AotIndexProperties
+          ExtendedDataType    
+            ARRAY 
+              #TableName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #IndexName
+        STRING
+        PROPERTIES
+          Name                #IndexName
+          Table               #AotIndexProperties
+          ExtendedDataType    
+            ARRAY 
+              #Indexname
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #AllowDuplicates
+        INT
+        PROPERTIES
+          Name                #AllowDuplicates
+          Table               #AotIndexProperties
+        ENDPROPERTIES
+        
+      FIELD #IndexId
+        INT
+        PROPERTIES
+          Name                #IndexId
+          Table               #AotIndexProperties
+        ENDPROPERTIES
+        
+      FIELD #AppLayer
+        STRING
+        PROPERTIES
+          Name                #AppLayer
+          Table               #AotIndexProperties
+          StringSize          #3
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+  ENDTABLE
+  
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : AotIndexFields unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #AotIndexFields
+    PROPERTIES
+      Name                #AotIndexFields
+      CreateRecIdIndex    #Yes
+      SaveDataPerCompany  #No
+      PrimaryIndex        #RecId
+      ClusterIndex        #RecId
+      CreatedDateTime     #Yes
+      DEL_createdTime     #Yes
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #TableName
+        STRING
+        PROPERTIES
+          Name                #TableName
+          Table               #AotIndexFields
+          ExtendedDataType    
+            ARRAY 
+              #TableName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #IndexName
+        STRING
+        PROPERTIES
+          Name                #IndexName
+          Table               #AotIndexFields
+          ExtendedDataType    
+            ARRAY 
+              #Indexname
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #FieldName
+        STRING
+        PROPERTIES
+          Name                #FieldName
+          Table               #AotIndexFields
+          ExtendedDataType    
+            ARRAY 
+              #FieldName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #FieldPosition
+        INT
+        PROPERTIES
+          Name                #FieldPosition
+          Table               #AotIndexFields
+          ExtendedDataType    
+            ARRAY 
+              #FieldNum
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+  ENDTABLE
+  
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : AotTableProperties unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #AotTableProperties
+    PROPERTIES
+      Name                #AotTableProperties
+      CreateRecIdIndex    #Yes
+      SaveDataPerCompany  #No
+      PrimaryIndex        #RecId
+      ClusterIndex        #RecId
+      CreatedDateTime     #Yes
+      DEL_createdTime     #Yes
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #TableGroup
+        INT
+        PROPERTIES
+          Name                #TableGroup
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #TableName
+        STRING
+        PROPERTIES
+          Name                #TableName
+          Table               #AotTableProperties
+          ExtendedDataType    
+            ARRAY 
+              #TableName
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #OCCEnabled
+        INT
+        PROPERTIES
+          Name                #OCCEnabled
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #CacheLookup
+        INT
+        PROPERTIES
+          Name                #CacheLookup
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #PrimaryKey
+        STRING
+        PROPERTIES
+          Name                #PrimaryKey
+          Table               #AotTableProperties
+          ExtendedDataType    
+            ARRAY 
+              #Indexname
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #ClusteredIndex
+        STRING
+        PROPERTIES
+          Name                #ClusteredIndex
+          Table               #AotTableProperties
+          ExtendedDataType    
+            ARRAY 
+              #Indexname
+              #
+            ENDARRAY
+          StringSize          #40
+        ENDPROPERTIES
+        
+      FIELD #InsertMethodOverridden
+        INT
+        PROPERTIES
+          Name                #InsertMethodOverridden
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #UpdateMethodOverridden
+        INT
+        PROPERTIES
+          Name                #UpdateMethodOverridden
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #DeleteMethodOverridden
+        INT
+        PROPERTIES
+          Name                #DeleteMethodOverridden
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #DataPerCompany
+        INT
+        PROPERTIES
+          Name                #DataPerCompany
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #AosValidateInsert
+        INT
+        PROPERTIES
+          Name                #AosValidateInsert
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #AosValidateUpdate
+        INT
+        PROPERTIES
+          Name                #AosValidateUpdate
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #AosValidateDelete
+        INT
+        PROPERTIES
+          Name                #AosValidateDelete
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #DatabaseLogInsert
+        INT
+        PROPERTIES
+          Name                #DatabaseLogInsert
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #DatabaseLogDelete
+        INT
+        PROPERTIES
+          Name                #DatabaseLogDelete
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #DatabaseLogUpdate
+        INT
+        PROPERTIES
+          Name                #DatabaseLogUpdate
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #DatabaseLogRenameKey
+        INT
+        PROPERTIES
+          Name                #DatabaseLogRenameKey
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #EventInsert
+        INT
+        PROPERTIES
+          Name                #EventInsert
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #EventDelete
+        INT
+        PROPERTIES
+          Name                #EventDelete
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #EventUpdate
+        INT
+        PROPERTIES
+          Name                #EventUpdate
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #EventRenameKey
+        INT
+        PROPERTIES
+          Name                #EventRenameKey
+          Table               #AotTableProperties
+        ENDPROPERTIES
+        
+      FIELD #TabId
+        INT
+        PROPERTIES
+          Name                #TabId
+          Table               #AotTableProperties
+          ExtendedDataType    
+            ARRAY 
+              #TabId
+              #
+            ENDARRAY
+        ENDPROPERTIES
+        
+      FIELD #AppLayer
+        STRING
+        PROPERTIES
+          Name                #AppLayer
+          Table               #AotTableProperties
+          StringSize          #3
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+  ENDTABLE
+  
+
+***Element: PRN
+
+; Microsoft Dynamics AX Project : AOTExport unloaded
+; --------------------------------------------------------------------------------
+  PROJECTVERSION 2
+  
+  PROJECT #AOTExport
+   PRIVATE
+  PROPERTIES
+    Name                #AOTExport
+  ENDPROPERTIES
+  
+    PROJECTCLASS ProjectNode
+    BEGINNODE
+      FILETYPE 0
+      UTILTYPE 45
+      UTILOBJECTID 50001
+      NODETYPE 329
+      NAME #AOTExport
+    ENDNODE
+    BEGINNODE
+      FILETYPE 0
+      UTILTYPE 44
+      UTILOBJECTID 50002
+      NODETYPE 204
+      NAME #AotIndexProperties
+    ENDNODE
+    BEGINNODE
+      FILETYPE 0
+      UTILTYPE 44
+      UTILOBJECTID 50001
+      NODETYPE 204
+      NAME #AotIndexFields
+    ENDNODE
+    BEGINNODE
+      FILETYPE 0
+      UTILTYPE 44
+      UTILOBJECTID 50003
+      NODETYPE 204
+      NAME #AotTableProperties
+    ENDNODE
+  ENDPROJECT
+  
+
+***Element: END

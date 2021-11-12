@@ -1,0 +1,21 @@
+The full installation steps can be found here:  http://blogs.msdn.com/axinthefield
+
+Installation steps are as follows:
+
+
+Step 1 - Run Script 1 Create Core Objects, This creates the DynamicsPerf database and all objects
+Step 2 - Run script 2 Deploy DynamicsPerf Schedules
+Step 3 - If DynamicsPerf is being installed remotely run scipt 3 Setup Linked Servers, otherwise skip this step
+Step 4 - Run Script 4 Configure DBs to Collect,  Specify your Dynamics Databases that you want to collect data for
+Step 5 - Run Script 5 Setup SSRS Data Collection,  This will allow collection of SSRS Report performance data
+Step 6 - Run Script 6 Install Fulltext Indexes in DynamicsPerf database
+Step 7 - Run Script 7 Deploy Extended Events,  MUST BE RUN on SQL instance hosting your Dynamics application database, SQL 2012 and above only
+		  NOTE: If installing on SQL2008R2 use the SQL2008R2 Blocking Jobs.SQL instead of this step
+Step 8 - Deploy the Windows Perfmon counters
+Step 9 - For Dynamics AX, Edit the DYNPERF_COLLECT_AOS_CONFIG SQL Agent job, must put in connection information for Dynamics SQL and DynamicsPerf SQL 
+Step 10 - For Dynamics AX, Import and Run the new AOTEXPORT class from DynamicsPerf\Scripts - Dynamics AX folder
+
+System Requirements:
+
+SQL Server 2012 or above for instance hosting DynamicsPerf database.  It will work on SQL 2008R2 but not all features are available
+SQL instance hosting DynamicsPerf must use same collation as SQL instances collecting data from. 

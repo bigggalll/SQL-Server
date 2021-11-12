@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# SQL Server Management Studio Solution File, Format Version 11.00
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "DynamicsPerf - Analysis Scripts", "DynamicsPerf - Analysis Scripts\DynamicsPerf - Analysis Scripts.ssmssqlproj", "{FFA1A4A3-F773-41A9-ADC4-BEF409A11953}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Scripts - Dynamics AX", "Scripts - Dynamics AX\Scripts - Dynamics AX.ssmssqlproj", "{10D13BB8-47AE-4783-B2BA-3CC24EF0F833}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Scripts - Dynamics CRM", "Scripts - Dynamics CRM\Scripts - Dynamics CRM.ssmssqlproj", "{21317492-AE8D-4332-BA36-9236BFAECF51}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Scripts - Dynamics GP", "Scripts - Dynamics GP\Scripts - Dynamics GP.ssmssqlproj", "{1BB7EF08-77A2-4EDF-8EB7-A62AE72A4094}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Scripts - Dynamics NAV", "Scripts - Dynamics NAV\Scripts - Dynamics NAV.ssmssqlproj", "{154D87BF-BC93-4B0C-9F75-9A2358AF4ABA}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Scripts - Dynamics SL", "Scripts - Dynamics SL\Scripts - Dynamics SL.ssmssqlproj", "{2E79B058-9F7D-4DF1-9D86-A3D520E48F5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFA1A4A3-F773-41A9-ADC4-BEF409A11953}.Default|Default.ActiveCfg = Default
+		{10D13BB8-47AE-4783-B2BA-3CC24EF0F833}.Default|Default.ActiveCfg = Default
+		{21317492-AE8D-4332-BA36-9236BFAECF51}.Default|Default.ActiveCfg = Default
+		{1BB7EF08-77A2-4EDF-8EB7-A62AE72A4094}.Default|Default.ActiveCfg = Default
+		{154D87BF-BC93-4B0C-9F75-9A2358AF4ABA}.Default|Default.ActiveCfg = Default
+		{2E79B058-9F7D-4DF1-9D86-A3D520E48F5C}.Default|Default.ActiveCfg = Default
+		{EA0DD6E3-6931-4CFC-BC9F-820684D2B6FB}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

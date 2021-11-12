@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Windows Perfmon Scripts">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items>
+        <FileNode Name="Server2003_AOS.htm">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Server2003_AOS.htm</FullPath>
+        </FileNode>
+        <FileNode Name="Server2003_SQL_Default_Instance.htm">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Server2003_SQL_Default_Instance.htm</FullPath>
+        </FileNode>
+        <FileNode Name="Server2003_SQL_Named_Instance.htm">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Server2003_SQL_Named_Instance.htm</FullPath>
+        </FileNode>
+        <FileNode Name="Server2008_AOS.xml">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Server2008_AOS.xml</FullPath>
+        </FileNode>
+        <FileNode Name="Server2008_SQL_Default_Instance.xml">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Server2008_SQL_Default_Instance.xml</FullPath>
+        </FileNode>
+        <FileNode Name="Server2008_SQL_Named_Instance.xml">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Server2008_SQL_Named_Instance.xml</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

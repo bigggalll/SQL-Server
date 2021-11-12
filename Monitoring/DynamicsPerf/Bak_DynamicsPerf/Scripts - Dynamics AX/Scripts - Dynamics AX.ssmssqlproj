@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Scripts - Dynamics AX">
+  <Items>
+    <LogicalFolder Name="Connexions" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="DVG031P:GJC\mara1">
+          <Created>2016-03-10T16:02:13.5469533-05:00</Created>
+          <Type>SQL</Type>
+          <Server>DVG031P</Server>
+          <UserName />
+          <Authentication>Authentification Windows</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Requête</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="lstnax01q:GJC\mara1">
+          <Created>2016-03-10T16:12:19.3319533-05:00</Created>
+          <Type>SQL</Type>
+          <Server>lstnax01q</Server>
+          <UserName />
+          <Authentication>Authentification Windows</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Requête</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="lstndefaultq:GJC\mara1">
+          <Created>2016-03-10T16:02:57.3639533-05:00</Created>
+          <Type>SQL</Type>
+          <Server>lstndefaultq</Server>
+          <UserName />
+          <Authentication>Authentification Windows</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Requête</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Requêtes" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="3-Analyze AX Configuration.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>3-Analyze AX Configuration.sql</FullPath>
+        </FileNode>
+        <FileNode Name="4-Analyze AX Indexes.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>4-Analyze AX Indexes.sql</FullPath>
+        </FileNode>
+        <FileNode Name="5-Analyze AX Queries.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>5-Analyze AX Queries.sql</FullPath>
+        </FileNode>
+        <FileNode Name="DynamicsAX Client Tracing.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:lstnax01q:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>lstnax01q</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>DynamicsAX Client Tracing.sql</FullPath>
+        </FileNode>
+        <FileNode Name="DynamicsAX Run SQL as API Cursor.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>DynamicsAX Run SQL as API Cursor.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Divers" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

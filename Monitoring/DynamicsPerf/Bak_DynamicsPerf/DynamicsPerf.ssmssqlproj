@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DynamicsPerf">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="RODSP3:NORTHAMERICA\rhansen">
+          <Created>2015-05-10T11:39:50.9389278-04:00</Created>
+          <Type>SQL</Type>
+          <Server>RODSP3</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB>DynamicsPerf</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="1-Create_Core_Objects.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:RODSP3:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>RODSP3</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>1-Create_Core_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_AX_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_AX_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_GP_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_GP_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_NAV_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_NAV_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_SL_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_SL_Objects.sql</FullPath>
+        </FileNode>
+        <FileNode Name="2-Create_CRM_Objects.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>2-Create_CRM_Objects.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items>
+        <FileNode Name="ChangeLog.txt">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>ChangeLog.txt</FullPath>
+        </FileNode>
+        <FileNode Name="Factors that Impact Performance.jpg">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Factors that Impact Performance.jpg</FullPath>
+        </FileNode>
+        <FileNode Name="Perf Analysis Flowchart.jpg">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Perf Analysis Flowchart.jpg</FullPath>
+        </FileNode>
+        <FileNode Name="Performance Analyzer for Dynamics Deployment and User Guide.pdf">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Performance Analyzer for Dynamics Deployment and User Guide.pdf</FullPath>
+        </FileNode>
+        <FileNode Name="Recommended Reading.docx">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Recommended Reading.docx</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

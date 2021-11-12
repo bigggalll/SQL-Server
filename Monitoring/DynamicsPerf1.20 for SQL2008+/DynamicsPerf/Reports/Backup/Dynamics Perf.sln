@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Dynamics Perf", "Dynamics Perf.rptproj", "{74C50837-A963-49B6-876C-B97842E9F89D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74C50837-A963-49B6-876C-B97842E9F89D}.Debug|Default.ActiveCfg = Debug
+		{74C50837-A963-49B6-876C-B97842E9F89D}.Debug|Default.Build.0 = DebugLocal
+		{74C50837-A963-49B6-876C-B97842E9F89D}.Debug|Default.Deploy.0 = DebugLocal
+		{74C50837-A963-49B6-876C-B97842E9F89D}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{74C50837-A963-49B6-876C-B97842E9F89D}.DebugLocal|Default.Build.0 = DebugLocal
+		{74C50837-A963-49B6-876C-B97842E9F89D}.DebugLocal|Default.Deploy.0 = DebugLocal
+		{74C50837-A963-49B6-876C-B97842E9F89D}.Release|Default.ActiveCfg = Release
+		{74C50837-A963-49B6-876C-B97842E9F89D}.Release|Default.Build.0 = Release
+		{74C50837-A963-49B6-876C-B97842E9F89D}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

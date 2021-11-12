@@ -1,0 +1,222 @@
+Original Author:  Mark Prazak  Sr. Escal Eng
+Current Author: Rod Hansen  Sr. PFE
+
+A big THANK YOU to the Dynamics community that gave feedback and helped make this such a great
+release!!
+		Rod Hansen
+
+
+
+Performance Analyzer 1.20 for Microsoft Dynamics is a tool developed in cooperation
+between the Microsoft Premier Field Engineering Team and Dynamics Developement teams. 
+You can find out more about us at:
+
+http://blogs.msdn.com/axinthefield/
+
+Other blogs:
+	http://pfedynamics.com/
+	http://blogs.msdn.com/pfedynamics/
+	http://blogs.msdn.com/crminthefield/
+	http://blogs.msdn.com/axperf/
+
+Lifecycle Services for Dynamics AX
+  What is it?
+	http://technet.microsoft.com/EN-US/library/dn268616.aspx
+	
+  Where is it?
+	http://lcs.dynmamics.com
+	
+	
+
+Version 1.20
+
+	RTM Fixes:
+	
+	Fixed SP_INDEX_CHANGES to handle captures with multiple databases in them
+	Changed SP_PURGESTATS to keep PERF_INDEX_DETAIL records for 2 years
+	Corrected SP_CAPTURESTATS_PERF to only insert data into PERF_INDEX_DETAIL for the Clustered or Heap 
+	Corrected an error in collecting database statistics on tables with schema's other then .dbo
+	Updated the .XPO file names for Dynamics AX files
+	Corrected error collection AX2009 Number Sequences
+	All SSRS reports are now case sensitive
+	Updated Perfmon templates to version in PAL 2.4
+	Updated the sample query for Queries with multiple execution plans
+	Fixed collection of VLF data
+	Added FORMAT back to the AX_NUM_SEQUENCES table
+	Updated comments in scripts
+	Updated AOSANALYSIS.CMD samples
+	
+	
+	RC0:
+	
+	Improved performance in PERF_HOURLY_ROWDATA_VW
+	Fixed error handling encrypted triggers
+	Added logic ACTIVITY_MONITOR_VW to handle Context_Info for Dynamics AX 2012 and above with this flag set on AOS
+	Added logic to optional blocking to handle Context_Info for Dynamics AX 2012 and above with this flag set on AOS
+	Added additional queries for investigating blocking
+	Added logic to collect Baseline capture data
+		(NOTE: QUERY_STATS table has entire procedure cache for that db during Baseline capture)
+	Updated SP_PURGESTATS to not delete any runs like 'BASE%' to support baselines
+	Changed CREATION_TIME to COMPILED_TIME in all views for clarity, aka when the query as compiled at by SQL
+	Changed CREATEDDATETIME in AX_SQLTRACE table from UTC time to local SQL Server time to match all other time columns
+	Modified QUERY_STATS_CURR_VW to remove any run_name like 'BASE%' from this view
+	Modified HIDDEN_SCANS_VW to include combinations of PARTITION and DATAAREAID for Dynamics AX
+	Moved COMMENT column from QUERY_STATS table to a new table called COMMENTS
+	Created new BLOCKS_VW for Optional Blocking Job to display CONTEXT_INFO information
+	Updated SP_PURGESTATS to delete from the SQLErrorLog table
+	Schema change to support comparing BASELINE data captures
+	Added new sample queries for BASELINE comparisons to 7-Benchmark Queries
+	Added new procedure SP_INDEX_CHANGES to show index changes from BASELINE
+	Updated for AX Number Sequences in AX2012
+	Added TempDb usage data to the ACTIVITY_MONITOR_VW
+	Added wait columns to ACTIVITY_MONITOR_VW
+	Added tables SYSOBJECTS, SYSPARTITIONS, SYSINDEXES to collect these system tables
+	Added sp_updatestats to the DYNPERF_Capture_Stats_Purge job to keep stats updated on DynamicsPerf db
+	Added new view INDEX_HISTORICAL_VW which summarizes all index stats data collections
+	Updated the SampleDB_MaintenanceScripts to latest code
+	Removed STATS_TIME,DATABASE_NAME,PLAN_HANDLE from QUERY_PLANS table as they were not being used
+	Added QUERY_STATS_HASH_VW for baseline comparisons
+	Reorganized the Scripts - Dynamics AX project in this solution
+	Added new SQL job DYNPERF_Set_AX_User_Trace_on
+	Added new SQL job DYNPERF_Set_AX_User_Trace_off
+	Added new trace templates to Windows Perfmon folder for Dynamics AX tracing
+	Added new column TOTAL_WAIT_TIME to QUERY_STATS_VW and QUERY_STATS_CURR_VW  (it's Total time - worker time)
+	Corrected AX_NUM_SEQUENCES table to include DATAAREAID for AX4 and AX2009
+	Added CaptureStats in TEST.sql for analyzing data in DEV/TEST environments
+	Added EXECUTION_COUNT/HR to QUERY_STATS views
+	Added TOTAL_WAIT_TIME to QUERY_STATS views
+	
+
+
+
+Version 1.16
+	Modified schema on QUERY_PLANS to add SQL_PARMS column
+	Improved performance of QUERY_STATS_CURR_VW by parsing SQL_PARMS in SP_CAPTURESTATS
+	Modified QUERY_STATS_CURR_VW to add new column SQL_PARMS from the QUERY_PLANS table
+	Improved performance of QUERY_STATS_CURR_VW by adding join hint
+	Modified SP_PURGESTATS to add new parameter @DATABASE_NAME to remove data for a single database
+	Default the COMMENT column in QUERY_STATS to ''
+	Modified SP_PURGESTATS to keep last set of data per SQL Server restart
+	Modified SP_PURGESTATS to keep PERF_XXXX tables for @PURGE_DAYS + 60 days
+	Added additional scripts to Updated Manual - CaptureStats.sql to demonstrate how to collect data in a TEST environment
+	Fixed issue inserting into INDEX_DETAIL for partitioned tables sys.partitions
+	Defaulted COMMENTS field on QUERY_STATS to '' value
+	Fixed path in DEFAULT_TRC_VW  to match logic in BLOCKED_PROCESS_VW
+	Fixed case sensitive issue in SP_POPULATE_BLOCKED_PROCESS_INFO
+	Added Missing Index Flag to QUERY_PLANS table
+	Fixed the size calculation on INDEX_DETAIL table for LOB data and partitioned tables
+	Added CURSOR_ACTIVITY_VW view
+	Modified QUICK ACTIVITY MONITOR script to display more information
+	Corrected performance issue inserting QUERY_TEXT table
+	Improved Performance of PERF_HOURLY_ROWDATA_VW
+
+	
+	
+	
+Version 1.15
+	Fixed error if @SKIP_STATS optional paramter was set to 'Y'
+	Changed default of @SKIP_STATS to 'Y' to skip the collection of statistics
+	Added @SKIP_STATS = 'N' to the DYNPERF_Capture_Stats job so the SQL Job will collect stats
+	Updated AOTEXPORT for more accurate Application Code Layer information
+	Updated how we get Dynamics AX Application build from SYSCONFIG vs. SYSSETUPLOG table
+	Updated scripts for clustered index recommendations on HEAPS and CLUSTERED indexes
+	Fixed performance issue in PERF_HOURLY_ROWDATA_VW
+	Fixed performance issue in PERF_HOURLY_WAITSTATS_VW
+	Fixed performance issue in PERF_IOSTATS_VW
+	Fixed performance issue with BUFFER_DETAIL table and removed [BUFFER_DETAIL_VW], we are aggregating on the server now
+	Updated the BLOCKED_PROCESS_VW to better handle trace path locations, added PATH column to the DYNAMICSPERF_SETUP table
+	Updated the DYNPERF_Default_Trace_Start_Load_Blocking_Data job to get the trace path from sys.traces 
+	Updated QUERY_STATS_VW, QUERY_STATS_CURR_VW, MISSING_INDEXES_VW, MISSING_INDEXES_CURR_VW to move row_num and query_hash columns
+	Updated SP_LOGBLOCKS_MS to utilize SQL Server 2008 MERGE command
+	Updated BLOCKS table for additional columns: TRANSACTION_ID, BLOCKED_CONTEXT_INFO, BLOCKER_CONTEXT_INFO
+	Added context_info column to Quick Activity query for Dynamics AX 2012
+	Added new sample query to Analyze Queries to find queries that have option(fast) set but we are still getting a sort operation
+	Added new feature to compress the DYNAMICSPERF database if running a SQL edition that supports compression
+		NOTE: This requires that the DYNAMICSPERF database be restored to an edition that supports compression
+			if it was installed on a version that supports compression
+	Added new stored procedure SP_PARSE_PLAN for shredding XML plans
+	Fixed issue with Blocked Processes Report and SQL Server 2008 R2 SP1 and above
+	Changed the default time limit of AX_SQLTRACE to 5 seconds up from 2 seconds
+	Addded new view ACTIVITY_MONITOR_VW that shows all currently executing SQL statements 
+	Added filter to SP_SQLTRACE to filter the DynamicsPerf database out of the trace
+	Removed the DYNPERF_Default_Trace_Start_Load_Blocking_Data job, can manually run the stored procedure
+	Reorganized some of the Scripts
+	Added a new SQL Job called DYNPERF - DETAILED TRACE.  Use at the direction of Microsoft support only.
+	Added new parameter so SP_SQLTRACE called @DURATION, used to add a duration filter to the Detailed Trace job
+	Created a seperate AOSANALYSIS.CMD file for AX4 in the DynamicsPef\Scripts - Dynamics AX folder
+	Removed some non-SQL files from the DynamicsPerf Solution.  The files still exist in the DynamicsPerf folders.
+	Changed collection of DBCC SHOW_STATISTICS to run on Sundays or if we have never collected statistics for data collection performance reasons
+	Replaced the @DETAILED flag with @SQL_DURATION for SP_SQLTRACE stored procedure
+	Fixed LAST_EXECUTION_TIME and CREATION_TIME columns in QUERY_STATS
+	Changed QUERY_STATS_CURR_VW view to contain the last value that was collected for all queries in a database.
+		(It is no longer just queries that have run since the last data collection)
+		NOTE:  This requires that trace flag 4199 be enabled on the SQL Server or this view will perform slowly
+	Turn on 'Ad Hoc Distributed Queries' in sp_configure and reset it back during capturestats to support and openrowset query used for compatability reasons
+	Added New Deployment and User Guide document	
+	Fixed support for SQL Server 2012
+	Fixed @RUN_NAME parameter support for SP_CAPTURESTATS procedure
+	Removed sample Compression scripts
+	
+	
+Version 1.10
+	Restructered the Creation of Objects between SQL Core and Dynamics Products
+	Added Debug flag and code for printing debug information
+	Added TRY/CATCH code around all operations
+	Added PRINT messages to better show progress
+	Added check to only collect Index Statistics once per day (STATS_COLLECTED flag on STATS_COLLECTION_SUMMARY table)
+	Keep only 1 copy per plan_handle/query_plan_hash in the QUERY_PLANS table to reduce database size(adjusted all views to join Query_Stats to Query_Plans on plan_handle only)
+	Added Dynamics_Version column to the STATS_COLLECTION_SUMMARY table  (replaces appbuild/kernelbuild columns)
+	Corrected case Sensitivity issues
+	Added Compression Analysis Tool
+	Added some sample DB Maintenance scripts for Index maintenance
+	Added Job to do lightweight data capture for transaction volume analysis
+	Added Views for Hourly Performance Analysis (PERF_HOURLY_XXXXXXX_VW)
+	Added Analyze Hourly Data sql scripts
+	Renamed the DYNPERF_Log_blocks_option1_xxxxxx jobs to DYNPERF_Option1_xxxxxxx
+	Added DYANMICSPERF_SETUP table to record the version of Performance Analyzer for Microsoft Dynamics
+	Added collection of AX SQLSTORAGE table
+	Added data_compression column to INDEX_DETAIL table
+	Auto configure the DYNPERF SQL jobs to the largest Dynamics product database
+	Modifed deletion to never delete query_stats that have comments column populated
+	Added SQL Plan Guide sample code
+	Added Trigger_Table to capture trigger definitions
+	Added Research Queries.sql which contain the common queries used when investigating sql statements
+	Added CREATION_TIME to QUERY_STATS table and views
+	Added new view PERF_IOSTATS_VW to analyze Disk latency
+	Added PLAN_GENERATION_NUM to QUERY_STATS table, QUERY_STATS_VW and QUERY_STATS_CURR_VW views.
+	Changed all decimal fields from (12,3) to (14,3)
+	Added new view INDEX_OPS for analysis of Read/Write to each table between runs.
+	Added code to handle NUMBERSEQUENCETABLE being a shared table where DATAAREADID doesn't exist on a Dynamics AX database.
+	Added new table LOGINFO and code to capture Virtual Log File(VLF) information for each database's transaction log file
+	Added support for new DMV data in SQL2008R2 SP1 and above, sys.dm_server_registry, sys.dm_server_services, sys.dm_os_volume_stats,sys.dm_os_windows_info
+		and the new rows columns in the query_stats dmv
+	Added data_compression column to INDEX_STATS_VW and INDEX_STATS_CURR_VW
+	Added Sample query to find all compressed indexes
+	Added support for capturing multiple databases in a single capture
+	Auto populate the DATABASES_2_CAPTURE table with all Dynamics databases
+	Added @SKIP_STATS parameter to not collect database statistics (stats are only collected every other day)
+	Added TokenPermStore to SERVERINFO table
+	Added the INDEX_KEY to the views that recommend indexes
+	Changed purge stats job to save 14 days of data
+	Added new table QUERY_TEXT 
+	Modified QUERY_STATS_xxxxx views to get SQL_TEXT from QUERY_TEXT table
+	Corrected some formating in names and capitilization
+	Added QUERY_PARAMETER_VALUES column to all views that use QUERY_PLANS table
+	Added CAPTURE_LOG table that has the output from each data capture
+	Added some new events to the Trace file
+	Added new SQL Job DYNPERF_Purge_SYSTRACETABLESQL_AX 
+	Added a check so that you can't run capturestats more than 1 time per minute which is what the index key limits us too
+	Changed Buffer_Detail collection to only collect at the database level and not at table level for performance reasons
+	Removed query plans column from BLOCKED_PROCESS_INFO_VW for performance purposes
+	
+	
+Version 1.01
+	Corrected field sizes on the AX_Number_Sequence table to correct issue with International versions of AX4
+	Fixed issue in SP_Logblocks_MS to get object names
+	Fixed issue with AX_SQLTRACE table not being populated
+	Updated AX_SQLTRACE table definition to support larger column sizes
+	Updated the sample scripts in Query - Investigate SQL Statements
+	Added new SQL Job DYNPERF_Log_Blocks_Option1_Load_Blocked_Data to load blocking data every 10 minutes
+	Added new column to Query_Stats table, comment and row_number
+	Added new sample query for Density_Vector to determine avg row counts when trace flag 4136 is on
+	Added function Fn_getDBName for Blocked_Processes_Info_View to get database name from DynamicsPerf

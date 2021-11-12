@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Performance Analyzer 1.20 for Microsoft Dynamics">
+</Property><Property Name="Solution File" Value="C:\TEMP\DynamicsPerf1.20 for SQL2008+\DynamicsPerf\Performance Analyzer 1.20 for Microsoft Dynamics.ssmssln">
+</Property><Property Name="Date" Value="February 17, 2015">
+</Property><Property Name="Time" Value="11:36 AM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="Performance Analyzer 1.20 for Microsoft Dynamics.ssmssln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="Performance Analyzer 1.20 for Microsoft Dynamics.ssmssln" Description="Converted">
+</Event></UpgradeLog>

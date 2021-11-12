@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# SQL Server Management Studio Solution File, Format Version 11.00
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "DynamicsPerf Install", "DynamicsPerf Install\DynamicsPerf Install.ssmssqlproj", "{9A0368FD-7C3E-42A7-A02C-85F25C743BCA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A0368FD-7C3E-42A7-A02C-85F25C743BCA}.Default|Default.ActiveCfg = Default
+		{BD77DC19-9AA6-4B6E-B431-5ACF5C28DF6F}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

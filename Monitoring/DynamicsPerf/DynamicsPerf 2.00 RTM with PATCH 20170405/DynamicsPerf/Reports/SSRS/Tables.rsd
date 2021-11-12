@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>DynamicsPerf</DataSourceReference>
+      <CommandText>SELECT distinct TABLE_NAME
+FROM   MISSING_INDEXES_CURR_VW
+order by TABLE_NAME</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="TABLE_NAME">
+        <DataField>TABLE_NAME</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

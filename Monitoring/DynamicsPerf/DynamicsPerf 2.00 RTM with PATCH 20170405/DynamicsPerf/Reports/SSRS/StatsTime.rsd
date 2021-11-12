@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="">
+    <Query>
+      <DataSourceReference>DynamicsPerf</DataSourceReference>
+      <CommandText>SELECT DISTINCT STATS_TIME
+FROM            PERF_HOURLY_IOSTATS_VW
+ORDER BY STATS_TIME</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="Stats_time">
+        <DataField>STATS_TIME</DataField>
+        <rd:TypeName>System.DateTime</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

@@ -1,0 +1,2457 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AOTExport2012_Direct unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AOTExport2012_Direct
+    PROPERTIES
+      Name                #AOTExport2012_Direct
+      Extends             #RunBaseBatch
+      Origin              #{71C05661-FFA0-460B-8A61-7621B524BCDF}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #addBatchJobInfo
+        #private void addBatchJobInfo()
+        #{
+        #    int start;
+        #    int stop;
+        #
+        #    start = timeNow();
+        #
+        #    totalBatchJobs = AOTExport2012_Direct::addBatchJobInfoServer(sqlInstanceName,
+        #        dynamicsPerfDatabaseName, axDatabaseName, axSqlInstanceName, statsTimeStr);
+        #
+        #    stop = timeNow();
+        #
+        #    totalBatchJobTime = stop - start;
+        #}
+      ENDSOURCE
+      SOURCE #addBatchServerGroupConfig
+        #private void addBatchServerGroupConfig()
+        #{
+        #    int start;
+        #    int stop;
+        #
+        #    start = timeNow();
+        #
+        #    totalBatchServerGroups = AOTExport2012_Direct::addBatchServerGroupConfigServer(sqlInstanceName,
+        #        dynamicsPerfDatabaseName, axDatabaseName, axSqlInstanceName, statsTimeStr);
+        #
+        #    stop = timeNow();
+        #
+        #    totalBatchServerGroupTime = stop - start;
+        #}
+      ENDSOURCE
+      SOURCE #addConfigurationKeyProperties
+        #private void addConfigurationKeyProperties()
+        #{
+        #    int start;
+        #    int stop;
+        #
+        #    start = timeNow();
+        #
+        #    totalConfigurationKeys = AOTExport2012_Direct::addConfigurationKeyDetailServer(sqlInstanceName,
+        #        dynamicsPerfDatabaseName, axDatabaseName, axSqlInstanceName, statsTimeStr);
+        #
+        #    stop = timeNow();
+        #
+        #    totalConfigurationKeyTime = stop - start;
+        #}
+      ENDSOURCE
+      SOURCE #addIndexProperties
+        #private void addIndexProperties()
+        #{
+        #    int start;
+        #    int stop;
+        #
+        #    start = timeNow();
+        #
+        #    totalIndexes = AOTExport2012_Direct::addIndexDetailServer(sqlInstanceName,
+        #        dynamicsPerfDatabaseName, axDatabaseName, axSqlInstanceName, statsTimeStr);
+        #
+        #    stop = timeNow();
+        #
+        #    totalIndexTime = stop - start;
+        #}
+      ENDSOURCE
+      SOURCE #addLicenseKeyProperties
+        #private void addLicenseKeyProperties()
+        #{
+        #    int start;
+        #    int stop;
+        #
+        #    start = timeNow();
+        #
+        #    totalLicenseKeys = AOTExport2012_Direct::addLicenseKeyDetailServer(sqlInstanceName,
+        #        dynamicsPerfDatabaseName, axDatabaseName, axSqlInstanceName, statsTimeStr, this.isInBatch());
+        #
+        #    stop = timeNow();
+        #
+        #    totalConfigurationKeyTime = stop - start;
+        #}
+      ENDSOURCE
+      SOURCE #addServerConfig
+        #private void addServerConfig()
+        #{
+        #    int start;
+        #    int stop;
+        #
+        #    start = timeNow();
+        #
+        #    totalServers = AOTExport2012_Direct::addServerConfigServer(sqlInstanceName,
+        #        dynamicsPerfDatabaseName, axDatabaseName, axSqlInstanceName, statsTimeStr);
+        #
+        #    stop = timeNow();
+        #
+        #    totalServerTime = stop - start;
+        #}
+      ENDSOURCE
+      SOURCE #addTableProperties
+        #private void addTableProperties()
+        #{
+        #    int start;
+        #    int stop;
+        #
+        #    start = timeNow();
+        #
+        #    totalTables = AOTExport2012_Direct::addTableDetailServer(sqlInstanceName,
+        #        dynamicsPerfDatabaseName, axDatabaseName, axSqlInstanceName, statsTimeStr);
+        #
+        #    stop = timeNow();
+        #
+        #    totalTableTime = stop - start;
+        #}
+      ENDSOURCE
+      SOURCE #canGoBatch
+        #public boolean canGoBatch()
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #caption
+        #public ClassDescription caption()
+        #{
+        #    #define.DialogCaption("AOT export")
+        #
+        #    return #DialogCaption;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #class AOTExport2012_Direct extends RunBaseBatch
+        #{
+        #    #define.SystemDataSqlDbType('System.Data.SqlDbType')
+        #    #define.NVarChar('NVarChar')
+        #    #define.DateTime('DateTime')
+        #    #define.VarBinary('VarBinary')
+        #    #define.Int('Int')
+        #    #define.SystemConvert('System.Convert')
+        #    #define.ToBase64String('ToBase64String')
+        #    #define.FromBase64String('FromBase64String')
+        #
+        #    #define.DynamicsPerf("DynamicsPerf")
+        #    #define.BatchSize(200)
+        #    #define.NA("NA")
+        #    #define.Comma(",")
+        #    #define.ValuesClause("VALUES")
+        #    #define.BitOne(1)
+        #    #define.BitZero(0)
+        #
+        #    #define.ExportTask_Count(9)
+        #    #define.ExportTask_AotExportStart("AOT export...")
+        #    #define.ExportTask_DeleteTables("Delete tables")
+        #    #define.ExportTask_TableProperties("Table properties")
+        #    #define.ExportTask_IndexProperties("Index properties")
+        #    #define.ExportTask_ConfigurationKeyProperties("Configuration key properties")
+        #    #define.ExportTask_LicenseKeyProperties("License key properties")
+        #    #define.ExportTask_ServerConfiguration("Server configuration")
+        #    #define.ExportTask_BatchServerGroupConfiguration("Batch server/group configuration")
+        #    #define.ExportTask_BatchJobInformation("Batch job information")
+        #
+        #    #define.INDEXDESC_CLUSTERED("CLUSTERED")
+        #    #define.INDEXDESC_UNIQUE("UNIQUE")
+        #    #define.INDEXDESC_PRIMARYKEY("PRIMARY KEY")
+        #    #define.INDEXDESC_INCLUDE("INCLUDE")
+        #
+        #    #define.TABLE_SERVER_NAME("SERVER_NAME")
+        #    #define.TABLE_DATABASE_NAME("DATABASE_NAME")
+        #    #define.TABLE_STATS_TIME("STATS_TIME")
+        #    #define.TABLE_TABLE_NAME("TABLE_NAME")
+        #    #define.TABLE_TABLE_ID("TABLE_ID")
+        #    #define.TABLE_TABLE_TYPE("TABLE_TYPE")
+        #    #define.TABLE_VALID_TIME_STATE_TABLE("VALID_TIME_STATE_TABLE")
+        #    #define.TABLE_SUPPORT_INHERITANCE("SUPPORT_INHERITANCE")
+        #    #define.TABLE_EXTENDS("EXTENDS")
+        #    #define.TABLE_TABLE_GROUP("TABLE_GROUP")
+        #    #define.TABLE_OCC_ENABLED("OCC_ENABLED")
+        #    #define.TABLE_CACHE_LOOKUP("CACHE_LOOKUP")
+        #    #define.TABLE_AOS_AUTHORIZATION("AOS_AUTHORIZATION")
+        #    #define.TABLE_INSERT_METHOD_OVERRIDDEN("INSERT_METHOD_OVERRIDDEN")
+        #    #define.TABLE_UPDATE_METHOD_OVERRIDDEN("UPDATE_METHOD_OVERRIDDEN")
+        #    #define.TABLE_DELETE_METHOD_OVERRIDDEN("DELETE_METHOD_OVERRIDDEN")
+        #    #define.TABLE_AOS_VALIDATE_INSERT("AOS_VALIDATE_INSERT")
+        #    #define.TABLE_AOS_VALIDATE_UPDATE("AOS_VALIDATE_UPDATE")
+        #    #define.TABLE_AOS_VALIDATE_DELETE("AOS_VALIDATE_DELETE")
+        #    #define.TABLE_AOS_VALIDATE_READ("AOS_VALIDATE_READ")
+        #    #define.TABLE_DATABASELOG_INSERT("DATABASELOG_INSERT")
+        #    #define.TABLE_DATABASELOG_DELETE("DATABASELOG_DELETE")
+        #    #define.TABLE_DATABASELOG_UPDATE("DATABASELOG_UPDATE")
+        #    #define.TABLE_DATABASELOG_RENAMEKEY("DATABASELOG_RENAMEKEY")
+        #    #define.TABLE_EVENT_INSERT("EVENT_INSERT")
+        #    #define.TABLE_EVENT_DELETE("EVENT_DELETE")
+        #    #define.TABLE_EVENT_UPDATE("EVENT_UPDATE")
+        #    #define.TABLE_EVENT_RENAMEKEY("EVENT_RENAMEKEY")
+        #    #define.TABLE_CLUSTERED_INDEX("CLUSTERED_INDEX")
+        #    #define.TABLE_PRIMARY_KEY("PRIMARY_KEY")
+        #    #define.TABLE_DATA_PER_COMPANY("DATA_PER_COMPANY")
+        #    #define.TABLE_DATA_PER_PARTITION("DATA_PER_PARTITION")
+        #    #define.TABLE_CONFIGURATION_KEY_ID("CONFIGURATION_KEY_ID")
+        #    #define.TABLE_LICENSE_CODE_ID("LICENSE_CODE_ID")
+        #    #define.TABLE_APPLAYER("APPLAYER")
+        #    #define.TABLE_COUNTRY_REGION_CODES("COUNTRY_REGION_CODES")
+        #
+        #    #define.INDEX_SERVER_NAME("SERVER_NAME")
+        #    #define.INDEX_DATABASE_NAME("DATABASE_NAME")
+        #    #define.INDEX_STATS_TIME("STATS_TIME")
+        #    #define.INDEX_TABLE_NAME("TABLE_NAME")
+        #    #define.INDEX_INDEX_NAME("INDEX_NAME")
+        #    #define.INDEX_INDEX_ID("INDEX_ID")
+        #    #define.INDEX_INDEX_DESCRIPTION("INDEX_DESCRIPTION")
+        #    #define.INDEX_INDEX_KEYS("INDEX_KEYS")
+        #    #define.INDEX_ALLOW_DUPLICATES("ALLOW_DUPLICATES")
+        #    #define.INDEX_ALTERNATE_KEY("ALTERNATE_KEY")
+        #    #define.INDEX_VALIDTIME_STATE_KEY("VALIDTIME_STATE_KEY")
+        #    #define.INDEX_APPLAYER("APPLAYER")
+        #
+        #    #define.CONFIG_SERVER_NAME("SERVER_NAME")
+        #    #define.CONFIG_DATABASE_NAME("DATABASE_NAME")
+        #    #define.CONFIG_STATS_TIME("STATS_TIME")
+        #    #define.CONFIG_CONFIG_KEY_ID("CONFIG_KEY_ID")
+        #    #define.CONFIG_CONFIG_KEY_NAME("CONFIG_KEY_NAME")
+        #    #define.CONFIG_CONFIG_KEY_LABEL("CONFIG_KEY_LABEL")
+        #    #define.CONFIG_PARENT_KEY_ID("PARENT_KEY_ID")
+        #    #define.CONFIG_LICENSE_KEY_ID("LICENSE_KEY_ID")
+        #    #define.CONFIG_ENABLED("CONFIG_ENABLED")
+        #
+        #    #define.LICENSE_SERVER_NAME("SERVER_NAME")
+        #    #define.LICENSE_DATABASE_NAME("DATABASE_NAME")
+        #    #define.LICENSE_STATS_TIME("STATS_TIME")
+        #    #define.LICENSE_LICENSE_KEY_ID("LICENSE_KEY_ID")
+        #    #define.LICENSE_LICENSE_KEY_NAME("LICENSE_KEY_NAME")
+        #    #define.LICENSE_LICENSE_KEY_LABEL("LICENSE_KEY_LABEL")
+        #    #define.LICENSE_LICENSE_GROUP("LICENSE_GROUP")
+        #    #define.LICENSE_LICENSE_TYPE("LICENSE_TYPE")
+        #    #define.LICENSE_PACKAGE("PACKAGE")
+        #    #define.LICENSE_PREREQUISITE1("PREREQUISITE1")
+        #    #define.LICENSE_PREREQUISITE2("PREREQUISITE2")
+        #    #define.LICENSE_PREREQUISITE3("PREREQUISITE3")
+        #    #define.LICENSE_PREREQUISITE4("PREREQUISITE4")
+        #    #define.LICENSE_PREREQUISITE5("PREREQUISITE5")
+        #    #define.LICENSE_LICENSE_KEY_ENABLED("LICENSE_KEY_ENABLED")
+        #
+        #    #define.BATCHJOB_SERVER_NAME("SERVER_NAME")
+        #    #define.BATCHJOB_DATABASE_NAME("DATABASE_NAME")
+        #    #define.BATCHJOB_STATS_TIME("STATS_TIME")
+        #    #define.BATCHJOB_JOB_STATUS("JOB_STATUS")
+        #    #define.BATCHJOB_CAPTION("CAPTION")
+        #    #define.BATCHJOB_COMPANY("COMPANY")
+        #    #define.BATCHJOB_LOG_LEVEL("LOG_LEVEL")
+        #    #define.BATCHJOB_SCHED_START_DATETIME("SCHED_START_DATETIME")
+        #    #define.BATCHJOB_ACTUAL_START_DATETIME("ACTUAL_START_DATETIME")
+        #    #define.BATCHJOB_END_DATETIME("END_DATETIME")
+        #    #define.BATCHJOB_DATA_PARTITION("DATA_PARTITION")
+        #    #define.BATCHJOB_RECUR_TIMEZONE("RECUR_TIMEZONE")
+        #    #define.BATCHJOB_RECUR_RANGE_STARTDATETIME("RECUR_RANGE_STARTDATETIME")
+        #    #define.BATCHJOB_RECUR_RANGE_UNIT("RECUR_RANGE_UNIT")
+        #    #define.BATCHJOB_RECUR_PATTERN_UNIT("RECUR_PATTERN_UNIT")
+        #    #define.BATCHJOB_RECUR_PATTERN_DESC("RECUR_PATTERN_DESC")
+        #    #define.BATCHJOB_CREATED_DATETIME("CREATED_DATETIME")
+        #    #define.BATCHJOB_CREATED_BY("CREATED_BY")
+        #    #define.BATCHJOB_BATCH_GROUPID("BATCH_GROUPID")
+        #    #define.BATCHJOB_RUN_TYPE("RUN_TYPE")
+        #
+        #    #define.SERVER_SERVER_NAME("SERVER_NAME")
+        #    #define.SERVER_DATABASE_NAME("DATABASE_NAME")
+        #    #define.SERVER_STATS_TIME("STATS_TIME")
+        #    #define.SERVER_AOS_SERVER_NAME("AOS_SERVER_NAME")
+        #    #define.SERVER_ENABLE_BATCH("ENABLE_BATCH")
+        #    #define.SERVER_LOAD_BALANCING_ENABLED("LOAD_BALANCING_ENABLED")
+        #    #define.SERVER_MAX_SESSIONS("MAX_SESSIONS")
+        #    #define.SERVER_CLUSTER_NAME("CLUSTER_NAME")
+        #    #define.SERVER_CLUSTER_DESCRIPTION("CLUSTER_DESCRIPTION")
+        #
+        #    #define.BATCHSERVERGROUP_SERVER_NAME("SERVER_NAME")
+        #    #define.BATCHSERVERGROUP_DATABASE_NAME("DATABASE_NAME")
+        #    #define.BATCHSERVERGROUP_STATS_TIME("STATS_TIME")
+        #    #define.BATCHSERVERGROUP_BATCH_GROUPID("BATCH_GROUPID")
+        #    #define.BATCHSERVERGROUP_BATCH_GROUPDESC("BATCH_GROUPDESC")
+        #    #define.BATCHSERVERGROUP_BATCH_SERVER_NAME("BATCH_SERVER_NAME")
+        #    #define.BATCHSERVERGROUP_MAX_BATCH_SESSIONS("MAX_BATCH_SESSIONS")
+        #    #define.BATCHSERVERGROUP_BATCH_SERVER_STARTTIME("BATCH_SERVER_STARTTIME")
+        #    #define.BATCHSERVERGROUP_BATCH_SERVER_ENDTIME("BATCH_SERVER_ENDTIME")
+        #
+        #    int totalTableTime;
+        #    int totalIndexTime;
+        #    int totalConfigurationKeyTime;
+        #    int totalLicenseKeyTime;
+        #    int totalBatchJobTime;
+        #    int totalServerTime;
+        #    int totalBatchServerGroupTime;
+        #    int totalExecutionTime;
+        #    int exportStart;
+        #    int exportStop;
+        #    int totalTables;
+        #    int totalIndexes;
+        #    int totalConfigurationKeys;
+        #    int totalLicenseKeys;
+        #    int totalBatchJobs;
+        #    int totalServers;
+        #    int totalBatchServerGroups;
+        #    Set tablePropertiesSet;
+        #
+        #    DialogField dialogSQLInstanceName;
+        #    str         sqlInstanceName;
+        #    str         axSqlInstanceName;
+        #    str         dynamicsPerfDatabaseName;
+        #    str         axDatabaseName;
+        #    str         statsTimeStr;
+        #
+        #    SysRecurrence recurrence;
+        #
+        #    SysOperationProgress exportProgress;
+        #
+        #    System.Data.SqlClient.SqlConnection conn;
+        #
+        #    #define.CurrentVersion(3)
+        #    #localMacro.CurrentList
+        #        sqlInstanceName,
+        #        axDatabaseName,
+        #        dynamicsPerfDatabaseName,
+        #        axSqlInstanceName
+        #    #endMacro
+        #}
+      ENDSOURCE
+      SOURCE #deleteTables
+        #private boolean deleteTables()
+        #{
+        #    boolean ret;
+        #
+        #    ret = AOTExport2012_Direct::deleteTablesServer(sqlInstanceName, dynamicsPerfDatabaseName, axDatabaseName);
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #dialog
+        #protected Object dialog()
+        #{
+        #    #define.AXDatabaseGroupLabel("Dynamics AX database")
+        #    #define.ConnectionGroupLabel("Connection information")
+        #    #define.SQLInstanceNameLabel("DynamicsPerf SQL Server instance name")
+        #    #define.SQLInstanceHelp("Specify the default or named instance for SQL Server")
+        #    #define.InfoGroupLabel("Information")
+        #    #define.InfoNoteLabel("Note")
+        #
+        #    #define.DynamicsPerfGroupLabel("DynamicsPerf")
+        #    #define.DatabaseNameLabel("Database name")
+        #
+        #    DialogRunbase   ret = super();
+        #    DialogField     dialogAxDatabaseName;
+        #    DialogField     dialogDynamicsPerfDatabaseName;
+        #    DialogField     dialogInfo;
+        #
+        #    ret.addGroup(#AXDatabaseGroupLabel);
+        #    dialogAxDatabaseName = ret.addFieldValue(extendedTypeStr(Name), axDatabaseName, #DatabaseNameLabel);
+        #    dialogAxDatabaseName.allowEdit(false);
+        #
+        #    ret.addGroup(#ConnectionGroupLabel);
+        #    dialogSQLInstanceName = ret.addFieldValue(extendedTypeStr(ServerName),
+        #        sqlInstanceName, #SQLInstanceNameLabel, #SQLInstanceHelp);
+        #
+        #    ret.addGroup(#DynamicsPerfGroupLabel);
+        #    dialogDynamicsPerfDatabaseName = ret.addFieldValue(extendedTypeStr(Name), dynamicsPerfDatabaseName, #DatabaseNameLabel);
+        #    dialogDynamicsPerfDatabaseName.allowEdit(false);
+        #
+        #    ret.addGroup(#InfoGroupLabel);
+        #    dialogInfo = ret.addField(extendedTypeStr(Notes), #InfoNoteLabel);
+        #    dialogInfo.allowEdit(false);
+        #    dialogInfo.multiLine(true);
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #displayProgress
+        #private void displayProgress(str _taskDescription)
+        #{
+        #    if (!this.isInBatch() && !isRunningOnServer())
+        #    {
+        #        this.initExportProgress();
+        #
+        #        exportProgress.setText(_taskDescription);
+        #        exportProgress.incCount();
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #displayTimes
+        #private void displayTimes()
+        #{
+        #    #define.TableDurationText("Table properties duration")
+        #    #define.IndexDurationText("Index properties duration")
+        #    #define.ConfigKeyText("Configuration key properties duration")
+        #    #define.LicenseKeyText("License key properties duration")
+        #    #define.ServerConfigText("Server configuration duration")
+        #    #define.BatchServerGroupConfigText("Batch server/group configuration duration")
+        #    #define.BatchJobInfoText("Batch job information duration")
+        #    #define.ProjectDurationText("Project information duration")
+        #    #define.AOTExportDurationText("AOTExport duration")
+        #    #define.Tables("tables")
+        #    #define.Indexes("indexes")
+        #    #define.ConfigKeys("configuration keys")
+        #    #define.LicenseKeys("license keys")
+        #    #define.Servers("servers")
+        #    #define.BatchServerGroups("servers/groups")
+        #    #define.BatchJobs("batch jobs")
+        #    #define.Projects("projects")
+        #    #define.sec("sec")
+        #
+        #    str text;
+        #
+        #    if (!this.isInBatch() && !isRunningOnServer())
+        #    {
+        #        text = strFmt("%1: %2 %3, %4 %5", #TableDurationText, totalTableTime, #sec, totalTables, #Tables);
+        #        info(text);
+        #
+        #        text = strFmt("%1: %2 %3, %4 %5", #IndexDurationText, totalIndexTime, #sec, totalIndexes, #Indexes);
+        #        info(text);
+        #
+        #        text = strFmt("%1: %2 %3, %4 %5", #ConfigKeyText, totalConfigurationKeyTime, #sec, totalConfigurationKeys, #ConfigKeys);
+        #        info(text);
+        #
+        #        text = strFmt("%1: %2 %3, %4 %5", #LicenseKeyText, totalLicenseKeyTime, #sec, totalLicenseKeys, #LicenseKeys);
+        #        info(text);
+        #
+        #        text = strFmt("%1: %2 %3, %4 %5", #ServerConfigText, totalServerTime, #sec, totalServers, #Servers);
+        #        info(text);
+        #
+        #        text = strFmt("%1: %2 %3, %4 %5", #BatchServerGroupConfigText, totalBatchServerGroupTime, #sec, totalBatchServerGroups, #BatchServerGroups);
+        #        info(text);
+        #
+        #        text = strFmt("%1: %2 %3, %4 %5", #BatchJobInfoText, totalBatchJobTime, #sec, totalBatchJobs, #BatchJobs);
+        #        info(text);
+        #
+        #        totalExecutionTime = exportStop - exportStart;
+        #
+        #        text = strFmt("%1: %2 %3", #AOTExportDurationText, totalExecutionTime, #sec);
+        #        info(text);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #getFromDialog
+        #public boolean getFromDialog()
+        #{
+        #    boolean ret;
+        #
+        #    ret = super();
+        #
+        #    sqlInstanceName = dialogSQLInstanceName.value();
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #init
+        #public boolean init()
+        #{
+        #    SqlSystem   sql = new SqlSystem();
+        #    boolean     ret;
+        #
+        #    ret = super();
+        #
+        #    sqlInstanceName             = sql.loginServer();
+        #    axSqlInstanceName           = sql.loginServer();
+        #    axDatabaseName              = sql.loginDatabase();
+        #    dynamicsPerfDatabaseName    = #DynamicsPerf;
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #initExportProgress
+        #private void initExportProgress()
+        #{
+        #    if (exportProgress == null)
+        #    {
+        #        exportProgress = SysOperationProgress::newGeneral(#AviUpdate, this.caption(), #ExportTask_Count);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return [#CurrentVersion, #CurrentList];
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #public void run()
+        #{
+        #    #define.AOTExportError("AOT export failed.")
+        #
+        #    System.Exception ex;
+        #    str              ex1;
+        #
+        #    try
+        #    {
+        #        this.displayProgress(#ExportTask_AotExportStart);
+        #
+        #        exportStart = timeNow();
+        #
+        #        statsTimeStr = AOTExport2012_Direct::convertDateTime2Str(DateTimeUtil::getSystemDateTime());
+        #
+        #        this.displayProgress(#ExportTask_DeleteTables);
+        #
+        #        if (this.deleteTables())
+        #        {
+        #
+        #            this.displayProgress(#ExportTask_TableProperties);
+        #            this.addTableProperties();
+        #
+        #            this.displayProgress(#ExportTask_IndexProperties);
+        #            this.addIndexProperties();
+        #
+        #            this.displayProgress(#ExportTask_ConfigurationKeyProperties);
+        #            this.addConfigurationKeyProperties();
+        #
+        #            this.displayProgress(#ExportTask_LicenseKeyProperties);
+        #            this.addLicenseKeyProperties();
+        #
+        #            this.displayProgress(#ExportTask_ServerConfiguration);
+        #            this.addServerConfig();
+        #
+        #            this.displayProgress(#ExportTask_BatchServerGroupConfiguration);
+        #            this.addBatchServerGroupConfig();
+        #
+        #            this.displayProgress(#ExportTask_BatchJobInformation);
+        #            this.addBatchJobInfo();
+        #        }
+        #
+        #        exportStop = timeNow();
+        #
+        #        this.displayTimes();
+        #    }
+        #    catch (Exception::CLRError)
+        #    {
+        #        ex = CLRInterop::getLastException();
+        #
+        #        if (ex != null)
+        #        {
+        #            ex = ex.get_InnerException();
+        #
+        #            if (ex != null)
+        #            {
+        #                ex1 = ex.ToString();
+        #                error(strFmt("%1: %2", funcName(), ex1));
+        #                // error(ex.ToString());
+        #            }
+        #        }
+        #
+        #        throw Exception::Error;
+        #    }
+        #    catch
+        #    {
+        #        error(#AOTExportError);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container _packedClass)
+        #{
+        #    Version version = RunBase::getVersion(_packedClass);
+        #
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion :
+        #            [version, #CurrentList] = _packedClass;
+        #            break;
+        #        default :
+        #            return false;
+        #    }
+        #
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #addBatchJobInfoServer
+        #private server static int addBatchJobInfoServer(str _sqlInstanceName,
+        #                                                str _dynamicsPerfDatabaseName,
+        #                                                str _axDatabaseName,
+        #                                                str _axSqlInstanceName,
+        #                                                str _statsTime)
+        #{
+        #    #define.RECUR_VERSION(1)
+        #    #define.RECUR_STARTTIME(2)
+        #    #define.RECUR_STARTDATE(3)
+        #    #define.RECUR_ENDDATERADIO(4)
+        #    #define.RECUR_ENDDATEINT(5)
+        #    #define.RECUR_ENDDATEDATE(6)
+        #    #define.RECUR_UNIT(7)
+        #    #define.RECUR_PATTERNCONTAINER(8)
+        #    #define.RECUR_TIMEZONE(9)
+        #
+        #    #define.Batch_DataPartition("DataPartition")
+        #
+        #    BatchJob    batchJob;
+        #    Batch       batch;
+        #    FieldId     fieldId;
+        #    str         insertBatchJob;
+        #    str         values;
+        #    int         totalBatchJobs;
+        #
+        #    SysRecurrenceData   recurrenceData;
+        #    str                 rangeTimeZoneDesc;
+        #    StartDateTime       rangeStartDateTime;
+        #    str                 rangeUnit;
+        #    str                 patternUnit;
+        #    str                 patternDesc;
+        #
+        #    System.Data.SqlClient.SqlConnection conn;
+        #    System.Data.SqlClient.SqlCommand    cmd;
+        #    System.Exception                    ex;
+        #    str                                 ex1;
+        #
+        #    str commandText;
+        #    int result;
+        #
+        #    conn = AOTExport2012_Direct::connection(_sqlInstanceName, _dynamicsPerfDatabaseName);
+        #
+        #    if (conn)
+        #    {
+        #        try
+        #        {
+        #            cmd = conn.CreateCommand();
+        #
+        #            insertBatchJob = AOTExport2012_Direct::buildAxBatchJobDetailInsert();
+        #
+        #            while select * from batchJob
+        #                where (batchJob.Status == BatchStatus::Error
+        #                       || batchJob.Status == BatchStatus::Executing
+        #                       || batchJob.Status == BatchStatus::Ready
+        #                       || batchJob.Status == BatchStatus::Waiting)
+        #            {
+        #                // Just taking the first batch record to be representative of other tasks for the batch job
+        #                select firstOnly groupId, runType from batch
+        #                    where batch.BatchJobId == batchJob.RecId;
+        #
+        #                recurrenceData      = batchJob.recurrenceData;
+        #
+        #                values += "(";
+        #                values += strFmt("'%1', ", _axSqlInstanceName);
+        #                values += strFmt("'%1', ", _axDatabaseName);
+        #                values += strFmt("'%1', ", _statsTime);
+        #                values += strFmt("'%1', ", enum2str(batchJob.Status));
+        #                values += strFmt("N'%1', ", batchJob.Caption);
+        #                values += strFmt("'%1', ", batchJob.Company);
+        #                values += strFmt("'%1', ", enum2str(batchJob.LogLevel));
+        #                values += strFmt("'%1', ", AOTExport2012_Direct::convertDateTime2Str(batchJob.OrigStartDateTime));
+        #                values += strFmt("'%1', ", AOTExport2012_Direct::convertDateTime2Str(batchJob.StartDateTime));
+        #                values += strFmt("'%1', ", AOTExport2012_Direct::convertDateTime2Str(batchJob.EndDateTime));
+        #
+        #                if (AOTExport2012_Direct::supportsPartition())
+        #                {
+        #                    // values += strFmt("'%1', ", (AOTExport2012_Direct::supportsPartition()) ? batchJob.DataPartition : "");
+        #                    fieldId = fieldName2id(batchJob.TableId, #Batch_DataPartition);
+        #                    values += strFmt("'%1', ", batchJob.(fieldId));
+        #                }
+        #                else
+        #                {
+        #                    values += strFmt("'%1', ", "");
+        #                }
+        #
+        #                if (conLen(recurrenceData) > 0)
+        #                {
+        #                    rangeTimeZoneDesc   = enum2str(conPeek(recurrenceData, #RECUR_TIMEZONE));
+        #                    rangeStartDateTime  = DateTimeUtil::newDateTime(conPeek(recurrenceData, #RECUR_STARTDATE),
+        #                        conPeek(recurrenceData, #RECUR_STARTTIME), conPeek(recurrenceData, #RECUR_TIMEZONE));
+        #                    rangeUnit           = AOTExport2012_Direct::rangeUnit(recurrenceData);
+        #                    patternUnit         = AOTExport2012_Direct::patternUnit(recurrenceData);
+        #                    patternDesc         = AOTExport2012_Direct::patternDesc(recurrenceData);
+        #
+        #                    values += strFmt("'%1', ", rangeTimeZoneDesc);
+        #                    values += strFmt("'%1', ", AOTExport2012_Direct::convertDateTime2Str(rangeStartDateTime));
+        #                    values += strFmt("'%1', ", rangeUnit);
+        #                    values += strFmt("'%1', ", patternUnit);
+        #                    values += strFmt("'%1', ", patternDesc);
+        #                }
+        #                else
+        #                {
+        #                    values += strFmt("'%1', ", "");
+        #                    values += strFmt("'%1', ", AOTExport2012_Direct::convertDateTime2Str(DateTimeUtil::minValue()));
+        #                    values += strFmt("'%1', ", "");
+        #                    values += strFmt("'%1', ", "");
+        #                    values += strFmt("'%1', ", "");
+        #                }
+        #
+        #                values += strFmt("'%1', ", AOTExport2012_Direct::convertDateTime2Str(batchJob.createdDateTime));
+        #                values += strFmt("'%1', ", batchJob.createdBy);
+        #                values += strFmt("'%1', ", batch.GroupId);
+        #                values += strFmt("'%1'", enum2str(batch.RunType));
+        #                values += ");\n";
+        #
+        #                commandText += strFmt("%1 %2 %3", insertBatchJob, #ValuesClause, values);
+        #                values      = "";
+        #
+        #                if (commandText)
+        #                {
+        #                    cmd.set_CommandText(commandText);
+        #
+        #                    result      = cmd.ExecuteNonQuery();
+        #                    commandText = "";
+        #                }
+        #
+        #                totalBatchJobs++;
+        #            }
+        #
+        #            if (commandText)
+        #            {
+        #                cmd.set_CommandText(commandText);
+        #
+        #                result = cmd.ExecuteNonQuery();
+        #            }
+        #        }
+        #        catch (Exception::CLRError)
+        #        {
+        #            ex = CLRInterop::getLastException();
+        #
+        #            if (ex != null)
+        #            {
+        #                ex = ex.get_InnerException();
+        #
+        #                if (ex != null)
+        #                {
+        #                    ex1 = ex.ToString();
+        #                    error(strFmt("%1: %2", funcName(), ex1));
+        #                    // error(strFmt("%1: %2", funcName(), ex.ToString()));
+        #                    // error(ex.ToString());
+        #                }
+        #            }
+        #        }
+        #    }
+        #
+        #    return totalBatchJobs;
+        #}
+      ENDSOURCE
+      SOURCE #addBatchServerGroupConfigServer
+        #private server static int addBatchServerGroupConfigServer(str _sqlInstanceName,
+        #                                                          str _dynamicsPerfDatabaseName,
+        #                                                          str _axDatabaseName,
+        #                                                          str _axSqlInstanceName,
+        #                                                          str _statsTime)
+        #{
+        #    BatchServerConfig   serverConfig;
+        #    BatchServerGroup    serverGroup;
+        #    BatchGroup          batchGroup;
+        #    str                 insertBatchServerGroup;
+        #    str                 values;
+        #    int                 totalServers;
+        #
+        #    System.Data.SqlClient.SqlConnection conn;
+        #    System.Data.SqlClient.SqlCommand    cmd;
+        #    System.Exception                    ex;
+        #    str                                 ex1;
+        #
+        #    str commandText;
+        #    int result;
+        #
+        #    conn = AOTExport2012_Direct::connection(_sqlInstanceName, _dynamicsPerfDatabaseName);
+        #
+        #    if (conn)
+        #    {
+        #        try
+        #        {
+        #            cmd = conn.CreateCommand();
+        #
+        #            insertBatchServerGroup = AOTExport2012_Direct::buildAxBatchServerGroupConfigInsert();
+        #
+        #            while select * from serverGroup
+        #                outer join serverConfig
+        #                    where serverConfig.ServerId == serverGroup.ServerId
+        #                outer join batchGroup
+        #                    where batchGroup.Group == serverGroup.GroupId
+        #            {
+        #                values += "(";
+        #                values += strFmt("'%1', ", _axSqlInstanceName);
+        #                values += strFmt("'%1', ", _axDatabaseName);
+        #                values += strFmt("'%1', ", _statsTime);
+        #                values += strFmt("'%1', ", batchGroup.Group);
+        #                values += strFmt("'%1', ", batchGroup.Description);
+        #                values += strFmt("'%1', ", serverGroup.ServerId);
+        #                values += strFmt("%1, ", serverConfig.MaxBatchSessions);
+        #                values += strFmt("%1, ", serverConfig.StartTime);
+        #                values += strFmt("%1", serverConfig.EndTime);
+        #                values += ");\n";
+        #
+        #                commandText += strFmt("%1 %2 %3", insertBatchServerGroup, #ValuesClause, values);
+        #                values      = "";
+        #
+        #                if (commandText)
+        #                {
+        #                    cmd.set_CommandText(commandText);
+        #
+        #                    result      = cmd.ExecuteNonQuery();
+        #                    commandText = "";
+        #                }
+        #
+        #                totalServers++;
+        #            }
+        #
+        #            if (commandText)
+        #            {
+        #                cmd.set_CommandText(commandText);
+        #
+        #                result = cmd.ExecuteNonQuery();
+        #            }
+        #        }
+        #        catch (Exception::CLRError)
+        #        {
+        #            ex = CLRInterop::getLastException();
+        #
+        #            if (ex != null)
+        #            {
+        #                ex = ex.get_InnerException();
+        #
+        #                if (ex != null)
+        #                {
+        #                    ex1 = ex.ToString();
+        #                    error(strFmt("%1: %2", funcName(), ex1));
+        #                    // error(strFmt("%1: %2", funcName(), ex.ToString()));
+        #                    // error(ex.ToString());
+        #                }
+        #            }
+        #        }
+        #    }
+        #
+        #    return totalServers;
+        #}
+      ENDSOURCE
+      SOURCE #addConfigurationKeyDetailServer
+        #private server static int addConfigurationKeyDetailServer(str _sqlInstanceName,
+        #                                                   str _dynamicsPerfDatabaseName,
+        #                                                   str _axDatabaseName,
+        #                                                   str _axSqlInstanceName,
+        #                                                   str _statsTime)
+        #{
+        #    UtilIdElements          elementsTable;
+        #    SysDictConfigurationKey configurationKey;
+        #    ConfigurationKeySet     set;
+        #    SysDictLicenseCode      licenseCode;
+        #    Counter                 records;
+        #    str                     insertConfigKey;
+        #    str                     values;
+        #    str                     labelVal;
+        #    int                     totalConfigurationKeys;
+        #
+        #    System.Data.SqlClient.SqlConnection conn;
+        #    System.Data.SqlClient.SqlCommand    cmd;
+        #    System.Exception                    ex;
+        #    str                                 ex1;
+        #
+        #    str commandText;
+        #    int result;
+        #
+        #    conn = AOTExport2012_Direct::connection(_sqlInstanceName, _dynamicsPerfDatabaseName);
+        #
+        #    if (conn)
+        #    {
+        #        try
+        #        {
+        #            cmd = conn.CreateCommand();
+        #            set = new ConfigurationKeySet();
+        #
+        #            insertConfigKey = AOTExport2012_Direct::buildAxConfigurationKeyDetailInsert();
+        #
+        #            while select Id, maxOf(UtilLevel) from elementsTable
+        #                group by Id
+        #                where elementsTable.recordType == UtilElementType::ConfigurationKey
+        #            {
+        #                configurationKey = new SysDictConfigurationKey(elementsTable.id);
+        #
+        #                if (configurationKey)
+        #                {
+        #                    records++;
+        #
+        #                    licenseCode = new SysDictLicenseCode(configurationKey.licenseCode());
+        #                    labelVal    = strReplace(configurationKey.label(), "'", "''");
+        #
+        #                    values += "(";
+        #                    values += strFmt("'%1', ", _axSqlInstanceName);
+        #                    values += strFmt("'%1', ", _axDatabaseName);
+        #                    values += strFmt("'%1', ", _statsTime);
+        #                    values += strFmt("%1, ", elementsTable.id);
+        #                    values += strFmt("'%1', ", configurationKey.name());
+        #                    values += strFmt("'%1', ", labelVal);
+        #                    values += strFmt("%1, ", configurationKey.parentConfigurationKeyId());
+        #                    values += strFmt("%1, ", (licenseCode) ? licenseCode.id() : 0);
+        #                    values += strFmt("%1", (set.enabled(elementsTable.id)) ? #BitOne : #BitZero);
+        #
+        #                    values += ");\n";
+        #
+        #                    commandText += strFmt("%1 %2 %3", insertConfigKey, #ValuesClause, values);
+        #                    values      = "";
+        #
+        #                    if (records == #BatchSize)
+        #                    {
+        #                        if (commandText)
+        #                        {
+        #                            cmd.set_CommandText(commandText);
+        #
+        #                            result = cmd.ExecuteNonQuery();
+        #                        }
+        #
+        #                        commandText = "";
+        #                        records     = 0;
+        #                    }
+        #
+        #                    totalConfigurationKeys++;
+        #                }
+        #            }
+        #
+        #            if (commandText)
+        #            {
+        #                cmd.set_CommandText(commandText);
+        #
+        #                result = cmd.ExecuteNonQuery();
+        #            }
+        #        }
+        #        catch (Exception::CLRError)
+        #        {
+        #            ex = CLRInterop::getLastException();
+        #
+        #            if (ex != null)
+        #            {
+        #                ex = ex.get_InnerException();
+        #
+        #                if (ex != null)
+        #                {
+        #                    ex1 = ex.ToString();
+        #                    error(strFmt("%1: %2", funcName(), ex1));
+        #                    // error(strFmt("%1: %2", funcName(), ex.ToString()));
+        #                    // error(ex.ToString());
+        #                }
+        #            }
+        #        }
+        #    }
+        #
+        #    return totalConfigurationKeys;
+        #}
+      ENDSOURCE
+      SOURCE #addIndexDetailServer
+        #private server static int addIndexDetailServer(str _sqlInstanceName,
+        #                                               str _dynamicsPerfDatabaseName,
+        #                                               str _axDatabaseName,
+        #                                               str _axSqlInstanceName,
+        #                                               str _statsTime)
+        #{
+        #    #define.FIELD_PARTITION("PARTITION")
+        #    #define.FIELD_DATAAREAID("DATAAREAID")
+        #
+        #    UtilIdElements      elementsTable;
+        #    SysDictIndex        dictIndex;
+        #    SysDictField        dictField;
+        #    SysDictTable        dictTable;
+        #    TreeNode            indexNode;
+        #    str                 tableName;
+        #    Counter             indexCount;
+        #    Counter             indexIndex;
+        #    Counter             fieldIndex;
+        #    Counter             fieldIndexInclude;
+        #    Counter             fieldCount;
+        #    int                 numberOfFields;
+        #    int                 numberOfIncludedColumns;
+        #    int                 totalIndexes;
+        #    str                 insertIndex;
+        #    str                 values;
+        #    str                 keyFields;
+        #    str                 includeFields;
+        #    str                 indexDescription;
+        #    boolean             proceed;
+        #
+        #    System.Data.SqlClient.SqlConnection conn;
+        #    System.Data.SqlClient.SqlCommand    cmd;
+        #    System.Exception                    ex;
+        #    str                                 ex1;
+        #
+        #    str commandText;
+        #    int result;
+        #
+        #    conn = AOTExport2012_Direct::connection(_sqlInstanceName, _dynamicsPerfDatabaseName);
+        #
+        #    if (conn)
+        #    {
+        #        try
+        #        {
+        #            cmd = conn.CreateCommand();
+        #
+        #            insertIndex = AOTExport2012_Direct::buildAxIndexDetailInsert();
+        #
+        #            while select Id, maxOf(UtilLevel) from elementsTable
+        #                group by Id
+        #                where elementsTable.recordType == UtilElementType::Table
+        #            {
+        #                dictTable = SysDictTable::newTableId(elementsTable.id);
+        #
+        #                // For easier debugging
+        #                proceed = (dictTable != null);
+        #                proceed = proceed && dictTable.isSql();
+        #                proceed = proceed && !dictTable.isView();
+        #                proceed = proceed && !dictTable.isTmp();
+        #                proceed = proceed && !dictTable.isTempDb();
+        #                proceed = proceed && (dictTable.name(DbBackend::Sql) != "");
+        #
+        #                if (!proceed)
+        #                {
+        #                    continue;
+        #                }
+        #
+        #                indexCount = dictTable.indexCnt();
+        #
+        #                for (indexIndex = 1; indexIndex <= indexCount; indexIndex++)
+        #                {
+        #                    dictIndex = new SysDictIndex(elementsTable.Id, dictTable.indexCnt2Id(indexIndex));
+        #                    tableName = AOTExport2012_Direct::parseTableName(dictTable.name(DbBackend::Sql));
+        #
+        #                    if (dictIndex && dictIndex.enabled() && dictIndex.name(DbBackend::Sql) != "")
+        #                    {
+        #                        if (dictIndex.id() == dictTable.clusterIndex())
+        #                        {
+        #                            indexDescription += #INDEXDESC_CLUSTERED;
+        #                        }
+        #
+        #                        if (!dictIndex.allowDuplicates())
+        #                        {
+        #                            if (indexDescription == "")
+        #                            {
+        #                                indexDescription += #INDEXDESC_UNIQUE;
+        #                            }
+        #                            else
+        #                            {
+        #                                indexDescription += ", " + #INDEXDESC_UNIQUE;
+        #                            }
+        #                        }
+        #
+        #                        if (dictIndex.id() == dictTable.primaryIndex())
+        #                        {
+        #                            if (indexDescription == "")
+        #                            {
+        #                                indexDescription += #INDEXDESC_PRIMARYKEY;
+        #                            }
+        #                            else
+        #                            {
+        #                                indexDescription += ", " + #INDEXDESC_PRIMARYKEY;
+        #                            }
+        #                        }
+        #
+        #                        values += "(";
+        #                        values += strFmt("'%1', ", _axSqlInstanceName);
+        #                        values += strFmt("'%1', ", _axDatabaseName);
+        #                        values += strFmt("'%1', ", _statsTime);
+        #                        values += strFmt("'%1', ", tableName);
+        #                        values += strFmt("'%1', ", dictIndex.name(DbBackend::Sql));
+        #                        values += strFmt("%1, ", dictIndex.id());
+        #                        values += strFmt("'%1', ", indexDescription);
+        #                        values += strFmt("%1, ", (dictIndex.allowDuplicates()) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (dictIndex.isAlternateKey()) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (dictIndex.isValidTimeStateKey()) ? #BitOne : #BitZero);
+        #
+        #                        indexNode = TreeNode::findNode(dictIndex.path());
+        #
+        #                        if (indexNode)
+        #                        {
+        #                            values += strFmt("'%1', ", enum2str(indexNode.AOTLayer()));
+        #                        }
+        #                        else
+        #                        {
+        #                            values += strFmt("'%1', ", enum2str(dictTable.treeNode().AOTLayer()));
+        #                        }
+        #
+        #                        numberOfFields          = dictIndex.numberOfFields();
+        #                        numberOfIncludedColumns = dictIndex.numberOfIncludedColumns();
+        #                        fieldCount              = 0;
+        #
+        #                        // if (AOTExport2012_Direct::supportsPartition() && dictTable.dataPerPartition())
+        #                        if (AOTExport2012_Direct::supportsPartition())
+        #                        {
+        #                            if (keyFields == "")
+        #                            {
+        #                                keyFields = #FIELD_PARTITION;
+        #                            }
+        #                            else
+        #                            {
+        #                                keyFields += strFmt(", %1", #FIELD_PARTITION);
+        #                            }
+        #                        }
+        #
+        #                        if (dictTable.dataPrCompany())
+        #                        {
+        #                            if (keyFields == "")
+        #                            {
+        #                                keyFields = #FIELD_DATAAREAID;
+        #                            }
+        #                            else
+        #                            {
+        #                                keyFields += strFmt(", %1", #FIELD_DATAAREAID);
+        #                            }
+        #                        }
+        #
+        #                        for (fieldIndex = 1; fieldIndex <= numberOfFields; fieldIndex++)
+        #                        {
+        #                            dictField = new SysDictField(dictTable.id(), dictIndex.field(fieldIndex));
+        #
+        #                            if (keyFields == "")
+        #                            {
+        #                                keyFields = dictField.name(DbBackend::Sql);
+        #                            }
+        #                            else
+        #                            {
+        #                                keyFields += strFmt(", %1", dictField.name(DbBackend::Sql));
+        #                            }
+        #
+        #                            fieldCount++;
+        #                        }
+        #
+        #                        // If no tree node exists for this index, then it's not going to have any
+        #                        // include columns. In the case of the standard RecId, it might event have
+        #                        // an erroneous include colums count and cause the loop to execute.
+        #                        if (indexNode)
+        #                        {
+        #                            for (fieldIndexInclude = 1; fieldIndexInclude <= numberOfIncludedColumns; fieldIndexInclude++)
+        #                            {
+        #                                dictField = new SysDictField(dictTable.id(), dictIndex.includedColumn(fieldIndexInclude));
+        #
+        #                                if (includeFields == "")
+        #                                {
+        #                                    includeFields = dictField.name(DbBackend::Sql);
+        #                                }
+        #                                else
+        #                                {
+        #                                    includeFields += strFmt(", %1", dictField.name(DbBackend::Sql));
+        #                                }
+        #                            }
+        #                        }
+        #
+        #                        if (includeFields)
+        #                        {
+        #                            keyFields = strFmt("%1 %2 (%3)", keyFields, #INDEXDESC_INCLUDE, includeFields);
+        #                        }
+        #
+        #                        values += strFmt("'%1'", keyFields);
+        #                        values += ");\n";
+        #
+        #                        commandText += strFmt("%1 %2 %3", insertIndex, #ValuesClause, values);
+        #
+        #                        values              = "";
+        #                        indexDescription    = "";
+        #                        keyFields           = "";
+        #                        includeFields       = "";
+        #
+        #                        totalIndexes++;
+        #                    }
+        #                }
+        #
+        #                if (commandText)
+        #                {
+        #                    cmd.set_CommandText(commandText);
+        #
+        #                    result = cmd.ExecuteNonQuery();
+        #                }
+        #
+        #                commandText = "";
+        #            }
+        #
+        #            if (commandText)
+        #            {
+        #                cmd.set_CommandText(commandText);
+        #
+        #                result = cmd.ExecuteNonQuery();
+        #            }
+        #        }
+        #        catch (Exception::CLRError)
+        #        {
+        #            ex = CLRInterop::getLastException();
+        #
+        #            if (ex != null)
+        #            {
+        #                ex = ex.get_InnerException();
+        #
+        #                if (ex != null)
+        #                {
+        #                    ex1 = ex.ToString();
+        #                    error(strFmt("%1: %2", funcName(), ex1));
+        #                    // error(strFmt("%1: %2", funcName(), ex.ToString()));
+        #                    // error(ex.ToString());
+        #                }
+        #            }
+        #        }
+        #    }
+        #
+        #    return totalIndexes;
+        #}
+      ENDSOURCE
+      SOURCE #addLicenseKeyDetailServer
+        #private server static int addLicenseKeyDetailServer(str _sqlInstanceName,
+        #                                                    str _dynamicsPerfDatabaseName,
+        #                                                    str _axDatabaseName,
+        #                                                    str _axSqlInstanceName,
+        #                                                    str _statsTime,
+        #                                                    boolean _isInBatch)
+        #{
+        #    #define.NA("Not available in Batch")
+        #
+        #    UtilIdElements          elementsTable;
+        #    SysDictLicenseCode      licenseCode;
+        #    SysDictLicenseCode      licensePre;
+        #    Set                     prereqSet;
+        #    SetEnumerator           setEnum;
+        #    container               prereqValues;
+        #    Counter                 records;
+        #    str                     insertLicenseKey;
+        #    str                     values;
+        #    str                     labelVal;
+        #    int                     totalLicenseKeys;
+        #
+        #    System.Data.SqlClient.SqlConnection conn;
+        #    System.Data.SqlClient.SqlCommand    cmd;
+        #    System.Exception                    ex;
+        #    str                                 ex1;
+        #
+        #    str commandText;
+        #    int result;
+        #
+        #    conn = AOTExport2012_Direct::connection(_sqlInstanceName, _dynamicsPerfDatabaseName);
+        #
+        #    if (conn)
+        #    {
+        #        try
+        #        {
+        #            cmd = conn.CreateCommand();
+        #
+        #            insertLicenseKey = AOTExport2012_Direct::buildAxLicenseKeyDetailInsert();
+        #
+        #            while select Id, maxOf(UtilLevel) from elementsTable
+        #                group by Id
+        #                where elementsTable.recordType == UtilElementType::LicenseCode
+        #            {
+        #                licenseCode = new SysDictLicenseCode(elementsTable.id);
+        #
+        #                if (licenseCode && licenseCode.isEntered())
+        #                {
+        #                    prereqSet       = null;
+        #                    prereqValues    = conNull();
+        #
+        #                    records++;
+        #
+        #                    if (_isInBatch)
+        #                    {
+        #                        prereqValues = [#NA, #NA, #NA, #NA, #NA];
+        #                    }
+        #                    else
+        #                    {
+        #                        prereqSet = licenseCode.prerequisites();
+        #
+        #                        setEnum = prereqSet.getEnumerator();
+        #
+        #                        while (setEnum.moveNext())
+        #                        {
+        #                            licensePre = new SysDictLicenseCode(setEnum.current());
+        #
+        #                            prereqValues += licensePre.name();
+        #                        }
+        #                    }
+        #
+        #                    labelVal = strReplace(licenseCode.label(), "'", "''");
+        #
+        #                    values += "(";
+        #                    values += strFmt("'%1', ", _axSqlInstanceName);
+        #                    values += strFmt("'%1', ", _axDatabaseName);
+        #                    values += strFmt("'%1', ", _statsTime);
+        #                    values += strFmt("%1, ", elementsTable.id);
+        #                    values += strFmt("'%1', ", licenseCode.name());
+        #                    values += strFmt("'%1', ", labelVal);
+        #                    values += strFmt("'%1', ", enum2str(licenseCode.group()));
+        #                    values += strFmt("'%1', ", enum2str(licenseCode.type()));
+        #                    values += strFmt("'%1', ", enum2str(licenseCode.package()));
+        #                    values += strFmt("'%1', ", conPeek(prereqValues, 1));
+        #                    values += strFmt("'%1', ", conPeek(prereqValues, 2));
+        #                    values += strFmt("'%1', ", conPeek(prereqValues, 3));
+        #                    values += strFmt("'%1', ", conPeek(prereqValues, 4));
+        #                    values += strFmt("'%1', ", conPeek(prereqValues, 5));
+        #                    values += strFmt("%1", (licenseCode.isEntered()) ? #BitOne : #BitZero);
+        #                    values += ");\n";
+        #
+        #                    commandText += strFmt("%1 %2 %3", insertLicenseKey, #ValuesClause, values);
+        #                    values      = "";
+        #
+        #                    if (records == #BatchSize)
+        #                    {
+        #                        if (commandText)
+        #                        {
+        #                            cmd.set_CommandText(commandText);
+        #
+        #                            result = cmd.ExecuteNonQuery();
+        #                        }
+        #
+        #                        commandText = "";
+        #                        records     = 0;
+        #                    }
+        #
+        #                    totalLicenseKeys++;
+        #                }
+        #            }
+        #
+        #            if (commandText)
+        #            {
+        #                cmd.set_CommandText(commandText);
+        #
+        #                result = cmd.ExecuteNonQuery();
+        #            }
+        #        }
+        #        catch (Exception::CLRError)
+        #        {
+        #            ex = CLRInterop::getLastException();
+        #
+        #            if (ex != null)
+        #            {
+        #                ex = ex.get_InnerException();
+        #
+        #                if (ex != null)
+        #                {
+        #                    ex1 = ex.ToString();
+        #                    error(strFmt("%1: %2", funcName(), ex1));
+        #                    // error(strFmt("%1: %2", funcName(), ex.ToString()));
+        #                    // error(ex.ToString());
+        #                }
+        #            }
+        #        }
+        #    }
+        #
+        #    return totalLicenseKeys;
+        #}
+      ENDSOURCE
+      SOURCE #addServerConfigServer
+        #private server static int addServerConfigServer(str _sqlInstanceName,
+        #                                                str _dynamicsPerfDatabaseName,
+        #                                                str _axDatabaseName,
+        #                                                str _axSqlInstanceName,
+        #                                                str _statsTime)
+        #{
+        #    SysServerConfig     serverConfig;
+        #    SysClusterConfig    clusterConfig;
+        #    str                 insertServerConfig;
+        #    str                 values;
+        #    int                 totalServers;
+        #
+        #    System.Data.SqlClient.SqlConnection conn;
+        #    System.Data.SqlClient.SqlCommand    cmd;
+        #    System.Exception                    ex;
+        #    str                                 ex1;
+        #
+        #    str commandText;
+        #    int result;
+        #
+        #    conn = AOTExport2012_Direct::connection(_sqlInstanceName, _dynamicsPerfDatabaseName);
+        #
+        #    if (conn)
+        #    {
+        #        try
+        #        {
+        #            cmd = conn.CreateCommand();
+        #
+        #            insertServerConfig = AOTExport2012_Direct::buildAxServerConfigInsert();
+        #
+        #            while select * from serverConfig
+        #                join clusterConfig
+        #                where serverConfig.ClusterRefRecId == clusterConfig.RecId
+        #            {
+        #                values += "(";
+        #                values += strFmt("'%1', ", _axSqlInstanceName);
+        #                values += strFmt("'%1', ", _axDatabaseName);
+        #                values += strFmt("'%1', ", _statsTime);
+        #                values += strFmt("'%1', ", serverConfig.ServerId);
+        #                values += strFmt("%1, ", (serverConfig.EnableBatch) ? #BitOne : #BitZero);
+        #                values += strFmt("%1, ", (serverConfig.LoadBalancingEnabled) ? #BitOne : #BitZero);
+        #                values += strFmt("%1, ", serverConfig.MaxSessions);
+        #                values += strFmt("'%1', ", clusterConfig.ClusterName);
+        #                values += strFmt("'%1'", clusterConfig.ClusterDescription);
+        #                values += ");\n";
+        #
+        #                commandText += strFmt("%1 %2 %3", insertServerConfig, #ValuesClause, values);
+        #                values      = "";
+        #
+        #                if (commandText)
+        #                {
+        #                    cmd.set_CommandText(commandText);
+        #
+        #                    result      = cmd.ExecuteNonQuery();
+        #                    commandText = "";
+        #                }
+        #
+        #                totalServers++;
+        #            }
+        #
+        #            if (commandText)
+        #            {
+        #                cmd.set_CommandText(commandText);
+        #
+        #                result = cmd.ExecuteNonQuery();
+        #            }
+        #        }
+        #        catch (Exception::CLRError)
+        #        {
+        #            ex = CLRInterop::getLastException();
+        #
+        #            if (ex != null)
+        #            {
+        #                ex = ex.get_InnerException();
+        #
+        #                if (ex != null)
+        #                {
+        #                    ex1 = ex.ToString();
+        #                    error(strFmt("%1: %2", funcName(), ex1));
+        #                    // error(strFmt("%1: %2", funcName(), ex.ToString()));
+        #                    // error(ex.ToString());
+        #                }
+        #            }
+        #        }
+        #    }
+        #
+        #    return totalServers;
+        #}
+      ENDSOURCE
+      SOURCE #addTableDetailServer
+        #private server static int addTableDetailServer(str _sqlInstanceName,
+        #                                                   str _dynamicsPerfDatabaseName,
+        #                                                   str _axDatabaseName,
+        #                                                   str _axSqlInstanceName,
+        #                                                   str _statsTime)
+        #{
+        #    UtilIdElements          elementsTable;
+        #    SysDictTable            dictTable;
+        #    SysDictConfigurationKey configurationKey;
+        #    SysDictLicenseCode      licenseCode;
+        #    DatabaseLog             databaseLog;
+        #    boolean                 logInsert;
+        #    boolean                 logUpdate;
+        #    boolean                 logDelete;
+        #    boolean                 logRename;
+        #    boolean                 eventInsert;
+        #    boolean                 eventUpdate;
+        #    boolean                 eventDelete;
+        #    boolean                 eventRename;
+        #    Counter                 records;
+        #    int                     totalTables;
+        #    str                     insertTable;
+        #    str                     values;
+        #    container               codes;
+        #    int                     codeCount;
+        #    int                     x;
+        #    str                     countryRegionCodes;
+        #
+        #    System.Data.SqlClient.SqlConnection conn;
+        #    System.Data.SqlClient.SqlCommand    cmd;
+        #    System.Exception                    ex;
+        #    str                                 ex1;
+        #
+        #    str commandText;
+        #    int result;
+        #
+        #    conn = AOTExport2012_Direct::connection(_sqlInstanceName, _dynamicsPerfDatabaseName);
+        #
+        #    if (conn)
+        #    {
+        #        try
+        #        {
+        #            cmd = conn.CreateCommand();
+        #
+        #            insertTable = AOTExport2012_Direct::buildAxTableDetailInsert();
+        #
+        #            while select Id, maxOf(UtilLevel) from elementsTable
+        #                group by Id
+        #                where elementsTable.recordType == UtilElementType::Table
+        #            {
+        #                dictTable = new SysDictTable(elementsTable.id);
+        #
+        #                if (dictTable)
+        #                {
+        #                    if (dictTable.isSql()
+        #                        && !dictTable.isView()
+        #                        && !dictTable.isTmp()
+        #                        && !dictTable.isTempDb()
+        #                        && dictTable.name(DbBackend::Sql) != "")
+        #                    {
+        #                        countryRegionCodes  = "";
+        #                        codes               = dictTable.getCountryRegionCodes();
+        #                        codeCount           = conLen(codes);
+        #
+        #                        for (x = 1; x <= codeCount; x++)
+        #                        {
+        #                            if (countryRegionCodes != "")
+        #                            {
+        #                                countryRegionCodes += ", ";
+        #                            }
+        #
+        #                            countryRegionCodes += conPeek(codes, x);
+        #                        }
+        #
+        #                        logInsert   = false;
+        #                        logUpdate   = false;
+        #                        logDelete   = false;
+        #                        logRename   = false;
+        #                        eventInsert = false;
+        #                        eventUpdate = false;
+        #                        eventDelete = false;
+        #                        eventRename = false;
+        #
+        #                        records++;
+        #
+        #                        while select LogType from databaseLog
+        #                            where databaseLog.logTable == elementsTable.id
+        #                        {
+        #                            switch (databaseLog.logType)
+        #                            {
+        #                                case DatabaseLogType::Insert            : logInsert = true; break;
+        #                                case DatabaseLogType::Update            : logUpdate = true; break;
+        #                                case DatabaseLogType::Delete            : logDelete = true; break;
+        #                                case DatabaseLogType::RenameKey         : logRename = true; break;
+        #                                case DatabaseLogType::EventInsert       : eventInsert = true; break;
+        #                                case DatabaseLogType::EventUpdate       : eventUpdate = true; break;
+        #                                case DatabaseLogType::EventDelete       : eventDelete = true; break;
+        #                                case DatabaseLogType::EventRenameKey    : eventRename = true; break;
+        #                            }
+        #                        }
+        #
+        #                        if (dictTable.configurationKeyId())
+        #                        {
+        #                            configurationKey    = AOTExport2012_Direct::getRootConfigurationKey(dictTable.configurationKeyId());
+        #                            licenseCode         = new SysDictLicenseCode(configurationKey.licenseCode());
+        #                        }
+        #
+        #                        values += "(";
+        #                        values += strFmt("'%1', ", _axSqlInstanceName);
+        #                        values += strFmt("'%1', ", _axDatabaseName);
+        #                        values += strFmt("'%1', ", _statsTime);
+        #                        values += strFmt("'%1', ", AOTExport2012_Direct::parseTableName(dictTable.name(DbBackend::Sql)));
+        #                        values += strFmt("%1, ", elementsTable.id);
+        #                        values += strFmt("'%1', ", dictTable.tableType());
+        #                        values += strFmt("%1, ", (dictTable.isValidTimeStateTable()) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (dictTable.supportInheritance()) ? #BitOne : #BitZero);
+        #                        values += strFmt("'%1', ", tableId2name(dictTable.extends()));
+        #                        values += strFmt("'%1', ", dictTable.tableGroup());
+        #                        values += strFmt("%1, ", (dictTable.occEnabled()) ? #BitOne : #BitZero);
+        #                        values += strFmt("'%1', ", dictTable.cacheLookup());
+        #                        values += strFmt("'%1', ", dictTable.AOSAuthSetting());
+        #                        values += strFmt("%1, ", (SysDictTable::hasMethod(dictTable, identifierStr(Insert))) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (SysDictTable::hasMethod(dictTable, identifierStr(Update))) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (SysDictTable::hasMethod(dictTable, identifierStr(Delete))) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (SysDictTable::hasMethod(dictTable, identifierStr(AosValidateInsert))) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (SysDictTable::hasMethod(dictTable, identifierStr(AosValidateUpdate))) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (SysDictTable::hasMethod(dictTable, identifierStr(AosValidateDelete))) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (SysDictTable::hasMethod(dictTable, identifierStr(AosValidateRead))) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (logInsert) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (logDelete) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (logUpdate) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (logRename) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (eventInsert) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (eventDelete) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (eventUpdate) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (eventRename) ? #BitOne : #BitZero);
+        #                        values += strFmt("'%1', ", dictTable.indexName(dictTable.clusterIndex(), DbBackend::Sql));
+        #                        values += strFmt("'%1', ", dictTable.indexName(dictTable.primaryIndex(), DbBackend::Sql));
+        #                        values += strFmt("%1, ", (dictTable.dataPrCompany()) ? #BitOne : #BitZero);
+        #                        // values += strFmt("%1, ", (AOTExport2012_Direct::supportsPartition() && dictTable.dataPerPartition()) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (AOTExport2012_Direct::supportsPartition()) ? #BitOne : #BitZero);
+        #                        values += strFmt("%1, ", (configurationKey) ? configurationKey.id() : 0);
+        #                        values += strFmt("%1, ", (licenseCode) ? licenseCode.id() : 0);
+        #                        values += strFmt("'%1', ", enum2str(elementsTable.utilLevel));
+        #                        values += strFmt("'%1'", countryRegionCodes);
+        #                        values += ");\n";
+        #
+        #                        commandText += strFmt("%1 %2 %3", insertTable, #ValuesClause, values);
+        #                        values      = "";
+        #
+        #                        if (records == #BatchSize)
+        #                        {
+        #                            if (commandText)
+        #                            {
+        #                                cmd.set_CommandText(commandText);
+        #
+        #                                result = cmd.ExecuteNonQuery();
+        #                            }
+        #
+        #                            commandText = "";
+        #                            records     = 0;
+        #                        }
+        #
+        #                        totalTables++;
+        #                    }
+        #                }
+        #            }
+        #
+        #            if (commandText)
+        #            {
+        #                cmd.set_CommandText(commandText);
+        #
+        #                result = cmd.ExecuteNonQuery();
+        #            }
+        #        }
+        #        catch (Exception::CLRError)
+        #        {
+        #            ex = CLRInterop::getLastException();
+        #
+        #            if (ex != null)
+        #            {
+        #                ex = ex.get_InnerException();
+        #
+        #                if (ex != null)
+        #                {
+        #                    ex1 = ex.ToString();
+        #                    error(strFmt("%1: %2", funcName(), ex1));
+        #                    // error(strFmt("%1: %2", funcName(), ex.ToString()));
+        #                    // error(ex.ToString());
+        #                }
+        #            }
+        #        }
+        #    }
+        #
+        #    return totalTables;
+        #}
+      ENDSOURCE
+      SOURCE #buildAxBatchJobDetailInsert
+        #private static str buildAxBatchJobDetailInsert()
+        #{
+        #    #define.INSERTSTART("SET LANGUAGE N'us_english'; INSERT INTO DynamicsPerf.dbo.AX_BATCHJOB_DETAIL (")
+        #
+        #    str ret;
+        #
+        #    ret += #INSERTSTART;
+        #    ret += #BATCHJOB_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_DATABASE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_STATS_TIME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_JOB_STATUS + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_CAPTION + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_COMPANY + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_LOG_LEVEL + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_SCHED_START_DATETIME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_ACTUAL_START_DATETIME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_END_DATETIME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_DATA_PARTITION + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_RECUR_TIMEZONE + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_RECUR_RANGE_STARTDATETIME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_RECUR_RANGE_UNIT + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_RECUR_PATTERN_UNIT + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_RECUR_PATTERN_DESC + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_CREATED_DATETIME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_CREATED_BY + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_BATCH_GROUPID + strFmt("%1 ", #Comma);
+        #    ret += #BATCHJOB_RUN_TYPE;
+        #    ret += ")";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #buildAxBatchServerGroupConfigInsert
+        #private static str buildAxBatchServerGroupConfigInsert()
+        #{
+        #    #define.INSERTSTART("SET LANGUAGE N'us_english'; INSERT INTO DynamicsPerf.dbo.AX_BATCHSERVERGROUP_CONFIG (")
+        #
+        #    str ret;
+        #
+        #    ret += #INSERTSTART;
+        #    ret += #BATCHSERVERGROUP_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHSERVERGROUP_DATABASE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHSERVERGROUP_STATS_TIME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHSERVERGROUP_BATCH_GROUPID + strFmt("%1 ", #Comma);
+        #    ret += #BATCHSERVERGROUP_BATCH_GROUPDESC + strFmt("%1 ", #Comma);
+        #    ret += #BATCHSERVERGROUP_BATCH_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHSERVERGROUP_MAX_BATCH_SESSIONS + strFmt("%1 ", #Comma);
+        #    ret += #BATCHSERVERGROUP_BATCH_SERVER_STARTTIME + strFmt("%1 ", #Comma);
+        #    ret += #BATCHSERVERGROUP_BATCH_SERVER_ENDTIME;
+        #    ret += ")";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #buildAxConfigurationKeyDetailInsert
+        #private static str buildAxConfigurationKeyDetailInsert()
+        #{
+        #    #define.INSERTSTART("SET LANGUAGE N'us_english'; INSERT INTO DynamicsPerf.dbo.AX_CONFIGURATIONKEY_DETAIL (")
+        #
+        #    str ret;
+        #
+        #    ret += #INSERTSTART;
+        #    ret += #CONFIG_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #CONFIG_DATABASE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #CONFIG_STATS_TIME + strFmt("%1 ", #Comma);
+        #    ret += #CONFIG_CONFIG_KEY_ID + strFmt("%1 ", #Comma);
+        #    ret += #CONFIG_CONFIG_KEY_NAME + strFmt("%1 ", #Comma);
+        #    ret += #CONFIG_CONFIG_KEY_LABEL + strFmt("%1 ", #Comma);
+        #    ret += #CONFIG_PARENT_KEY_ID + strFmt("%1 ", #Comma);
+        #    ret += #CONFIG_LICENSE_KEY_ID + strFmt("%1 ", #Comma);
+        #    ret += #CONFIG_ENABLED;
+        #    ret += ")";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #buildAxIndexDetailInsert
+        #private static str buildAxIndexDetailInsert()
+        #{
+        #    #define.INSERTSTART("SET LANGUAGE N'us_english'; INSERT INTO DynamicsPerf.dbo.AX_INDEX_DETAIL (")
+        #
+        #    str ret;
+        #
+        #    ret += #INSERTSTART;
+        #    ret += #INDEX_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_DATABASE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_STATS_TIME + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_TABLE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_INDEX_NAME + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_INDEX_ID + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_INDEX_DESCRIPTION + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_ALLOW_DUPLICATES + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_ALTERNATE_KEY + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_VALIDTIME_STATE_KEY + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_APPLAYER + strFmt("%1 ", #Comma);
+        #    ret += #INDEX_INDEX_KEYS;
+        #    ret += ")";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #buildAxLicenseKeyDetailInsert
+        #private static str buildAxLicenseKeyDetailInsert()
+        #{
+        #    #define.INSERTSTART("SET LANGUAGE N'us_english'; INSERT INTO DynamicsPerf.dbo.AX_LICENSEKEY_DETAIL (")
+        #
+        #    str ret;
+        #
+        #    ret += #INSERTSTART;
+        #    ret += #LICENSE_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_DATABASE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_STATS_TIME + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_LICENSE_KEY_ID + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_LICENSE_KEY_NAME + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_LICENSE_KEY_LABEL + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_LICENSE_GROUP + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_LICENSE_TYPE + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_PACKAGE + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_PREREQUISITE1 + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_PREREQUISITE2 + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_PREREQUISITE3 + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_PREREQUISITE4 + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_PREREQUISITE5 + strFmt("%1 ", #Comma);
+        #    ret += #LICENSE_LICENSE_KEY_ENABLED;
+        #    ret += ")";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #buildAxServerConfigInsert
+        #private static str buildAxServerConfigInsert()
+        #{
+        #    #define.INSERTSTART("SET LANGUAGE N'us_english'; INSERT INTO DynamicsPerf.dbo.AX_SERVER_CONFIG (")
+        #
+        #    str ret;
+        #
+        #    ret += #INSERTSTART;
+        #    ret += #SERVER_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #SERVER_DATABASE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #SERVER_STATS_TIME + strFmt("%1 ", #Comma);
+        #    ret += #SERVER_AOS_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #SERVER_ENABLE_BATCH + strFmt("%1 ", #Comma);
+        #    ret += #SERVER_LOAD_BALANCING_ENABLED + strFmt("%1 ", #Comma);
+        #    ret += #SERVER_MAX_SESSIONS + strFmt("%1 ", #Comma);
+        #    ret += #SERVER_CLUSTER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #SERVER_CLUSTER_DESCRIPTION;
+        #    ret += ")";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #buildAxTableDetailInsert
+        #private static str buildAxTableDetailInsert()
+        #{
+        #    #define.INSERTSTART("SET LANGUAGE N'us_english'; INSERT INTO DynamicsPerf.dbo.AX_TABLE_DETAIL (")
+        #
+        #    str ret;
+        #
+        #    ret += #INSERTSTART;
+        #    ret += #TABLE_SERVER_NAME + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_DATABASE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_STATS_TIME + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_TABLE_NAME + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_TABLE_ID + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_TABLE_TYPE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_VALID_TIME_STATE_TABLE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_SUPPORT_INHERITANCE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_EXTENDS + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_TABLE_GROUP + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_OCC_ENABLED + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_CACHE_LOOKUP + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_AOS_AUTHORIZATION + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_INSERT_METHOD_OVERRIDDEN + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_UPDATE_METHOD_OVERRIDDEN + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_DELETE_METHOD_OVERRIDDEN + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_AOS_VALIDATE_INSERT + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_AOS_VALIDATE_UPDATE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_AOS_VALIDATE_DELETE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_AOS_VALIDATE_READ + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_DATABASELOG_INSERT + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_DATABASELOG_DELETE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_DATABASELOG_UPDATE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_DATABASELOG_RENAMEKEY + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_EVENT_INSERT + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_EVENT_DELETE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_EVENT_UPDATE + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_EVENT_RENAMEKEY + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_CLUSTERED_INDEX + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_PRIMARY_KEY + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_DATA_PER_COMPANY + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_DATA_PER_PARTITION + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_CONFIGURATION_KEY_ID + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_LICENSE_CODE_ID + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_APPLAYER + strFmt("%1 ", #Comma);
+        #    ret += #TABLE_COUNTRY_REGION_CODES;
+        #    ret += ")";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #connection
+        #static System.Data.SqlClient.SqlConnection connection(str _sqlInstanceName, str _databaseName)
+        #{
+        #    System.Data.SqlClient.SqlConnectionStringBuilder    connStringBuilder;
+        #    System.Data.SqlClient.SqlConnection                 ret = null;
+        #    CLRObject                                           exception;
+        #
+        #    str connStr;
+        #
+        #    connStringBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder();
+        #
+        #    connStringBuilder.set_DataSource(_sqlInstanceName);
+        #    connStringBuilder.set_IntegratedSecurity(true);
+        #    connStringBuilder.set_InitialCatalog(_databaseName);
+        #
+        #    connStr = connStringBuilder.get_ConnectionString();
+        #
+        #    if (connStr)
+        #    {
+        #        try
+        #        {
+        #            ret = new System.Data.SqlClient.SqlConnection(connStr);
+        #
+        #            ret.Open();
+        #        }
+        #        catch (Exception::CLRError)
+        #        {
+        #            exception = CLRInterop::getLastException();
+        #            throw Global::error(exception.ToString());
+        #        }
+        #        catch (exception::Error)
+        #        {
+        #            if (ret != null)
+        #            {
+        #                ret.Dispose();
+        #                ret = null;
+        #            }
+        #        }
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #convertDateTime2Str
+        #static str convertDateTime2Str(utcDateTime _dateTimeVal)
+        #{
+        #    str ret;
+        #
+        #    if (_dateTimeVal == DateTimeUtil::minValue())
+        #    {
+        #        ret = "1/1/1900 00:00:00";
+        #    }
+        #    else
+        #    {
+        #        ret = DateTimeUtil::toFormattedStr(_dateTimeVal, 213, 2, 3, 2, 3, 4, 1, 1);
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #deleteTablesServer
+        #server static boolean deleteTablesServer(str _sqlInstanceName, str _dynamicsPerfDatabaseName, str _axDatabaseName)
+        #{
+        #    #localMacro.SP_DELETE_AOTEXPORT
+        #        "DynamicsPerf.dbo.SP_DELETE_AOTEXPORT @servername, @databasename"
+        #    #endMacro
+        #
+        #    #define.ParmServerName("@servername")
+        #    #define.ParmAxDatabaseName("@databasename")
+        #
+        #    System.Data.SqlClient.SqlConnection             conn;
+        #    System.Data.SqlClient.SqlCommand                cmd;
+        #    System.Data.SqlClient.SqlParameter              param;
+        #    System.Data.SqlClient.SqlParameterCollection    paramCollection;
+        #    System.Data.SqlDbType                           dbType;
+        #
+        #    str     commandText;
+        #    int     result;
+        #    boolean ret;
+        #
+        #    conn = AOTExport2012_Direct::connection(_sqlInstanceName, _dynamicsPerfDatabaseName);
+        #
+        #    commandText = #SP_DELETE_AOTEXPORT;
+        #
+        #    if (conn)
+        #    {
+        #        cmd = conn.CreateCommand();
+        #
+        #        cmd.set_CommandText(commandText);
+        #
+        #        paramCollection = cmd.get_Parameters();
+        #        dbType          = CLRInterop::parseClrEnum(#SystemDataSqlDbType, #NVarChar);
+        #
+        #        param           = paramCollection.Add(#ParmServerName, dbType);
+        #        param.set_Value(_sqlInstanceName);
+        #
+        #        param           = paramCollection.Add(#ParmAxDatabaseName, dbType);
+        #        param.set_Value(_axDatabaseName);
+        #
+        #        result = cmd.ExecuteNonQuery();
+        #    }
+        #
+        #    ret = ((result == 0) || (result > 0));
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #extractPropertyValue
+        #static str extractPropertyValue(str _propertyName, Set _tablePropertiesSet)
+        #{
+        #    #define.Hash("#")
+        #
+        #    SetEnumerator   propertyEnum;
+        #    str             ret;
+        #    str             lineStr;
+        #    str             propertyName;
+        #    str             propertyValue;
+        #    int             pos;
+        #
+        #    if (_tablePropertiesSet.elements() > 0)
+        #    {
+        #        propertyEnum = _tablePropertiesSet.getEnumerator();
+        #
+        #        while (propertyEnum.moveNext())
+        #        {
+        #            lineStr         = propertyEnum.current();
+        #
+        #            if (lineStr != "")
+        #            {
+        #                lineStr         = strRem(lineStr, num2char(32));
+        #                pos             = strScan(lineStr, #Hash, 1, strLen(lineStr));
+        #                propertyName    = subStr(lineStr, 1, pos - 1);
+        #                propertyValue   = subStr(lineStr, pos + 1, strLen(lineStr));
+        #
+        #                if (propertyName == _propertyName)
+        #                {
+        #                    ret = propertyValue;
+        #                }
+        #            }
+        #        }
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #getObjectLayers
+        #public server static container getObjectLayers(TreeNode _node)
+        #{
+        #    // SetEnumerator   enumSet;
+        #    // Set             layerSet;
+        #    int             layerMask;
+        #    UtilEntryLevel  layer = enumCnt(UtilEntryLevel);
+        #    int             x = 1 << enumCnt(UtilEntryLevel);
+        #    container       ret;
+        #
+        #    if (_node && _node.treeNodeType().isLayerAware())
+        #    {
+        #        layerMask = _node.applObjectLayerMask();
+        #
+        #        while (x)
+        #        {
+        #            if (bitTest(layerMask, x))
+        #            {
+        #                ret += layer;
+        #            }
+        #
+        #            x = x >> 1;
+        #
+        #            layer--;
+        #        }
+        #
+        #        /*
+        #        layerSet    = _node.AOTLayers();
+        #        enumSet     = layerSet.getEnumerator();
+        #
+        #        while (enumSet.moveNext())
+        #        {
+        #            layer = enumSet.current();
+        #
+        #            if (ret)
+        #            {
+        #                ret += ", ";
+        #            }
+        #
+        #            ret += strFmt("%1", layer);
+        #        }
+        #        */
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #getObjectLayerStr
+        #public server static str getObjectLayerStr(TreeNode _node)
+        #{
+        #    UtilEntryLevel  layer;
+        #    container       nodeLayers;
+        #    int             layers;
+        #    int             x;
+        #    str             ret;
+        #
+        #    nodeLayers  = AOTExport2012_Direct::getObjectLayers(_node);
+        #    layers      = conLen(nodeLayers);
+        #
+        #    for (x = 1; x <= layers; x++)
+        #    {
+        #        layer = conPeek(nodeLayers, x);
+        #
+        #        if (ret)
+        #        {
+        #            ret += ", ";
+        #        }
+        #
+        #        ret += strFmt("%1", layer);
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #getRootConfigurationKey
+        #static SysDictConfigurationKey getRootConfigurationKey(ConfigurationKeyId _configurationKeyId)
+        #{
+        #    SysDictConfigurationKey configKey = new SysDictConfigurationKey(_configurationKeyId);
+        #
+        #    while (configKey && configKey.parentConfigurationKeyId())
+        #    {
+        #        configKey = new SysDictConfigurationKey(configKey.parentConfigurationKeyId());
+        #    }
+        #
+        #    return configKey;
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #static void main(Args _args)
+        #{
+        #    AOTExport2012_Direct export = new AOTExport2012_Direct();
+        #
+        #    export.init();
+        #
+        #    if (export.prompt())
+        #    {
+        #        export.run();
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #parseTableName
+        #static str parseTableName(str _tableName)
+        #{
+        #    #define.Period(".")
+        #
+        #    container   parts;
+        #    str         ret;
+        #
+        #    if (strScan(_tableName, #Period, 1, strLen(_tableName)) > 0)
+        #    {
+        #        parts = str2con(_tableName, #Period);
+        #
+        #        ret = conPeek(parts, conLen(parts));
+        #    }
+        #    else
+        #    {
+        #        ret = _tableName;
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #patternDesc
+        #static str patternDesc(SysRecurrenceData _recurrenceData)
+        #{
+        #    #define.RECUR_VERSION(1)
+        #    #define.RECUR_STARTTIME(2)
+        #    #define.RECUR_STARTDATE(3)
+        #    #define.RECUR_ENDDATERADIO(4)
+        #    #define.RECUR_ENDDATEINT(5)
+        #    #define.RECUR_ENDDATEDATE(6)
+        #    #define.RECUR_PATTERNUNIT(7)
+        #    #define.RECUR_PATTERNCONTAINER(8)
+        #    #define.RECUR_TIMEZONE(9)
+        #
+        #    container           pattern;
+        #    SysRecurrenceUnit   unit;
+        #    int                 value;
+        #    int                 per;
+        #    int                 weekDaysPattern;
+        #    int                 day;
+        #    int                 perMonth1;
+        #    int                 perMonth2;
+        #    WeekDays            dayValue;
+        #    WeekOfMonth         weekOfMonth;
+        #    MonthsOfYear        monthValue;
+        #    str                 ret;
+        #
+        #    unit    = conPeek(_recurrenceData, #RECUR_PATTERNUNIT);
+        #    pattern = conPeek(_recurrenceData, #RECUR_PATTERNCONTAINER);
+        #
+        #    switch (unit)
+        #    {
+        #        case SysRecurrenceUnit::Minute :
+        #            [value] = pattern;
+        #            ret     = strFmt("@SYS70705", value);
+        #            break;
+        #
+        #        case SysRecurrenceUnit::Hour :
+        #            [value] = pattern;
+        #            ret     = strFmt("@SYS70704", value);
+        #            break;
+        #
+        #        case SysRecurrenceUnit::Day :
+        #            [value, per] = pattern;
+        #
+        #            if (value == 1)
+        #            {
+        #                ret = strFmt("@SYS70701", per);
+        #            }
+        #            else
+        #            {
+        #                ret = "@SYS70702";
+        #            }
+        #
+        #            break;
+        #
+        #        case SysRecurrenceUnit::Week :
+        #            [value, weekDaysPattern] = pattern;
+        #            ret = AOTExport2012_Direct::weekToString(weekDaysPattern, value);
+        #
+        #            break;
+        #
+        #        case SysRecurrenceUnit::Month :
+        #            [value, day, perMonth1, weekOfMonth, dayValue, perMonth2] = pattern;
+        #
+        #            if (value == 1)
+        #            {
+        #                ret = strFmt("@SYS70708", day, perMonth1);
+        #            }
+        #            else
+        #            {
+        #                ret = strFmt("@SYS70709", weekOfMonth, dayValue, perMonth2);
+        #            }
+        #
+        #            break;
+        #
+        #        case SysRecurrenceUnit::Year :
+        #            [value, weekOfMonth, dayValue, monthValue] = pattern;
+        #
+        #            if (value == 1)
+        #            {
+        #                ret = "@SYS70711";
+        #            }
+        #            else
+        #            {
+        #                ret = strFmt("@SYS70712", weekOfMonth, dayValue, monthValue);
+        #            }
+        #
+        #            break;
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #patternUnit
+        #static str patternUnit(SysRecurrenceData _recurrenceData)
+        #{
+        #    #define.RECUR_VERSION(1)
+        #    #define.RECUR_STARTTIME(2)
+        #    #define.RECUR_STARTDATE(3)
+        #    #define.RECUR_ENDDATERADIO(4)
+        #    #define.RECUR_ENDDATEINT(5)
+        #    #define.RECUR_ENDDATEDATE(6)
+        #    #define.RECUR_PATTERNUNIT(7)
+        #    #define.RECUR_PATTERNCONTAINER(8)
+        #    #define.RECUR_TIMEZONE(9)
+        #
+        #    #define.UnitDesc_Minutes("Minutes")
+        #    #define.UnitDesc_Hours("Hours")
+        #    #define.UnitDesc_Days("Days")
+        #    #define.UnitDesc_Weeks("Weeks")
+        #    #define.UnitDesc_Months("Months")
+        #    #define.UnitDesc_Years("Years")
+        #
+        #    SysRecurrenceUnit   unit;
+        #    str                 ret;
+        #
+        #    unit = conPeek(_recurrenceData, #RECUR_PATTERNUNIT);
+        #
+        #    switch (unit)
+        #    {
+        #        case SysRecurrenceUnit::Minute :
+        #            ret = #UnitDesc_Minutes;
+        #            break;
+        #        case SysRecurrenceUnit::Hour :
+        #            ret = #UnitDesc_Hours;
+        #            break;
+        #        case SysRecurrenceUnit::Day :
+        #            ret = #UnitDesc_Days;
+        #            break;
+        #        case SysRecurrenceUnit::Week :
+        #            ret = #UnitDesc_Weeks;
+        #            break;
+        #        case SysRecurrenceUnit::Month :
+        #            ret = #UnitDesc_Months;
+        #            break;
+        #        case SysRecurrenceUnit::Year :
+        #            ret = #UnitDesc_Years;
+        #            break;
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #rangeUnit
+        #static str rangeUnit(SysRecurrenceData _recurrenceData)
+        #{
+        #    #define.RECUR_VERSION(1)
+        #    #define.RECUR_STARTTIME(2)
+        #    #define.RECUR_STARTDATE(3)
+        #    #define.RECUR_ENDDATERADIO(4)
+        #    #define.RECUR_ENDDATEINT(5)
+        #    #define.RECUR_ENDDATEDATE(6)
+        #    #define.RECUR_UNIT(7)
+        #    #define.RECUR_PATTERNCONTAINER(8)
+        #    #define.RECUR_TIMEZONE(9)
+        #
+        #    #define.Unit_NoEndDate("No end date")
+        #    #define.Unit_EndAfter("End after")
+        #    #define.Unit_EndBy("End by")
+        #
+        #    str ret;
+        #    int unit;
+        #
+        #    unit = conPeek(_recurrenceData, #RECUR_ENDDATERADIO);
+        #
+        #    switch (unit)
+        #    {
+        #        case 1 :
+        #            ret = #Unit_NoEndDate;
+        #            break;
+        #        case 2 :
+        #            ret = strFmt("%1 %2", #Unit_EndAfter, conPeek(_recurrenceData, #RECUR_ENDDATEINT));
+        #            break;
+        #        case 3 :
+        #            ret = strFmt("%1 %2", #Unit_EndBy, conPeek(_recurrenceData, #RECUR_ENDDATEDATE));
+        #            break;
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #set2Con
+        #static container set2Con(Set _set)
+        #{
+        #    #define.TotalElements(5)
+        #
+        #    SetEnumerator   setEnum;
+        #    container       ret;
+        #
+        #    if (_set.elements() > 0)
+        #    {
+        #        while (setEnum.moveNext())
+        #        {
+        #            if (conLen(ret) <= #TotalElements)
+        #            {
+        #                ret = conIns(ret, conLen(ret) + 1, setEnum.current());
+        #            }
+        #        }
+        #
+        #        // Make sure the number of container elements equals #TotalElements
+        #        if (conLen(ret) < #TotalElements)
+        #        {
+        #            ret = conIns(ret, conLen(ret) + 1, "");
+        #        }
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #supportsPartition
+        #static boolean supportsPartition()
+        #{
+        #    #define.Dot(".")
+        #
+        #    List            versionList;
+        #    ListEnumerator  listEnum;
+        #    int             major, minor, build, dotBuild;
+        #    int             x;
+        #    boolean         ret;
+        #
+        #    versionList = strSplit(ApplicationVersion::applBuildNo(), #Dot);
+        #
+        #    if (versionList.elements() != 4)
+        #    {
+        #        ret = false;
+        #    }
+        #    else
+        #    {
+        #        listEnum = versionList.getEnumerator();
+        #
+        #        while (listEnum.moveNext())
+        #        {
+        #            x++;
+        #
+        #            switch (x)
+        #            {
+        #                case 1 :
+        #                    major = listEnum.current();
+        #                    break;
+        #                case 2 :
+        #                    minor = listEnum.current();
+        #                    break;
+        #                case 3 :
+        #                    build = listEnum.current();
+        #                    break;
+        #                case 4 :
+        #                    dotBuild = listEnum.current();
+        #                    break;
+        #            }
+        #        }
+        #
+        #        ret = ((major == 6 && minor >= 2) || (major > 6));
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #weekToString
+        #// Code adapted from SysRecurrence.unitWeekToString
+        #static str weekToString(int _weekDaysPattern, int _value)
+        #{
+        #    Map             map = new Map(Types::Integer, Types::String);
+        #    MapEnumerator   mapEnum;
+        #    int             x;
+        #    str             days;
+        #    str             ret;
+        #
+        #    if (_weekDaysPattern & 0x1)
+        #    {
+        #        map.insert(WeekDays::Monday,   enum2str(WeekDays::Monday));
+        #    }
+        #
+        #    if (_weekDaysPattern & 0x2)
+        #    {
+        #        map.insert(WeekDays::Tuesday,  enum2str(WeekDays::Tuesday));
+        #    }
+        #
+        #    if (_weekDaysPattern & 0x4)
+        #    {
+        #        map.insert(WeekDays::Wednesday,enum2str(WeekDays::Wednesday));
+        #    }
+        #
+        #    if (_weekDaysPattern & 0x8)
+        #    {
+        #        map.insert(WeekDays::Thursday, enum2str(WeekDays::Thursday));
+        #    }
+        #
+        #    if (_weekDaysPattern & 0x10)
+        #    {
+        #        map.insert(WeekDays::Friday,   enum2str(WeekDays::Friday));
+        #    }
+        #
+        #    if (_weekDaysPattern & 0x20)
+        #    {
+        #        map.insert(WeekDays::Saturday, enum2str(WeekDays::Saturday));
+        #    }
+        #
+        #    if (_weekDaysPattern & 0x40)
+        #    {
+        #        map.insert(WeekDays::Sunday,   enum2str(WeekDays::Sunday));
+        #    }
+        #
+        #    mapEnum = map.getEnumerator();
+        #
+        #    while (mapEnum.moveNext())
+        #    {
+        #        x++;
+        #
+        #        if (days && x == map.elements())
+        #        {
+        #            days = strFmt("@SYS62815", days, mapEnum.currentValue());
+        #        }
+        #
+        #        if (days)
+        #        {
+        #            days += ", ";
+        #        }
+        #
+        #        days += mapEnum.currentValue();
+        #    }
+        #
+        #    ret = strFmt("@SYS70710", _value, days);
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: PRN
+
+; Microsoft Dynamics AX Project : AOTExport2012_DynamicsPerfDirect unloaded
+; --------------------------------------------------------------------------------
+  PROJECTVERSION 2
+  
+  PROJECT #AOTExport2012_DynamicsPerfDirect
+  PRIVATE
+  PROPERTIES
+    Name                #AOTExport2012_DynamicsPerfDirect
+    Origin              #{9E704731-FEDD-46F5-AB94-5685164DFD1A}
+  ENDPROPERTIES
+  
+    PROJECTCLASS ProjectNode
+    GROUP #Classes
+      PROPERTIES
+        Name                #Classes
+        ProjectGroupType    #Classes
+        GroupMask           #
+        PreventEditProperties #No
+      ENDPROPERTIES
+      
+      BEGINNODE
+        FILETYPE 0
+        UTILTYPE 45
+        UTILOBJECTID 1025098
+        NODETYPE 329
+        NAME #AOTExport2012_Direct
+      ENDNODE
+      ENDGROUP
+      
+  ENDPROJECT
+  
+
+***Element: END

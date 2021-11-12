@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <Description />
+  <DataSet Name="RunTimes">
+    <Query>
+      <DataSourceReference>DynamicsPerf</DataSourceReference>
+      <CommandText>SELECT RUN_NAME FROM STATS_COLLECTION_SUMMARY</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="RUN_NAME">
+        <DataField>RUN_NAME</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

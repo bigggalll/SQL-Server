@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Performance Analyzer 2.0 Installation">
+</Property><Property Name="Fichier solution" Value="C:\Users\mara1\OneDrive\DBA\SQL Server\DynamicsPerf\Performance Analyzer 2.0 Installation.ssmssln">
+</Property><Property Name="Date" Value="2 mars 2016">
+</Property><Property Name="Time" Value="11:55">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="Performance Analyzer 2.0 Installation.ssmssln" Description="Solution correctement convertie">
+</Event><Event ErrorLevel="3" Project="" Source="Performance Analyzer 2.0 Installation.ssmssln" Description="Converted">
+</Event></UpgradeLog>
