@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="IndexingStrategies">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="I01 Heap - Table Scan IOs.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I01 Heap - Table Scan IOs.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I02 NC Covering.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I02 NC Covering.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I03 Bookmark Lookup v Table Scan.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I03 Bookmark Lookup v Table Scan.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I04 Nonunique nc columns.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I04 Nonunique nc columns.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I05 Best Choices for Include.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I05 Best Choices for Include.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I06 Indexes that look the same.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I06 Indexes that look the same.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I07 NC Covering - Index Internals Example.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I07 NC Covering - Index Internals Example.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I08 FilteredIndexes.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I08 FilteredIndexes.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I09 Parameters and filtered indexes.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I09 Parameters and filtered indexes.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I10 AnalyzingAdventureWorksDWFactInternetSales.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I10 AnalyzingAdventureWorksDWFactInternetSales.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS01 Indexing for AND.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IS01 Indexing for AND.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS02 Indexing for OR.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IS02 Indexing for OR.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS02a Indexing for IN with Query Rewrite.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IS02a Indexing for IN with Query Rewrite.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS03 Indexing for Joins.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IS03 Indexing for Joins.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS03a Indexing for Joins using auto pilot.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IS03a Indexing for Joins using auto pilot.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS04 Indexing for Aggregates.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IS04 Indexing for Aggregates.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS05 Indexed Views Quick Setup.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IS05 Indexed Views Quick Setup.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS06 Indexing for Aggregates - Compare ALL.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IS06 Indexing for Aggregates - Compare ALL.sql</FullPath>
+        </FileNode>
+        <FileNode Name="TP01 TippingPoint-AdventureWorksDW2014.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>TP01 TippingPoint-AdventureWorksDW2014.sql</FullPath>
+        </FileNode>
+        <FileNode Name="TP01a Discussion-ParameterSensitivityProblemsAndStabilizingPlans.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>TP01a Discussion-ParameterSensitivityProblemsAndStabilizingPlans.sql</FullPath>
+        </FileNode>
+        <FileNode Name="TP02 GeneralizingtheTippingPoint.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>TP02 GeneralizingtheTippingPoint.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

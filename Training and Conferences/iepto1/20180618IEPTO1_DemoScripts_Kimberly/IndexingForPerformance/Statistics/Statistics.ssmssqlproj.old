@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SqlWorkbenchSqlProject Name="Statistics" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <Items>
+      <LogicalFolder Name="Connections" Type="2" Sorted="true">
+         <Items>
+            <ConnectionNode Name="(local)\SQL2008R2Dev01:RoadRunnerKT\Kimberly">
+               <Created>2012-03-08T16:04:27.6330494-06:00</Created>
+               <Type>SQL</Type>
+               <Server>(local)\SQL2008R2Dev01</Server>
+               <UserName />
+               <Authentication>Windows Authentication</Authentication>
+               <InitialDB />
+               <LoginTimeout>15</LoginTimeout>
+               <ExecutionTimeout>0</ExecutionTimeout>
+               <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+               <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+            </ConnectionNode>
+            <ConnectionNode Name="(local)\SQLDEV01:RoadRunnerKT\Kimberly">
+               <Created>2009-08-14T08:00:16.9193828-05:00</Created>
+               <Type>SQL</Type>
+               <Server>(local)\SQLDEV01</Server>
+               <UserName />
+               <Authentication>Windows Authentication</Authentication>
+               <InitialDB>master</InitialDB>
+               <LoginTimeout>15</LoginTimeout>
+               <ExecutionTimeout>0</ExecutionTimeout>
+               <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+               <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+            </ConnectionNode>
+         </Items>
+      </LogicalFolder>
+      <LogicalFolder Name="Queries" Type="0" Sorted="true">
+         <Items>
+            <FileNode Name="01 Statistics Examples.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>01 Statistics Examples.sql</FullPath>
+            </FileNode>
+            <FileNode Name="02 Reading the histogram - member.corp_no.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>02 Reading the histogram - member.corp_no.sql</FullPath>
+            </FileNode>
+            <FileNode Name="03 Filtered Statistics.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>03 Filtered Statistics.sql</FullPath>
+            </FileNode>
+            <FileNode Name="04 Heuristics.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>04 Heuristics.sql</FullPath>
+            </FileNode>
+            <FileNode Name="05 Uneven Distribution.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>05 Uneven Distribution.sql</FullPath>
+            </FileNode>
+            <FileNode Name="06 DoNotTurnOffAutoUpdateStatistics.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>06 DoNotTurnOffAutoUpdateStatistics.sql</FullPath>
+            </FileNode>
+         </Items>
+      </LogicalFolder>
+      <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+         <Items />
+      </LogicalFolder>
+   </Items>
+</SqlWorkbenchSqlProject>

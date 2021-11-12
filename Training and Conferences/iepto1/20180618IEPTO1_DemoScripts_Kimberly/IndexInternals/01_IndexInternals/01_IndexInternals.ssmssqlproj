@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="01_IndexInternals">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="01_Using-sys.dm_db_index_physical_stats.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>01_Using-sys.dm_db_index_physical_stats.sql</FullPath>
+        </FileNode>
+        <FileNode Name="02_Using-DBCC_IND.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>02_Using-DBCC_IND.sql</FullPath>
+        </FileNode>
+        <FileNode Name="03_ExaminingtheClusteredIndexUniquifier.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>03_ExaminingtheClusteredIndexUniquifier.sql</FullPath>
+        </FileNode>
+        <FileNode Name="04_RestoreIndexInternalsSampleDatabase.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>04_RestoreIndexInternalsSampleDatabase.sql</FullPath>
+        </FileNode>
+        <FileNode Name="05_EmployeeCaseStudy-TableDefinition.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>05_EmployeeCaseStudy-TableDefinition.sql</FullPath>
+        </FileNode>
+        <FileNode Name="06_EmployeeCaseStudy-AnalyzeStructures01-ClusteredTable.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>06_EmployeeCaseStudy-AnalyzeStructures01-ClusteredTable.sql</FullPath>
+        </FileNode>
+        <FileNode Name="06_EmployeeCaseStudy-AnalyzeStructures02-ClusteredTableNav.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>06_EmployeeCaseStudy-AnalyzeStructures02-ClusteredTableNav.sql</FullPath>
+        </FileNode>
+        <FileNode Name="06_EmployeeCaseStudy-AnalyzeStructures03-Heap.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>06_EmployeeCaseStudy-AnalyzeStructures03-Heap.sql</FullPath>
+        </FileNode>
+        <FileNode Name="06_EmployeeCaseStudy-AnalyzeStructures04-ConvertRIDs.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>06_EmployeeCaseStudy-AnalyzeStructures04-ConvertRIDs.sql</FullPath>
+        </FileNode>
+        <FileNode Name="06_EmployeeCaseStudy-AnalyzeStructures05-HeapNav.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>06_EmployeeCaseStudy-AnalyzeStructures05-HeapNav.sql</FullPath>
+        </FileNode>
+        <FileNode Name="06_EmployeeCaseStudy-AnalyzeStructures06-NCIndexOnClusteredTable.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>06_EmployeeCaseStudy-AnalyzeStructures06-NCIndexOnClusteredTable.sql</FullPath>
+        </FileNode>
+        <FileNode Name="06_EmployeeCaseStudy-AnalyzeStructures07-NonuniqueNCIndexes.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>06_EmployeeCaseStudy-AnalyzeStructures07-NonuniqueNCIndexes.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items>
+        <FileNode Name="IndexInternals2008.bak">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>IndexInternals2008.bak</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

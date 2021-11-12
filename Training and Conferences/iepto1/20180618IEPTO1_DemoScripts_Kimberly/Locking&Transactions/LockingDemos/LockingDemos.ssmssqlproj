@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="LockingDemos">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="00_Setup - Inconsistent Analysis in RC locking.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>00_Setup - Inconsistent Analysis in RC locking.sql</FullPath>
+        </FileNode>
+        <FileNode Name="01_Blocking Tran.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>01_Blocking Tran.sql</FullPath>
+        </FileNode>
+        <FileNode Name="02_Row Count Query.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>02_Row Count Query.sql</FullPath>
+        </FileNode>
+        <FileNode Name="03_Modify and move.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>03_Modify and move.sql</FullPath>
+        </FileNode>
+        <FileNode Name="MassiveRead.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>MassiveRead.sql</FullPath>
+        </FileNode>
+        <FileNode Name="PreventLongBlockingChains.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>PreventLongBlockingChains.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Query dm_tran_locks.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Query dm_tran_locks.sql</FullPath>
+        </FileNode>
+        <FileNode Name="RelaxedFifo_CheckLocks.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>RelaxedFifo_CheckLocks.sql</FullPath>
+        </FileNode>
+        <FileNode Name="RelaxedFifo_Query.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>RelaxedFifo_Query.sql</FullPath>
+        </FileNode>
+        <FileNode Name="RelaxedFifo_sp_recompile.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>RelaxedFifo_sp_recompile.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SettingIsolationLevelInStoredProcedure.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SettingIsolationLevelInStoredProcedure.sql</FullPath>
+        </FileNode>
+        <FileNode Name="UnusualModes.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>UnusualModes.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Versions in REBUILD or REORG.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Versions in REBUILD or REORG.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

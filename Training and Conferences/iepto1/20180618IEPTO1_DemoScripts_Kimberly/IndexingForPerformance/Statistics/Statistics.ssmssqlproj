@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Statistics">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="(local)\l2016:GROUPE\amartin">
+          <Created>2019-03-28T11:12:47.8536047-04:00</Created>
+          <Type>SQL</Type>
+          <Server>(local)\l2016</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB>master</InitialDB>
+          <LoginTimeout>30</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="dva752q\dw01q:GROUPE\amartin">
+          <Created>2019-03-28T13:48:31.4961427-04:00</Created>
+          <Type>SQL</Type>
+          <Server>dva752q\dw01q</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="00 Estimates Statistics Heuristics.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>00 Estimates Statistics Heuristics.sql</FullPath>
+        </FileNode>
+        <FileNode Name="01 Statistics Examples.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>01 Statistics Examples.sql</FullPath>
+        </FileNode>
+        <FileNode Name="01a ParametersVsVariablesInProcs.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>01a ParametersVsVariablesInProcs.sql</FullPath>
+        </FileNode>
+        <FileNode Name="02 Reading the histogram - member.corp_no.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>02 Reading the histogram - member.corp_no.sql</FullPath>
+        </FileNode>
+        <FileNode Name="02a MulticolumnDensityVector.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>02a MulticolumnDensityVector.sql</FullPath>
+        </FileNode>
+        <FileNode Name="03 Histogram.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>03 Histogram.sql</FullPath>
+        </FileNode>
+        <FileNode Name="04 SkewedData.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:dva752q\dw01q:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>dva752q\dw01q</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>04 SkewedData.sql</FullPath>
+        </FileNode>
+        <FileNode Name="05 FilteredStats.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>05 FilteredStats.sql</FullPath>
+        </FileNode>
+        <FileNode Name="06 IntervalSubsumption&amp;QueryRewrites.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>06 IntervalSubsumption&amp;QueryRewrites.sql</FullPath>
+        </FileNode>
+        <FileNode Name="07 Uneven_Distribution.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>07 Uneven_Distribution.sql</FullPath>
+        </FileNode>
+        <FileNode Name="07a UnevenDistribution(modified saleskey).sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>07a UnevenDistribution(modified saleskey).sql</FullPath>
+        </FileNode>
+        <FileNode Name="08 Auto pilot.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>08 Auto pilot.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Extra pre2012 Script - DoNotTurnOffAutoUpdateStatistics.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Extra pre2012 Script - DoNotTurnOffAutoUpdateStatistics.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

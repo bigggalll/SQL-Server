@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 14.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "LockingDemos", "LockingDemos\LockingDemos.ssmssqlproj", "{5E53152A-3F48-467B-A1D9-575D1D389C46}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "OtherUsefulScripts", "OtherUsefulScripts\OtherUsefulScripts.ssmssqlproj", "{0ECB788B-258C-430E-8C94-8DB9124EA9A2}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Transactions", "Transactions\Transactions.ssmssqlproj", "{9C92775D-18A3-4BED-A06F-637ADFB6004F}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "LockEscalation", "LockEscalation\LockEscalation.ssmssqlproj", "{3625C36E-962F-41E6-87DE-B68A6000A286}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "LockHashCollision_preR2", "LockHashCollision_preR2\LockHashCollision_preR2.ssmssqlproj", "{311A7614-52D0-4F72-808E-B71A0908F7C5}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Versioning", "Versioning\Versioning.ssmssqlproj", "{8580BE7F-994E-4F96-A145-0D414480CB3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E53152A-3F48-467B-A1D9-575D1D389C46}.Default|Default.ActiveCfg = Default
+		{0ECB788B-258C-430E-8C94-8DB9124EA9A2}.Default|Default.ActiveCfg = Default
+		{9C92775D-18A3-4BED-A06F-637ADFB6004F}.Default|Default.ActiveCfg = Default
+		{3625C36E-962F-41E6-87DE-B68A6000A286}.Default|Default.ActiveCfg = Default
+		{311A7614-52D0-4F72-808E-B71A0908F7C5}.Default|Default.ActiveCfg = Default
+		{8580BE7F-994E-4F96-A145-0D414480CB3B}.Default|Default.ActiveCfg = Default
+		{6AA0EF24-2BBC-47DA-833D-68F9D41C54FC}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="LockingDemos">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="(local)\SQL2008R2Dev01:RoadRunnerKT\Kimberly">
+          <Created>2012-04-17T17:29:29.4375178+01:00</Created>
+          <Type>SQL</Type>
+          <Server>(local)\SQL2008R2Dev01</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB>master</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="(local)\SQLDEV01:RoadRunnerKT\Kimberly">
+          <Created>2012-04-17T20:30:05.2995821+01:00</Created>
+          <Type>SQL</Type>
+          <Server>(local)\SQLDEV01</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB>LockResDemo</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="00_Setup - Inconsistent Analysis in RC.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>00_Setup - Inconsistent Analysis in RC.sql</FullPath>
+        </FileNode>
+        <FileNode Name="01_Blocking Tran.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>01_Blocking Tran.sql</FullPath>
+        </FileNode>
+        <FileNode Name="02_Row Count Query.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>02_Row Count Query.sql</FullPath>
+        </FileNode>
+        <FileNode Name="03_Modify and move.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>03_Modify and move.sql</FullPath>
+        </FileNode>
+        <FileNode Name="MassiveRead.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>MassiveRead.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Query dm_tran_locks.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Query dm_tran_locks.sql</FullPath>
+        </FileNode>
+        <FileNode Name="RelaxedFifo_CheckLocks.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>RelaxedFifo_CheckLocks.sql</FullPath>
+        </FileNode>
+        <FileNode Name="RelaxedFifo_Query.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>RelaxedFifo_Query.sql</FullPath>
+        </FileNode>
+        <FileNode Name="RelaxedFifo_sp_recompile.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>RelaxedFifo_sp_recompile.sql</FullPath>
+        </FileNode>
+        <FileNode Name="UnusualModes.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>UnusualModes.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Versions in REBUILD or REORG.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Versions in REBUILD or REORG.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

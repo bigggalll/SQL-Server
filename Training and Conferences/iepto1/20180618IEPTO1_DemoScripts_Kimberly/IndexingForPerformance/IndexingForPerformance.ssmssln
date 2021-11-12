@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# SQL Server Management Studio Solution File, Format Version 12.00
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "OtherUsefulScripts", "OtherUsefulScripts\OtherUsefulScripts.ssmssqlproj", "{1DD51832-CC6D-45E2-BBEC-00AB89697688}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "IndexingStrategies", "IndexingStrategies\IndexingStrategies.ssmssqlproj", "{A5CF92F0-20D3-402D-88B7-6EABB4DB83BA}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Statistics", "Statistics\Statistics.ssmssqlproj", "{74F50749-DA39-4CB6-A358-27AA8EC1D3B7}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "SQLskillsProcs", "SQLskillsProcs\SQLskillsProcs.ssmssqlproj", "{BCAAD16D-8D9F-450B-9EF2-3E437F9C3419}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "CardinalityModels", "CardinalityModels\CardinalityModels.ssmssqlproj", "{8B84D67C-88B3-4DFE-A77D-B28213BE8DA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DD51832-CC6D-45E2-BBEC-00AB89697688}.Default|Default.ActiveCfg = Default
+		{A5CF92F0-20D3-402D-88B7-6EABB4DB83BA}.Default|Default.ActiveCfg = Default
+		{74F50749-DA39-4CB6-A358-27AA8EC1D3B7}.Default|Default.ActiveCfg = Default
+		{BCAAD16D-8D9F-450B-9EF2-3E437F9C3419}.Default|Default.ActiveCfg = Default
+		{8B84D67C-88B3-4DFE-A77D-B28213BE8DA1}.Default|Default.ActiveCfg = Default
+		{A3A48FBA-E62D-43E0-9A0F-42CCE43B40C7}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

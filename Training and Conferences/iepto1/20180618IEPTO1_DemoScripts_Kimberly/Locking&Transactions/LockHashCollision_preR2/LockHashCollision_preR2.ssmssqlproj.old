@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Deadlocks">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="(local)\SQLDEV01:RoadRunnerKT\Kimberly">
+          <Created>2012-04-17T13:58:39.6447288-05:00</Created>
+          <Type>SQL</Type>
+          <Server>(local)\SQLDEV01</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName />
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="01_SetupLockResDemo.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>01_SetupLockResDemo.sql</FullPath>
+        </FileNode>
+        <FileNode Name="02_Connection1.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>02_Connection1.sql</FullPath>
+        </FileNode>
+        <FileNode Name="03_Connection2.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>03_Connection2.sql</FullPath>
+        </FileNode>
+        <FileNode Name="04_Debug.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>04_Debug.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

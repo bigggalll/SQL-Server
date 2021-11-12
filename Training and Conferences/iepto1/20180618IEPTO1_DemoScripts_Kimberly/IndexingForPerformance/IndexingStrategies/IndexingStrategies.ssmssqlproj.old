@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="IndexingStrategies">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="(local)\SQL2008R2Dev01:RoadRunnerKT\Kimberly">
+          <Created>2012-04-30T14:55:47.1367547-07:00</Created>
+          <Type>SQL</Type>
+          <Server>(local)\SQL2008R2Dev01</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="(local)\SQLDEV01:RoadRunnerKT\Kimberly">
+          <Created>2009-08-10T06:48:03.1890593-07:00</Created>
+          <Type>SQL</Type>
+          <Server>(local)\SQLDEV01</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB>master</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="I08 FilteredIndexes.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>I08 FilteredIndexes.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I01 Heap - Table Scan IOs.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>I01 Heap - Table Scan IOs.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I02 NC Covering.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>I02 NC Covering.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I03 Bookmark Lookup v Table Scan.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>I03 Bookmark Lookup v Table Scan.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I04 Nonunique nc columns.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>I04 Nonunique nc columns.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I05 Best Choices for Include.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>I05 Best Choices for Include.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I06 Indexes that look the same.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>I06 Indexes that look the same.sql</FullPath>
+        </FileNode>
+        <FileNode Name="I07 NC Covering - Index Internals Example.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>I07 NC Covering - Index Internals Example.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS01 Indexing for AND.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>IS01 Indexing for AND.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS02 Indexing for OR.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>IS02 Indexing for OR.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS03 Indexing for Joins.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>IS03 Indexing for Joins.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS04 Indexing for Aggregates.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>IS04 Indexing for Aggregates.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS05 Indexed Views Quick Setup.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>IS05 Indexed Views Quick Setup.sql</FullPath>
+        </FileNode>
+        <FileNode Name="IS06 Indexing for Aggregates - Compare ALL.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>IS06 Indexing for Aggregates - Compare ALL.sql</FullPath>
+        </FileNode>
+        <FileNode Name="TP01 TippingPoint-AdventureWorksDW2008.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>TP01 TippingPoint-AdventureWorksDW2008.sql</FullPath>
+        </FileNode>
+        <FileNode Name="TP02 GeneralizingtheTippingPoint.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>TP02 GeneralizingtheTippingPoint.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

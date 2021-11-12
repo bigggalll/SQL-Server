@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# SQL Server Management Studio Solution File, Format Version 11.00
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "01_IndexInternals", "01_IndexInternals\01_IndexInternals.ssmssqlproj", "{50AFEB70-E47C-4CD4-A0C1-983471286A56}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "02_SpecialIndexStructures", "02_SpecialIndexStructures\02_SpecialIndexStructures.ssmssqlproj", "{5C9E331F-136E-4E8B-A9A1-F0FD23920E8B}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "03_DataModificationInternals", "03_DataModificationInternals\03_DataModificationInternals.ssmssqlproj", "{7A40C288-B5F6-49DD-84A4-034B2C12B6B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50AFEB70-E47C-4CD4-A0C1-983471286A56}.Default|Default.ActiveCfg = Default
+		{5C9E331F-136E-4E8B-A9A1-F0FD23920E8B}.Default|Default.ActiveCfg = Default
+		{7A40C288-B5F6-49DD-84A4-034B2C12B6B9}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+SET NOCOUNT ON;
+GO
+
+INSERT INTO [CheckpointTest].[dbo].[BigRows] DEFAULT VALUES;
+GO 2000000
+

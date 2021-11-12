@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SQLskillsProcs">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="(local)\l2016:GROUPE\amartin">
+          <Created>2019-03-28T11:11:40.1260922-04:00</Created>
+          <Type>SQL</Type>
+          <Server>(local)\l2016</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB>master</InitialDB>
+          <LoginTimeout>30</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="dva752q\dw01q:GROUPE\amartin">
+          <Created>2019-03-28T11:15:38.513345-04:00</Created>
+          <Type>SQL</Type>
+          <Server>dva752q\dw01q</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="sp_SQLskills_AnalyzeAllLeadingIndexColumnSkew.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>sp_SQLskills_AnalyzeAllLeadingIndexColumnSkew.sql</FullPath>
+        </FileNode>
+        <FileNode Name="sp_SQLskills_AnalyzeColumnSkew.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:dva752q\dw01q:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>dva752q\dw01q</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>sp_SQLskills_AnalyzeColumnSkew.sql</FullPath>
+        </FileNode>
+        <FileNode Name="sp_SQLskills_CreateFilteredStats.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>sp_SQLskills_CreateFilteredStats.sql</FullPath>
+        </FileNode>
+        <FileNode Name="sp_SQLskills_CreateFilteredStatsString.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>sp_SQLskills_CreateFilteredStatsString.sql</FullPath>
+        </FileNode>
+        <FileNode Name="sp_SQLskills_DropAllColumnStats.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>sp_SQLskills_DropAllColumnStats.sql</FullPath>
+        </FileNode>
+        <FileNode Name="sp_SQLskills_HistogramTempTables.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>sp_SQLskills_HistogramTempTables.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

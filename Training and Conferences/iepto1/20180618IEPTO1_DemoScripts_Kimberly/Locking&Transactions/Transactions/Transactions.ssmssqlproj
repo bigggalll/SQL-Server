@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Transactions">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="BindToken01 - GetBindToken.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>BindToken01 - GetBindToken.sql</FullPath>
+        </FileNode>
+        <FileNode Name="BindToken02 - BindSession.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>BindToken02 - BindSession.sql</FullPath>
+        </FileNode>
+        <FileNode Name="ErrorHandling and XACT_ABORT.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>ErrorHandling and XACT_ABORT.sql</FullPath>
+        </FileNode>
+        <FileNode Name="nested savepoints.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>nested savepoints.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Raiserror with a permanent user-defined message.SQL">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Raiserror with a permanent user-defined message.SQL</FullPath>
+        </FileNode>
+        <FileNode Name="Restore log with marked transactions.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>Restore log with marked transactions.sql</FullPath>
+        </FileNode>
+        <FileNode Name="transaction madness.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>transaction madness.sql</FullPath>
+        </FileNode>
+        <FileNode Name="update using SET with variable and column.SQL">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>update using SET with variable and column.SQL</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

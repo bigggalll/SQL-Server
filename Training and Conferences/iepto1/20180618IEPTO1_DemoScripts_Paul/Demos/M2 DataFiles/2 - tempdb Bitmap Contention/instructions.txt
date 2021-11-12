@@ -1,0 +1,3 @@
+Follow steps in TempdbSetup.sql
+Use Add50Clients.cmd to use SELECT-INTO into temp table
+Use Add50Clients2.cmd to use INSERT-SELECT into permanent table

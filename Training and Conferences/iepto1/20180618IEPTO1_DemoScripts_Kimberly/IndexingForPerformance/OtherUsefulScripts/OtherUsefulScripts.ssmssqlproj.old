@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SqlWorkbenchSqlProject Name="OtherUsefulScripts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <Items>
+      <LogicalFolder Name="Connections" Type="2" Sorted="true">
+         <Items>
+            <ConnectionNode Name="(local)\SQL2008R2Dev01:RoadRunnerKT\Kimberly">
+               <Created>2012-04-25T16:45:30.8947861-05:00</Created>
+               <Type>SQL</Type>
+               <Server>(local)\SQL2008R2Dev01</Server>
+               <UserName />
+               <Authentication>Windows Authentication</Authentication>
+               <InitialDB />
+               <LoginTimeout>15</LoginTimeout>
+               <ExecutionTimeout>0</ExecutionTimeout>
+               <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+               <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+            </ConnectionNode>
+            <ConnectionNode Name="(local)\SQLDEV01:RoadRunnerKT\Kimberly">
+               <Created>2009-08-10T08:14:56.7094392-05:00</Created>
+               <Type>SQL</Type>
+               <Server>(local)\SQLDEV01</Server>
+               <UserName />
+               <Authentication>Windows Authentication</Authentication>
+               <InitialDB />
+               <LoginTimeout>15</LoginTimeout>
+               <ExecutionTimeout>0</ExecutionTimeout>
+               <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+               <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+            </ConnectionNode>
+         </Items>
+      </LogicalFolder>
+      <LogicalFolder Name="Queries" Type="0" Sorted="true">
+         <Items>
+            <FileNode Name="01 RestoreCredit.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQL2008R2Dev01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQL2008R2Dev01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>01 RestoreCredit.sql</FullPath>
+            </FileNode>
+            <FileNode Name="02 DMObjects.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>02 DMObjects.sql</FullPath>
+            </FileNode>
+            <FileNode Name="03 Indexed Views Walkthrough.sql">
+               <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(local)\SQLDEV01:True</AssociatedConnectionMoniker>
+               <AssociatedConnSrvName>(local)\SQLDEV01</AssociatedConnSrvName>
+               <AssociatedConnUserName />
+               <FullPath>03 Indexed Views Walkthrough.sql</FullPath>
+            </FileNode>
+         </Items>
+      </LogicalFolder>
+      <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+         <Items />
+      </LogicalFolder>
+   </Items>
+</SqlWorkbenchSqlProject>
