@@ -1,5 +1,5 @@
 select UPPER(a.name) as Name,
- -- quotename(b.default_database_Name),
+  quotename(b.default_database_Name),
   case 
        when a.type in ('G','U')
        then 'create login ' + quotename(a.name) 
@@ -17,6 +17,8 @@ select UPPER(a.name) as Name,
 from sys.server_principals a
 left outer join sys.sql_logins b
 on a.name = b.name
-where a.type not in ('R','C','K')
-and a.name not like '##%##'
-and a.sid != 0x01
+where 
+a.name = 'ENTV275P'
+--a.type not in ('R','C','K')
+--and a.name not like '##%##'
+--and a.sid != 0x01
