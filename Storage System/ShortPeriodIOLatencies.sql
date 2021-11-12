@@ -39,7 +39,7 @@ INTO ##SQLskillsStats1
 FROM sys.dm_io_virtual_file_stats (NULL, NULL);
 GO
  
-WAITFOR DELAY '00:30:00';
+WAITFOR DELAY '00:01:00';
 GO
  
 SELECT [database_id], [file_id], [num_of_reads], [io_stall_read_ms],
