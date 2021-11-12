@@ -1,0 +1,11 @@
+USE [Hotspot];
+GO
+
+SET NOCOUNT ON;
+GO
+
+WHILE (1 = 1)
+BEGIN
+	INSERT INTO [HotSpotTable] DEFAULT VALUES;
+END;
+GO

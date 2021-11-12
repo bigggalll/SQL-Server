@@ -1,0 +1,11 @@
+USE [PageSplit];
+GO
+
+SET NOCOUNT ON;
+GO
+
+WHILE (1 = 1)
+BEGIN
+	INSERT INTO [PageSplitTable] DEFAULT VALUES;
+END;
+GO

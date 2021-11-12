@@ -1,0 +1,2 @@
+Create the database using SetupParallelism.sql
+Follow instructions in Parallelism.sql 

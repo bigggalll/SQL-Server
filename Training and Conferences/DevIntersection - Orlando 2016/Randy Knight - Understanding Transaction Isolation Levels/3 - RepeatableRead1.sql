@@ -1,0 +1,16 @@
+USE AdventureWorks 
+GO 
+
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ 
+GO
+ 
+BEGIN TRAN 
+
+SELECT * 
+FROM HumanResources.Department 
+WHERE DepartmentID = 1
+GO
+
+
+COMMIT TRAN 	
+

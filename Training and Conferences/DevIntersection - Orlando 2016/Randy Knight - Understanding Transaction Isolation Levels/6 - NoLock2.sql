@@ -1,0 +1,11 @@
+USE AdventureWorks
+GO
+
+SET STATISTICS IO ON 
+
+WHILE 1=1
+BEGIN
+	UPDATE dbo.EvilNoLock SET SomeData = NEWID()
+	
+	WAITFOR DELAY '00:00:00.300'
+END
