@@ -11,7 +11,7 @@ WITH OS_SYS_INFO
           -- Temps en ms CPU disponible pour du traitement
           , osi.cpu_count AS [Logical CPU Count]
           , round(CAST(osi.cpu_count AS bigint) * cast(DATEDIFF(ms, drgwgps.statistics_start_time, GETDATE()) as bigint)/1000./60./60.,0) AS procesing_time_evalable_in_hours
-          --  -- Cumulative count of requests exceeding the CPU limit. Is not nullable.
+          -- Cumulative count of requests exceeding the CPU limit. Is not nullable.
           , drgwgps.total_cpu_limit_violation_count
             -- Cumulative CPU usage, in milliseconds, by this workload group. Is not nullable.
           , drgwgps.total_cpu_usage_ms/1000./60./60. AS total_cpu_usage_hh
@@ -21,7 +21,18 @@ WITH OS_SYS_INFO
             -- Current setting for maximum CPU use limit, in seconds, for a single request. Is not nullable.
           , drgwgps.request_max_cpu_time_sec
             -- pas trouvé de doc
-            --drgwgps.total_cpu_usage_preemptive_ms,
+          , drgwgps.total_cpu_usage_preemptive_ms
+		  , drgwgps.total_request_count
+		  , drgwgps.total_lock_wait_count
+		  , drgwgps.total_queued_request_count
+		  , rgrp.name AS pool_name
+		  , rgrp.min_cpu_percent
+		  , rgrp.max_cpu_percent
+		  , rgrp.min_iops_per_volume
+		  , rgrp.max_iops_per_volume
+		  , rgrp.min_memory_percent
+		  , rgrp.max_memory_percent
+
      FROM sys.dm_resource_governor_workload_groups drgwgps
           JOIN master.sys.resource_governor_resource_pools rgrp ON drgwgps.pool_id = rgrp.pool_id
           CROSS JOIN OS_SYS_INFO osi;

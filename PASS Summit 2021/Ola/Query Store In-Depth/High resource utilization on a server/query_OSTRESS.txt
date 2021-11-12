@@ -1,0 +1,1 @@
+"C:\Program Files\Microsoft Corporation\RMLUtils\ostress.exe" -SOLA\SQL2019ENT -dWideWorldImporters -Q"SELECT COUNT(OrderID) FROM Sales.Orders WHERE CustomerID = 1" -n10 -r100000 -q
