@@ -40,7 +40,7 @@ from full_path_cte;
     from sys.fn_xe_file_target_read_file(@xel_path, null, null, null)
 )
 select
-    object_name,
+    object_name,@@servername,
     event_timestamp = 
         dateadd(hour, @utc_adjustment, event_data.value('(event/@timestamp)[1]', 'datetime')),
     ag_name = 
