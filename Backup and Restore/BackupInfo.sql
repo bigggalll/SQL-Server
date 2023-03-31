@@ -26,7 +26,8 @@ FROM
    msdb.dbo.backupmediafamily 
    INNER JOIN msdb.dbo.backupset ON msdb.dbo.backupmediafamily.media_set_id = msdb.dbo.backupset.media_set_id 
 --WHERE 
-  -- (CONVERT(datetime, msdb.dbo.backupset.backup_start_date, 102) >= GETDATE() - 28) 
+  --CONVERT(datetime, msdb.dbo.backupset.backup_start_date, 102) >= GETDATE() - 100) 
+   --and database_name='voiceconsole'
 ORDER BY 
    msdb.dbo.backupset.database_name, 
    msdb.dbo.backupset.backup_finish_date desc
