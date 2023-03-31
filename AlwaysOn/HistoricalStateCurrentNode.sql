@@ -12,7 +12,7 @@ declare @utc_adjustment int = datediff(hour, getutcdate(), getdate());
     from sys.dm_xe_sessions s
     inner join sys.dm_xe_session_targets st
     on s.address = st.event_session_address
-    where s.name = 'alwayson_health'
+    where s.name = 'AlwaysOn_health'
     and st.target_name = 'event_file'
 ),
 full_path_cte as
