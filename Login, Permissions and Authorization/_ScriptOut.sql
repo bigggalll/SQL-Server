@@ -67,7 +67,7 @@ WHERE   SP.type IN ( 'S', 'U', 'G' )
 
 
 --***************************************
--- Script out database users permissions
+-- Script out database users 
 --***************************************
 SELECT 'USE '+ DB_NAME()+'; CREATE USER ['+dp.name+'] FOR LOGIN ['+dp.name+'];'+ 
         'ALTER USER ['+dp.name+'] WITH DEFAULT_SCHEMA=['+dp.default_schema_name+'];' AS [-- Logins To Be Created --]
